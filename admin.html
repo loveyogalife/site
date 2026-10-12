@@ -7,12 +7,7 @@
     <meta name="theme-color" content="#193d35">
     <meta name="robots" content="noindex, nofollow">
     <title>Site editor | Love Yoga Life</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./styles.css?v=20261012-4">
     <script src="./admin.js" defer></script>
 </head>
 
@@ -25,29 +20,24 @@
         <div class="admin-heading">
             <p class="eyebrow">Site editor</p>
             <h1>What's <em>on.</em></h1>
-            <p>Update announcements and upcoming events. Your changes are published to the website through GitHub Pages.
-            </p>
+            <p>Update announcements, events and weekly classes for the live website.</p>
         </div>
 
-        <section class="admin-connection" aria-labelledby="connection-title">
-            <div>
-                <p class="eyebrow">One-time setup per visit</p>
-                <h2 id="connection-title">Connect to the website</h2>
-            </div>
-            <label>GitHub repository <span>owner/repository</span><input id="github-repo" name="repo" type="text"
-                    autocomplete="off" placeholder="maureen / love-yoga-life" required></label>
-            <label>Fine-grained access token <span>Contents: read and write</span><input id="github-token" name="token"
-                    type="password" autocomplete="off" placeholder="github_pat_…" required></label>
-            <p class="admin-security">This editor page is public; a GitHub token is required to publish. The token
-                is used only for this browser session and is never saved with your content. Create a fine-grained
-                token limited to this repository, with Contents set to Read and write.
-            </p>
+        <section class="admin-access-gate" id="admin-access-gate" aria-labelledby="access-title">
+            <p class="eyebrow">Editor access</p>
+            <h2 id="access-title">Unlock the editor</h2>
+            <form class="admin-access-form" id="access-form">
+                <label for="access-password">Password</label>
+                <input id="access-password" name="password" type="password" autocomplete="current-password"
+                    placeholder="Enter password" required>
+                <button class="button button-dark" type="submit" id="access-button">Continue <span
+                        aria-hidden="true">→</span></button>
+            </form>
         </section>
 
-        <div class="admin-status" id="admin-status" role="status" aria-live="polite">Add your repository and access
-            token when you're ready to publish.</div>
+        <div class="admin-status" id="admin-status" role="status" aria-live="polite" hidden></div>
 
-        <div class="admin-columns">
+        <div class="admin-columns" id="editor-content" hidden>
             <section class="admin-section" aria-labelledby="announcement-admin-title">
                 <div class="admin-section-heading">
                     <div>
@@ -144,19 +134,19 @@
             </section>
         </div>
 
-        <div class="admin-publish">
+        <div class="admin-publish" id="publish-bar" hidden>
             <div>
                 <p class="eyebrow">Ready to share?</p>
-                <p>Publishing updates the website's event and announcement data. It can take a minute or two for GitHub
-                    Pages to show the change.</p>
-            </div><button class="button button-dark" type="button" id="publish-button"><span aria-hidden="true">↑</span>
+                <p>Published changes usually appear on the website within a minute or two.</p>
+            </div>
+            <button class="button button-dark" type="button" id="publish-button"><span aria-hidden="true">↑</span>
                 Publish changes</button>
         </div>
     </main>
     <footer class="site-footer admin-footer"><a class="wordmark" href="./index.html"><span>LOVE</span><span>YOGA
                 LIFE</span></a>
-        <p>Site editor · Content is published to the connected repository.</p><a class="footer-editor"
-            href="./index.html">Back to website <span aria-hidden="true">↗</span></a>
+        <p>Site editor · Changes are published to the live website.</p><a class="footer-editor" href="./index.html">Back
+            to website <span aria-hidden="true">↗</span></a>
     </footer>
 </body>
 

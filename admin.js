@@ -1,10 +1,18 @@
 const contentPath = 'data/site-content.json';
+const contentRepository = 'loveyogalife/site';
 const contentUrl = new URL(`./${contentPath}`, document.baseURI);
 const announcementForm = document.querySelector('#announcement-form');
 const eventForm = document.querySelector('#event-form');
 const classForm = document.querySelector('#class-form');
+const accessForm = document.querySelector('#access-form');
+const accessPassword = document.querySelector('#access-password');
+const accessButton = document.querySelector('#access-button');
+const editorGate = document.querySelector('#admin-access-gate');
+const editorContent = document.querySelector('#editor-content');
+const publishBar = document.querySelector('#publish-bar');
 const statusNode = document.querySelector('#admin-status');
 let siteContent = { announcements: [], events: [], classes: [] };
+let publishToken = '';
 
 function createId(prefix) {
     if (window.crypto && typeof window.crypto.randomUUID === 'function') return `${prefix}-${window.crypto.randomUUID()}`;
@@ -14,6 +22,57 @@ function createId(prefix) {
 function setStatus(message, kind = '') {
     statusNode.textContent = message;
     statusNode.className = `admin-status${kind ? ` is-${kind}` : ''}`;
+    statusNode.hidden = !message;
+}
+
+function relockEditor(message = '') {
+    publishToken = '';
+    accessPassword.value = '';
+    editorContent.hidden = true;
+    publishBar.hidden = true;
+    editorGate.hidden = false;
+    setStatus(message, message ? 'error' : '');
+}
+
+async function unlockEditor(event) {
+    event.preventDefault();
+    const password = accessPassword.value.trim();
+    if (!password) {
+        setStatus('Enter your password to continue.', 'error');
+        accessPassword.focus();
+        return;
+    }
+
+    accessButton.disabled = true;
+    accessButton.textContent = 'Checking…';
+    setStatus('Checking access…');
+
+    try {
+        const response = await fetch(`https://api.github.com/repos/${contentRepository}`, {
+            headers: {
+                Accept: 'application/vnd.github+json',
+                Authorization: `Bearer ${password}`,
+                'X-GitHub-Api-Version': '2022-11-28'
+            }
+        });
+        const repository = response.ok ? await response.json() : null;
+        if (!repository?.permissions?.push) {
+            throw new Error('That password could not unlock the editor. Check it and try again.');
+        }
+
+        publishToken = password;
+        accessPassword.value = '';
+        editorGate.hidden = true;
+        editorContent.hidden = false;
+        publishBar.hidden = false;
+        setStatus('Editor unlocked for this tab.', 'success');
+    } catch (error) {
+        setStatus(error.message || 'Could not check access. Check your connection and try again.', 'error');
+        accessPassword.focus();
+    } finally {
+        accessButton.disabled = false;
+        accessButton.innerHTML = 'Continue <span aria-hidden="true">→</span>';
+    }
 }
 
 function buildRecordCard(title, detail, onEdit, onDelete) {
@@ -217,11 +276,6 @@ document.querySelectorAll('[data-cancel]').forEach((button) => {
     });
 });
 
-document.querySelector('#github-repo').value = sessionStorage.getItem('love-yoga-life-repo') || '';
-document.querySelector('#github-repo').addEventListener('change', (event) => {
-    sessionStorage.setItem('love-yoga-life-repo', event.currentTarget.value.trim());
-});
-
 async function loadSiteContent() {
     try {
         const response = await fetch(`${contentUrl.href}?v=${Date.now()}`, { cache: 'no-store' });
@@ -244,26 +298,19 @@ async function loadSiteContent() {
 }
 
 async function publishChanges() {
-    const repo = document.querySelector('#github-repo').value.trim();
-    const token = document.querySelector('#github-token').value.trim();
-    if (!/^[\w.-]+\/[\w.-]+$/.test(repo)) {
-        setStatus('Enter the repository as owner/repository.', 'error');
-        document.querySelector('#github-repo').focus();
-        return;
-    }
-    if (!token) {
-        setStatus('Enter a fine-grained token with Contents read and write access to this repository.', 'error');
-        document.querySelector('#github-token').focus();
+    if (!publishToken) {
+        relockEditor('Access expired. Enter your password to unlock the editor again.');
+        accessPassword.focus();
         return;
     }
 
     const button = document.querySelector('#publish-button');
     button.disabled = true;
-    setStatus('Publishing your changes to GitHub…');
-    const endpoint = `https://api.github.com/repos/${repo}/contents/${contentPath}`;
+    setStatus('Publishing your changes…');
+    const endpoint = `https://api.github.com/repos/${contentRepository}/contents/${contentPath}`;
     const headers = {
         Accept: 'application/vnd.github+json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${publishToken}`,
         'X-GitHub-Api-Version': '2022-11-28',
         'Content-Type': 'application/json'
     };
@@ -272,7 +319,10 @@ async function publishChanges() {
         const currentResponse = await fetch(endpoint, { headers });
         let sha;
         if (currentResponse.ok) sha = (await currentResponse.json()).sha;
-        else if (currentResponse.status !== 404) throw new Error(`GitHub could not read the content file (${currentResponse.status}). Check the repository and token permissions.`);
+        else if (currentResponse.status === 401 || currentResponse.status === 403) {
+            relockEditor('Access expired. Enter your password to unlock the editor again.');
+            return;
+        } else if (currentResponse.status !== 404) throw new Error('Could not prepare your update. Please try again.');
 
         const text = `${JSON.stringify(siteContent, null, 2)}\n`;
         const bytes = new TextEncoder().encode(text);
@@ -285,18 +335,21 @@ async function publishChanges() {
         if (sha) payload.sha = sha;
         const saveResponse = await fetch(endpoint, { method: 'PUT', headers, body: JSON.stringify(payload) });
         if (!saveResponse.ok) {
-            const responseBody = await saveResponse.json().catch(() => ({}));
-            throw new Error(responseBody.message || `GitHub rejected the update (${saveResponse.status}). Check token access and branch protection.`);
+            if (saveResponse.status === 401 || saveResponse.status === 403) {
+                relockEditor('Access expired. Enter your password to unlock the editor again.');
+                return;
+            }
+            throw new Error('Could not publish changes. Please try again.');
         }
-        setStatus('Published. GitHub Pages should show the updates in a minute or two.', 'success');
-        document.querySelector('#github-token').value = '';
+        setStatus('Published. Changes should appear on the website shortly.', 'success');
     } catch (error) {
-        setStatus(error.message || 'Could not publish changes. Check your connection and token access.', 'error');
+        setStatus(error.message || 'Could not publish changes. Check your connection and try again.', 'error');
     } finally {
         button.disabled = false;
     }
 }
 
+accessForm.addEventListener('submit', unlockEditor);
 document.querySelector('#publish-button').addEventListener('click', publishChanges);
 renderAnnouncements();
 renderEvents();

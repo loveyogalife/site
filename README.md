@@ -8,12 +8,12 @@ For a first deploy from Windows, the local-only `Deploy-ToGitHub.ps1` helper can
 
 1. Sign in to the alternate GitHub account in a browser and create a **new empty repository** for the site. Do not initialize it with a README, license, or `.gitignore`.
 2. Create a fine-grained personal access token for that repository with **Contents: Read and write** permission. Keep the token private.
-3. From PowerShell in this folder, run `./Deploy-ToGitHub.ps1`. Enter the repository as `owner/name`, the commit name and email to use for this site, and the token when prompted. PowerShell masks the token entry.
+3. From PowerShell in this folder, run `./Deploy-ToGitHub.ps1`. The helper reads `repo_owner_name`, `git_commit_name`, `git_commit_email`, and `pat` from the local `.env` file by default. Press Enter to accept the displayed repository/name/email values or type an override. Confirm use of the `.env` token, or choose `n` to enter a replacement token through PowerShell's masked secure prompt.
 4. The script verifies repository access, initializes the `main` branch if needed, sets the commit identity locally for this project, commits the site, and pushes. It does not save the token in Git configuration or the repository; the temporary authentication helper is removed after the push.
 5. In the repository, open **Settings → Pages** and choose **GitHub Actions** as the build and deployment source. The workflow in `.github/workflows/pages.yml` deploys whenever `main` is updated. The published address appears in **Settings → Pages**.
 6. Open the published site and choose **Site editor** in the footer to manage announcements, dated events, and the recurring class timetable.
 
-The local helper uses the GitHub API and Git directly, so GitHub CLI is not required. The first push requires an empty repository. Later runs can update the same configured `origin/main`: the helper fetches the remote and only proceeds when the histories can be fast-forwarded, refusing a different remote or diverged history. The root `.gitignore` excludes `.env` and PowerShell scripts before commits.
+The local helper uses the GitHub API and Git directly, so GitHub CLI is not required. The first push requires an empty repository. Later runs can update the same configured `origin/main`: the helper fetches the remote and only proceeds when the histories can be fast-forwarded, refusing a different remote or diverged history. The root `.gitignore` excludes `.env` and PowerShell scripts before commits. Keep the `.env` file local and never share its token; rotate the token if it has been exposed.
 
 PowerShell may block local scripts depending on your execution policy. If that happens, run it for this invocation with `powershell -ExecutionPolicy Bypass -File .\Deploy-ToGitHub.ps1` rather than changing the machine-wide policy.
 
