@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap');
-
 :root {
     color-scheme: light;
     --forest: #193d35;
@@ -536,14 +534,13 @@ h2 em {
 
 .calendar-day.is-today::before {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    inset: 0;
     width: 26px;
     height: 26px;
+    margin: auto;
     border: 1px solid var(--coral);
     border-radius: 50%;
     content: '';
-    transform: translate(-50%, -50%);
 }
 
 .calendar-day.has-event::after {
@@ -874,13 +871,17 @@ h2 em {
 }
 
 .service-photo {
+    position: relative;
     min-height: 180px;
-    background-position: center;
-    background-size: cover;
 }
 
-.service-photo-yoga {
-    background-image: url('https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=900&q=80');
+.service-photo img,
+.wide-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .service-card-body {
@@ -944,8 +945,9 @@ h2 em {
 }
 
 .wide-image {
+    position: relative;
     min-height: 260px;
-    background: center / cover url('https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80');
+    overflow: hidden;
 }
 
 .service-card-wide .service-card-body {
