@@ -13,7 +13,7 @@ For a first deploy from Windows, the local-only `Deploy-ToGitHub.ps1` helper can
 5. In the repository, open **Settings → Pages** and choose **GitHub Actions** as the build and deployment source. The workflow in `.github/workflows/pages.yml` deploys whenever `main` is updated. The published address appears in **Settings → Pages**.
 6. Open the published site and choose **Site editor** in the footer to manage announcements, dated events, and the recurring class timetable.
 
-The local helper uses the GitHub API and Git directly, so GitHub CLI is not required. It deliberately refuses repositories that already have a branch or content, and it won't replace a different existing `origin` remote. The root `.gitignore` excludes `.env` and PowerShell scripts before the initial commit.
+The local helper uses the GitHub API and Git directly, so GitHub CLI is not required. The first push requires an empty repository. Later runs can update the same configured `origin/main`: the helper fetches the remote and only proceeds when the histories can be fast-forwarded, refusing a different remote or diverged history. The root `.gitignore` excludes `.env` and PowerShell scripts before commits.
 
 PowerShell may block local scripts depending on your execution policy. If that happens, run it for this invocation with `powershell -ExecutionPolicy Bypass -File .\Deploy-ToGitHub.ps1` rather than changing the machine-wide policy.
 

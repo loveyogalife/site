@@ -536,14 +536,14 @@ h2 em {
 
 .calendar-day.is-today::before {
     position: absolute;
-    top: 13%;
+    top: 50%;
     left: 50%;
     width: 26px;
     height: 26px;
     border: 1px solid var(--coral);
     border-radius: 50%;
     content: '';
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
 }
 
 .calendar-day.has-event::after {
