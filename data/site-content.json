@@ -1,76 +1,84 @@
 {
-    "announcements": [
-        {
-            "id": "autumn-sound-baths",
-            "title": "Autumn sound baths at Baginton Village Hall",
-            "message": "Join Maureen for a deeply relaxing sound bath and chakra meditation. Upcoming dates are Saturday 17 October and Saturday 14 November, 6–7pm. Pre-booking is essential.",
-            "linkText": "Ask Maureen to reserve your place",
-            "link": "mailto:maureenthomson54@hotmail.com?subject=Sound%20bath%20booking",
-            "active": true
-        }
-    ],
-    "classes": [
-        {
-            "id": "class-monday-gentle",
-            "day": "Monday",
-            "time": "10:00–11:00",
-            "title": "Gentle Yoga for the Young at Heart",
-            "place": "West Orchard United Reformed Church Hall, 83 Baginton Road, Styvechale CV3 6FQ · In person + Zoom"
-        },
-        {
-            "id": "class-tuesday-gentle",
-            "day": "Tuesday",
-            "time": "10:00–11:00",
-            "title": "Gentle Yoga for the Young at Heart",
-            "place": "Christ the King Community Centre, 14 Westhill Road, Coundon · In person + Zoom"
-        },
-        {
-            "id": "class-tuesday-evening",
-            "day": "Tuesday",
-            "time": "6:30–8:00",
-            "title": "Yoga",
-            "place": "Online via Zoom · Contact Maureen for details"
-        },
-        {
-            "id": "class-wednesday-evening",
-            "day": "Wednesday",
-            "time": "6:30–8:00",
-            "title": "Yoga",
-            "place": "Christ the King Community Centre, 14 Westhill Road, Coundon · In person + Zoom"
-        },
-        {
-            "id": "class-friday-afternoon",
-            "day": "Friday",
-            "time": "3:30–5:00",
-            "title": "Yoga",
-            "place": "Baginton Village Hall, Frances Road, Baginton CV8 3AB · In person + Zoom"
-        },
-        {
-            "id": "class-saturday-morning",
-            "day": "Saturday",
-            "time": "10:00–11:30",
-            "title": "Yoga",
-            "place": "Earlsdon Medical Centre (Oct–Apr) · War Memorial Park (May–Sep) · In person + Zoom"
-        }
-    ],
-    "events": [
-        {
-            "id": "sound-bath-2026-10-17",
-            "title": "Sound bath & chakra meditation",
-            "date": "2026-10-17",
-            "time": "6:00–7:00pm",
-            "location": "Baginton Village Hall, Frances Road, Baginton CV8 3AB",
-            "description": "An hour of guided chakra meditation and therapeutic sound. Pre-booking is essential.",
-            "price": "£15 in advance · £18 on the day"
-        },
-        {
-            "id": "sound-bath-2026-11-14",
-            "title": "Sound bath & chakra meditation",
-            "date": "2026-11-14",
-            "time": "6:00–7:00pm",
-            "location": "Baginton Village Hall, Frances Road, Baginton CV8 3AB",
-            "description": "An hour of guided chakra meditation and therapeutic sound. Pre-booking is essential.",
-            "price": "£15 in advance · £18 on the day"
-        }
-    ]
+  "announcements": [
+    {
+      "id": "autumn-sound-baths",
+      "title": "Autumn sound baths at Baginton Village Hall",
+      "message": "Join Maureen for a deeply relaxing sound bath and chakra meditation. Upcoming dates are Saturday 17 October and Saturday 14 November, 6–7pm. Pre-booking is essential.",
+      "linkText": "Ask Maureen to reserve your place",
+      "link": "mailto:maureenthomson54@hotmail.com?subject=Sound%20bath%20booking",
+      "active": true
+    },
+    {
+      "id": "announcement-85957b36-317e-483b-8024-7f7ed15f4dbc",
+      "title": "Got magazine for you",
+      "message": "how's maaaam",
+      "linkText": "",
+      "link": "",
+      "active": true
+    }
+  ],
+  "events": [
+    {
+      "id": "sound-bath-2026-10-17",
+      "title": "Sound bath & chakra meditation",
+      "date": "2026-10-17",
+      "time": "6:00–7:00pm",
+      "location": "Baginton Village Hall, Frances Road, Baginton CV8 3AB",
+      "description": "An hour of guided chakra meditation and therapeutic sound. Pre-booking is essential.",
+      "price": "£15 in advance · £18 on the day"
+    },
+    {
+      "id": "sound-bath-2026-11-14",
+      "title": "Sound bath & chakra meditation",
+      "date": "2026-11-14",
+      "time": "6:00–7:00pm",
+      "location": "Baginton Village Hall, Frances Road, Baginton CV8 3AB",
+      "description": "An hour of guided chakra meditation and therapeutic sound. Pre-booking is essential.",
+      "price": "£15 in advance · £18 on the day"
+    }
+  ],
+  "classes": [
+    {
+      "id": "class-monday-gentle",
+      "day": "Monday",
+      "time": "10:00–11:00",
+      "title": "Gentle Yoga for the Young at Heart",
+      "place": "West Orchard United Reformed Church Hall, 83 Baginton Road, Styvechale CV3 6FQ · In person + Zoom"
+    },
+    {
+      "id": "class-tuesday-gentle",
+      "day": "Tuesday",
+      "time": "10:00–11:00",
+      "title": "Gentle Yoga for the Young at Heart",
+      "place": "Christ the King Community Centre, 14 Westhill Road, Coundon · In person + Zoom"
+    },
+    {
+      "id": "class-tuesday-evening",
+      "day": "Tuesday",
+      "time": "6:30–8:00",
+      "title": "Yoga",
+      "place": "Online via Zoom · Contact Maureen for details"
+    },
+    {
+      "id": "class-wednesday-evening",
+      "day": "Wednesday",
+      "time": "6:30–8:00",
+      "title": "Yoga",
+      "place": "Christ the King Community Centre, 14 Westhill Road, Coundon · In person + Zoom"
+    },
+    {
+      "id": "class-friday-afternoon",
+      "day": "Friday",
+      "time": "3:30–5:00",
+      "title": "Yoga",
+      "place": "Baginton Village Hall, Frances Road, Baginton CV8 3AB · In person + Zoom"
+    },
+    {
+      "id": "class-saturday-morning",
+      "day": "Saturday",
+      "time": "10:00–11:30",
+      "title": "Yoga",
+      "place": "Earlsdon Medical Centre (Oct–Apr) · War Memorial Park (May–Sep) · In person + Zoom"
+    }
+  ]
 }
