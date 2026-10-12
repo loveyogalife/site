@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en-GB">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#193d35">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Site editor | Love Yoga Life</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./admin.js" defer></script>
+</head>
+
+<body class="admin-page">
+    <header class="site-header admin-header">
+        <a class="wordmark" href="./index.html"><span>LOVE</span><span>YOGA LIFE</span></a>
+        <a class="text-link" href="./index.html">View website <span aria-hidden="true">↗</span></a>
+    </header>
+    <main class="admin-main">
+        <div class="admin-heading">
+            <p class="eyebrow">Site editor</p>
+            <h1>What's <em>on.</em></h1>
+            <p>Update announcements and upcoming events. Your changes are published to the website through GitHub Pages.
+            </p>
+        </div>
+
+        <section class="admin-connection" aria-labelledby="connection-title">
+            <div>
+                <p class="eyebrow">One-time setup per visit</p>
+                <h2 id="connection-title">Connect to the website</h2>
+            </div>
+            <label>GitHub repository <span>owner/repository</span><input id="github-repo" name="repo" type="text"
+                    autocomplete="off" placeholder="maureen / love-yoga-life" required></label>
+            <label>Fine-grained access token <span>Contents: read and write</span><input id="github-token" name="token"
+                    type="password" autocomplete="off" placeholder="github_pat_…" required></label>
+            <p class="admin-security">This editor page is public; a GitHub token is required to publish. The token
+                is used only for this browser session and is never saved with your content. Create a fine-grained
+                token limited to this repository, with Contents set to Read and write.
+            </p>
+        </section>
+
+        <div class="admin-status" id="admin-status" role="status" aria-live="polite">Add your repository and access
+            token when you're ready to publish.</div>
+
+        <div class="admin-columns">
+            <section class="admin-section" aria-labelledby="announcement-admin-title">
+                <div class="admin-section-heading">
+                    <div>
+                        <p class="eyebrow">Homepage notice</p>
+                        <h2 id="announcement-admin-title">Announcements</h2>
+                    </div><span class="admin-count" id="announcement-count">0</span>
+                </div>
+                <div class="admin-records" id="announcement-records"></div>
+                <form id="announcement-form" class="admin-form">
+                    <input type="hidden" name="id">
+                    <h3 id="announcement-form-title">Add an announcement</h3>
+                    <label>Heading<input name="title" type="text" maxlength="100" required
+                            placeholder="A note from Maureen"></label>
+                    <label>Message<textarea name="message" rows="4" maxlength="500" required
+                            placeholder="Share the update with your visitors"></textarea></label>
+                    <div class="admin-form-row">
+                        <label>Link label <span>Optional</span><input name="linkText" type="text" maxlength="60"
+                                placeholder="More details"></label>
+                        <label>Link URL <span>Optional</span><input name="link" type="text" inputmode="url"
+                                placeholder="https://… or mailto:…"></label>
+                    </div>
+                    <label class="admin-checkbox"><input name="active" type="checkbox" checked><span>Show this
+                            announcement on the homepage</span></label>
+                    <div class="admin-form-actions"><button class="button button-dark" type="submit">Save
+                            announcement</button><button class="button button-quiet" type="button"
+                            data-cancel="announcement" hidden>Cancel edit</button></div>
+                </form>
+            </section>
+
+            <section class="admin-section" aria-labelledby="event-admin-title">
+                <div class="admin-section-heading">
+                    <div>
+                        <p class="eyebrow">Calendar & upcoming list</p>
+                        <h2 id="event-admin-title">Events</h2>
+                    </div><span class="admin-count" id="event-count-admin">0</span>
+                </div>
+                <div class="admin-records" id="event-records"></div>
+                <form id="event-form" class="admin-form">
+                    <input type="hidden" name="id">
+                    <h3 id="event-form-title">Add an event</h3>
+                    <label>Event name<input name="title" type="text" maxlength="100" required
+                            placeholder="Sound bath & chakra meditation"></label>
+                    <div class="admin-form-row">
+                        <label>Date<input name="date" type="date" required></label>
+                        <label>Time<input name="time" type="text" maxlength="60" required
+                                placeholder="6:00–7:00pm"></label>
+                    </div>
+                    <label>Venue<input name="location" type="text" maxlength="140" required
+                            placeholder="Venue name and address"></label>
+                    <label>Details<textarea name="description" rows="3" maxlength="300"
+                            placeholder="Anything visitors should know"></textarea></label>
+                    <label>Price<input name="price" type="text" maxlength="80"
+                            placeholder="£15 in advance · £18 on the day"></label>
+                    <div class="admin-form-actions"><button class="button button-dark" type="submit">Save
+                            event</button><button class="button button-quiet" type="button" data-cancel="event"
+                            hidden>Cancel edit</button></div>
+                </form>
+            </section>
+            <section class="admin-section admin-section-wide" aria-labelledby="class-admin-title">
+                <div class="admin-section-heading">
+                    <div>
+                        <p class="eyebrow">Weekly timetable</p>
+                        <h2 id="class-admin-title">Regular classes</h2>
+                    </div><span class="admin-count" id="class-count-admin">0</span>
+                </div>
+                <div class="admin-records" id="class-records"></div>
+                <form id="class-form" class="admin-form">
+                    <input type="hidden" name="id">
+                    <h3 id="class-form-title">Add a weekly class</h3>
+                    <div class="admin-form-row">
+                        <label>Day<select name="day" required>
+                                <option value="">Choose a day</option>
+                                <option>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                                <option>Thursday</option>
+                                <option>Friday</option>
+                                <option>Saturday</option>
+                                <option>Sunday</option>
+                            </select></label>
+                        <label>Time<input name="time" type="text" maxlength="50" required
+                                placeholder="10:00–11:00"></label>
+                    </div>
+                    <div class="admin-form-row">
+                        <label>Class name<input name="title" type="text" maxlength="100" required
+                                placeholder="Gentle Yoga"></label>
+                        <label>Venue and details<input name="place" type="text" maxlength="180" required
+                                placeholder="Venue, address, online options"></label>
+                    </div>
+                    <div class="admin-form-actions"><button class="button button-dark" type="submit">Save weekly
+                            class</button><button class="button button-quiet" type="button" data-cancel="class"
+                            hidden>Cancel edit</button></div>
+                </form>
+            </section>
+        </div>
+
+        <div class="admin-publish">
+            <div>
+                <p class="eyebrow">Ready to share?</p>
+                <p>Publishing updates the website's event and announcement data. It can take a minute or two for GitHub
+                    Pages to show the change.</p>
+            </div><button class="button button-dark" type="button" id="publish-button"><span aria-hidden="true">↑</span>
+                Publish changes</button>
+        </div>
+    </main>
+    <footer class="site-footer admin-footer"><a class="wordmark" href="./index.html"><span>LOVE</span><span>YOGA
+                LIFE</span></a>
+        <p>Site editor · Content is published to the connected repository.</p><a class="footer-editor"
+            href="./index.html">Back to website <span aria-hidden="true">↗</span></a>
+    </footer>
+</body>
+
+</html>

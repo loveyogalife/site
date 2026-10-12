@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="en-GB">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#193d35">
+    <meta name="description"
+        content="Yoga classes, private tuition, Reiki and sound healing with Maureen in Coventry and Baginton.">
+    <title>Love Yoga Life | Yoga with Maureen in Coventry</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./app.js" defer></script>
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+        <a class="wordmark" href="#top" aria-label="Love Yoga Life home"><span>LOVE</span><span>YOGA LIFE</span></a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"
+            aria-label="Open menu"><span></span><span></span></button>
+        <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+            <a href="#classes">Classes</a>
+            <a href="#sessions">Private sessions</a>
+            <a href="#healing">Sound & Reiki</a>
+            <a href="#about">About Maureen</a>
+            <a class="nav-contact" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="service-rail" aria-label="Explore classes and treatments">
+            <span class="rail-label">Find your practice</span>
+            <a href="#classes">Weekly yoga <span aria-hidden="true">↗</span></a>
+            <a href="#sessions">Private yoga <span aria-hidden="true">↗</span></a>
+            <a href="#healing">Reiki <span aria-hidden="true">↗</span></a>
+            <a href="#sound-baths">Sound baths <span aria-hidden="true">↗</span></a>
+        </section>
+
+        <section class="hero" id="top">
+            <div class="hero-copy">
+                <p class="eyebrow"><span class="eyebrow-mark"></span> Yoga, sound & stillness in Coventry</p>
+                <h1>Find a little more room to <em>breathe.</em></h1>
+                <p class="hero-intro">Friendly, thoughtful yoga and complementary therapies with Maureen. Come as you
+                    are, and find a practice that fits your life.</p>
+                <div class="hero-actions">
+                    <a class="button button-light" href="#classes">Explore classes <span aria-hidden="true">↓</span></a>
+                    <a class="text-link text-link-light" href="tel:+447507636623">Call Maureen <span
+                            aria-hidden="true">↗</span></a>
+                </div>
+                <p class="hero-note">Sun Power Yoga · Coventry & Baginton · In person and online</p>
+            </div>
+            <div class="hero-image-wrap">
+                <img class="hero-image"
+                    src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1400&q=85"
+                    alt="A quiet moment of meditation in soft morning light" fetchpriority="high">
+                <span class="image-caption">A practice that meets you where you are</span>
+                <span class="hero-stamp" aria-hidden="true">move<br>gently</span>
+            </div>
+        </section>
+
+        <section class="announcement-band" id="announcements" aria-live="polite" hidden>
+            <div class="announcement-icon" aria-hidden="true">✳</div>
+            <div class="announcement-copy" id="announcement-copy"></div>
+        </section>
+
+        <section class="events-section section-pad" id="events">
+            <div class="section-heading events-heading">
+                <div>
+                    <p class="eyebrow">Make a little space</p>
+                    <h2>What's coming <em>up</em></h2>
+                </div>
+                <p>Sound baths, special sessions and community gatherings. Choose a date to see what's happening.</p>
+            </div>
+            <div class="events-layout">
+                <div class="calendar-panel" aria-label="Events calendar">
+                    <div class="calendar-topline">
+                        <h3 id="calendar-month" aria-live="polite"></h3>
+                        <div class="calendar-controls">
+                            <button class="icon-button" type="button" id="calendar-prev" aria-label="Previous month"
+                                title="Previous month">←</button>
+                            <button class="icon-button" type="button" id="calendar-next" aria-label="Next month"
+                                title="Next month">→</button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid" id="calendar-grid" role="grid" aria-label="Monthly events"></div>
+                    <p class="calendar-legend"><span></span> Events on this day</p>
+                </div>
+                <aside class="event-list-panel" aria-live="polite">
+                    <div class="event-list-heading">
+                        <h3>Upcoming events</h3><span id="event-count"></span>
+                    </div>
+                    <div id="event-list" class="event-list"></div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="classes-section section-pad" id="classes">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">A class for your week</p>
+                    <h2>Move at your <em>own pace.</em></h2>
+                </div>
+                <p>Weekly classes around Coventry, with a welcoming mix of experience levels. Join in person or online
+                    where available.</p>
+            </div>
+            <div class="class-layout">
+                <div class="schedule-wrap">
+                    <div class="schedule-label"><span>Weekly timetable</span><span>Coventry & Baginton</span></div>
+                    <div class="schedule-list" id="schedule-list"></div>
+                    <p class="schedule-note">Class times and venues can change. Please check with Maureen before your
+                        first visit.</p>
+                </div>
+                <aside class="price-panel">
+                    <span class="price-sun" aria-hidden="true">✳</span>
+                    <p class="eyebrow">Simple, flexible pricing</p>
+                    <h3>Make yoga<br>part of your week.</h3>
+                    <dl class="price-list">
+                        <div>
+                            <dt>Drop-in class</dt>
+                            <dd>£10</dd>
+                        </div>
+                        <div>
+                            <dt>5-class pass</dt>
+                            <dd>£45</dd>
+                        </div>
+                        <div>
+                            <dt>10-class pass</dt>
+                            <dd>£80</dd>
+                        </div>
+                        <div>
+                            <dt>Gentle yoga</dt>
+                            <dd>£6</dd>
+                        </div>
+                    </dl>
+                    <p class="price-footnote">Gentle Yoga for the Young at Heart is £6 per session. Ask Maureen about
+                        class suitability and availability.</p>
+                    <a class="text-link" href="#contact">Ask about a class <span aria-hidden="true">↗</span></a>
+                </aside>
+            </div>
+        </section>
+
+        <section class="quote-band">
+            <div class="quote-mark" aria-hidden="true">“</div>
+            <blockquote>My classes feel like a gathering of friends — sharing the challenges and incredible rewards of
+                each yoga practice.</blockquote>
+            <p>Maureen</p>
+        </section>
+
+        <section class="testimonials-section section-pad" aria-labelledby="testimonials-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Shared by students</p>
+                    <h2 id="testimonials-title">A few kind <em>words.</em></h2>
+                </div>
+                <p>Reflections shared by students over the years. Every practice is personal, and experiences will
+                    differ.</p>
+            </div>
+            <div class="testimonial-list">
+                <blockquote>
+                    <p>“Maureen is the most wonderful Yoga teacher. I was immediately bowled over by her calm, patience,
+                        good humour, grace and expertise.”</p>
+                    <footer>Sam <span>· July 2013</span></footer>
+                </blockquote>
+                <blockquote>
+                    <p>“For anyone wanting to try Yoga, Maureen provides an excellent class and I am constantly learning
+                        new things about Yoga.”</p>
+                    <footer>Kate <span>· June 2013</span></footer>
+                </blockquote>
+                <blockquote>
+                    <p>“Her approach is open, honest, warm and friendly and she is a gem in the yoga world!”</p>
+                    <footer>Amber <span>· May 2013</span></footer>
+                </blockquote>
+            </div>
+        </section>
+
+        <section class="services-section section-pad" id="sessions">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Ways to work together</p>
+                    <h2>Find what feels <em>right.</em></h2>
+                </div>
+                <p>From your first class to one-to-one support, there's space to explore at your own pace.</p>
+            </div>
+            <div class="service-grid">
+                <article class="service-card service-card-featured">
+                    <div class="service-photo service-photo-yoga" role="img"
+                        aria-label="Yoga practice in a calm studio"></div>
+                    <div class="service-card-body"><span class="service-number">01 / YOGA</span>
+                        <h3>Private & small-group yoga</h3>
+                        <p>Personal sessions shaped around your experience, goals and schedule — at Maureen's home
+                            studio or in your own home.</p><a class="text-link" href="#contact">Ask about a session
+                            <span aria-hidden="true">↗</span></a>
+                    </div>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon service-icon-reiki" aria-hidden="true">✳</div>
+                    <div class="service-card-body"><span class="service-number">02 / REIKI</span>
+                        <h3>Reiki</h3>
+                        <p>A gentle, hands-on or hands-above treatment intended to support deep rest and relaxation. You
+                            remain fully clothed.</p>
+                        <p class="service-price">£40 single session · £105 for three</p><a class="text-link"
+                            href="#contact">Ask about Reiki <span aria-hidden="true">↗</span></a>
+                    </div>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon service-icon-sound" aria-hidden="true">♫</div>
+                    <div class="service-card-body"><span class="service-number">03 / SOUND</span>
+                        <h3>Singing bowl therapy</h3>
+                        <p>A one-to-one sound session with Tibetan singing bowls. Lie comfortably, fully clothed, and
+                            take time to unwind.</p>
+                        <p class="service-price">One-hour treatment · £50</p><a class="text-link" href="#contact">Ask
+                            about sound therapy <span aria-hidden="true">↗</span></a>
+                    </div>
+                </article>
+                <article class="service-card service-card-wide" id="healing">
+                    <div class="wide-image" role="img" aria-label="Singing bowls arranged for a sound bath"></div>
+                    <div class="service-card-body"><span class="service-number">04 / SOUND BATH</span>
+                        <h3>Sound baths & chakra meditation</h3>
+                        <p>A shared hour of guided chakra meditation and resonant instruments, including gongs, Tibetan
+                            singing bowls and gentle drums. Lie down or sit comfortably; bring a mat and something warm.
+                        </p><a class="text-link" href="#sound-baths">See sound bath dates <span
+                                aria-hidden="true">↗</span></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="sound-bath-section" id="sound-baths">
+            <div class="sound-bath-image">
+                <img src="https://images.unsplash.com/photo-1545389336-cf090694435e?auto=format&fit=crop&w=1200&q=85"
+                    alt="A peaceful yoga space prepared for a sound meditation" loading="lazy">
+                <span class="image-caption">Take time to settle in</span>
+            </div>
+            <div class="sound-bath-copy">
+                <p class="eyebrow">A shared pause</p>
+                <h2>Let the sound<br>carry you <em>away.</em></h2>
+                <p>Each sound bath begins with a guided chakra meditation. Then make yourself comfortable on the floor
+                    or in a chair and let the bowls, gongs and gentle percussion fill the room.</p>
+                <p>Pre-booking is essential. Bring a mat, blanket and cushions so you can settle in warmly. Some mats
+                    are available to borrow.</p>
+                <a class="button button-dark" href="#events">Find the next sound bath <span
+                        aria-hidden="true">↓</span></a>
+            </div>
+        </section>
+
+        <section class="about-section section-pad" id="about">
+            <div class="about-image-wrap">
+                <img src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=1000&q=85"
+                    alt="A yoga teacher guiding a calm studio practice" loading="lazy">
+                <span class="about-image-note">Practice, patience<br>& a little curiosity</span>
+            </div>
+            <div class="about-copy">
+                <p class="eyebrow">A little about your teacher</p>
+                <h2>Meet <em>Maureen.</em></h2>
+                <p>Maureen teaches Sun Power Yoga and is a Level 3 member of the Register of Exercise Professionals. She
+                    began teaching to share the health and happiness she found through a regular yoga practice.</p>
+                <p>Her classes bring together people from all walks of life. Whether you're new to yoga or returning to
+                    your practice, you'll be encouraged to listen to your own body and find your own way through each
+                    session.</p>
+                <a class="text-link" href="#contact">Come and say hello <span aria-hidden="true">↗</span></a>
+            </div>
+        </section>
+
+        <section class="first-class-section section-pad" id="first-class">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">New to yoga?</p>
+                    <h2>Your first class, <em>made easy.</em></h2>
+                </div>
+                <p>No special kit or experience needed. The most important thing is to let Maureen know if you have an
+                    injury or health concern before class begins.</p>
+            </div>
+            <div class="first-class-grid">
+                <article><span>01</span>
+                    <h3>Wear what moves</h3>
+                    <p>Comfortable clothes such as leggings, loose trousers or a T-shirt. Yoga is practised in bare
+                        feet.</p>
+                </article>
+                <article><span>02</span>
+                    <h3>Everything else is here</h3>
+                    <p>Mats are available, along with blocks, belts and blankets. Bring your own mat if you prefer.</p>
+                </article>
+                <article><span>03</span>
+                    <h3>Take it at your pace</h3>
+                    <p>All ages, body types and experience levels are welcome. There is no need to keep up or compete.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="contact-section" id="contact">
+            <div class="contact-copy">
+                <p class="eyebrow">Questions, bookings, or just saying hello</p>
+                <h2>Let's find your <em>next step.</em></h2>
+                <p>Get in touch with Maureen about a class, private session or sound treatment. She'll be happy to help
+                    you find the right fit.</p>
+                <div class="contact-actions"><a class="button button-light" href="tel:+447507636623">Call 07507 636623
+                        <span aria-hidden="true">↗</span></a><a class="text-link text-link-light"
+                        href="mailto:maureenthomson54@hotmail.com">Send an email <span aria-hidden="true">↗</span></a>
+                </div>
+            </div>
+            <div class="contact-aside"><span class="contact-flower" aria-hidden="true">✳</span>
+                <p>Coventry<br>& Baginton</p><span>In person · Online · One-to-one</span>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <a class="wordmark wordmark-footer" href="#top"><span>LOVE</span><span>YOGA LIFE</span></a>
+        <p>Yoga, sound & stillness with Maureen<br>Coventry and Baginton</p>
+        <a class="footer-editor" href="./admin.html">Site editor <span aria-hidden="true">↗</span></a>
+        <span class="footer-copy">© <span id="current-year"></span> Love Yoga Life</span>
+    </footer>
+</body>
+
+</html>
