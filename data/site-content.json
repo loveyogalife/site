@@ -7,6 +7,14 @@
       "linkText": "Ask Maureen to reserve your place",
       "link": "mailto:maureenthomson54@hotmail.com?subject=Sound%20bath%20booking",
       "active": true
+    },
+    {
+      "id": "announcement-1676954a-deee-4bd0-9f31-ad4c52379e00",
+      "title": "Welcome to my new Website🙏",
+      "message": "After 18 years, it was time for a refresh\n\nWhether you join me for Yoga, Sound therapy, Reiki or a Yoga retreat - you’re not just joining a class or experience - you’re becoming part of a warm supportive community where we can learn, grow and reconnect with ourselves and one another.\n\nI look forward to welcoming you and sharing the journey together🕉\n\nLove & light\n\nMaureen xx🙏🥰",
+      "linkText": "Welcome",
+      "link": "",
+      "active": true
     }
   ],
   "events": [
