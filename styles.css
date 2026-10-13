@@ -868,11 +868,6 @@ h2 em {
     font-weight: 700;
 }
 
-.testimonial-list footer span {
-    color: var(--muted);
-    font-weight: 400;
-}
-
 .services-section {
     background: var(--white);
 }
