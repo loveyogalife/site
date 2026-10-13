@@ -13,14 +13,14 @@
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css?v=20261012-2">
-    <script src="./app.js" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20261013-4">
+    <script src="./app.js?v=20261013-3" defer></script>
 </head>
 
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-        <a class="wordmark" href="#top" aria-label="Love Yoga Life home"><span>LOVE</span><span>YOGA LIFE</span></a>
+        <a class="wordmark" href="#top" aria-label="Love Yoga Life home"><img class="brand-logo" src="./pics/logo-transparent.png" alt=""></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"
             aria-label="Open menu"><span></span><span></span></button>
         <nav class="main-nav" id="main-nav" aria-label="Main navigation">
@@ -38,15 +38,17 @@
             <a href="#classes">Weekly yoga <span aria-hidden="true">↗</span></a>
             <a href="#sessions">Private yoga <span aria-hidden="true">↗</span></a>
             <a href="#healing">Reiki <span aria-hidden="true">↗</span></a>
-            <a href="#sound-baths">Sound baths <span aria-hidden="true">↗</span></a>
+            <a href="#healing">Sound baths <span aria-hidden="true">↗</span></a>
         </section>
 
         <section class="hero" id="top">
             <div class="hero-copy">
                 <p class="eyebrow"><span class="eyebrow-mark"></span> Yoga, sound & stillness in Coventry</p>
                 <h1>Find a little more room to <em>breathe.</em></h1>
-                <p class="hero-intro">Friendly, thoughtful yoga and complementary therapies with Maureen. Come as you
-                    are, and find a practice that fits your life.</p>
+                <p class="hero-intro">Come as you are, and find a practice that fits your life. Whether you join me for
+                    yoga, sound therapy, Reiki or a yoga retreat, you're not just joining a class or experience — you're
+                    becoming part of a warm, supportive community where we can learn, grow and reconnect with ourselves
+                    and one another. I look forward to welcoming you and sharing the journey together.</p>
                 <div class="hero-actions">
                     <a class="button button-light" href="#classes">Explore classes <span aria-hidden="true">↓</span></a>
                     <a class="text-link text-link-light" href="tel:+447507636623">Call Maureen <span
@@ -56,15 +58,16 @@
             </div>
             <div class="hero-image-wrap">
                 <img class="hero-image"
-                    src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1400&q=85"
-                    alt="A quiet moment of meditation in soft morning light" fetchpriority="high" decoding="async">
+                    src="./pics/19.jpeg"
+                    alt="A welcoming yoga class practising together in a warm studio" fetchpriority="high"
+                    decoding="async">
                 <span class="image-caption">A practice that meets you where you are</span>
                 <span class="hero-stamp" aria-hidden="true">move<br>gently</span>
             </div>
         </section>
 
         <section class="announcement-band" id="announcements" aria-live="polite" hidden>
-            <div class="announcement-icon" aria-hidden="true">✳</div>
+            <div class="announcement-icon" aria-hidden="true"><img src="./pics/lotus.svg" alt=""></div>
             <div class="announcement-copy" id="announcement-copy"></div>
         </section>
 
@@ -88,7 +91,8 @@
                         </div>
                     </div>
                     <div class="calendar-grid" id="calendar-grid" role="grid" aria-label="Monthly events"></div>
-                    <p class="calendar-legend"><span></span> Events on this day</p>
+                    <p class="calendar-legend"><span class="legend-class"></span> Weekly class <span
+                            class="legend-event"></span> One-off event</p>
                 </div>
                 <aside class="event-list-panel" aria-live="polite">
                     <div class="event-list-heading">
@@ -195,8 +199,9 @@
                     <div class="service-card-body"><span class="service-number">01 / YOGA</span>
                         <h3>Private & small-group yoga</h3>
                         <p>Personal sessions shaped around your experience, goals and schedule — at Maureen's home
-                            studio or in your own home.</p><a class="text-link" href="#contact">Ask about a session
-                            <span aria-hidden="true">↗</span></a>
+                            studio or in your own home.</p>
+                        <button class="text-link service-open" type="button" data-open-dialog="private-yoga-dialog">More
+                            about private yoga <span aria-hidden="true">↗</span></button>
                     </div>
                 </article>
                 <article class="service-card">
@@ -210,55 +215,119 @@
                             remain fully clothed.</p>
                         <p class="service-price">£40 single session · £105 for three</p><a class="text-link"
                             href="#contact">Ask about Reiki <span aria-hidden="true">↗</span></a>
+                        <button class="text-link service-open" type="button" data-open-dialog="reiki-dialog">More about
+                            Reiki <span aria-hidden="true">↗</span></button>
                     </div>
                 </article>
                 <article class="service-card">
                     <div class="service-photo service-photo-bowls">
-                        <img src="./pics/2.jpeg" alt="A singing bowl used for sound therapy" loading="lazy"
-                            decoding="async">
+                        <img src="./pics/20.jpeg" alt="Singing bowls arranged for a one-to-one sound therapy session"
+                            loading="lazy" decoding="async">
                     </div>
                     <div class="service-card-body"><span class="service-number">03 / SOUND</span>
                         <h3>Singing bowl therapy</h3>
                         <p>A one-to-one sound session with Tibetan singing bowls. Lie comfortably, fully clothed, and
                             take time to unwind.</p>
-                        <p class="service-price">One-hour treatment · £50</p><a class="text-link" href="#contact">Ask
-                            about sound therapy <span aria-hidden="true">↗</span></a>
+                        <p class="service-price">One-hour treatment · £50</p>
+                        <button class="text-link service-open" type="button" data-open-dialog="bowl-dialog">More about
+                            singing bowl therapy <span aria-hidden="true">↗</span></button>
                     </div>
                 </article>
                 <article class="service-card service-card-wide" id="healing">
                     <div class="wide-image">
-                        <img src="./pics/6.jpeg" alt="Maureen leads a sound session while participants rest on mats"
+                        <img src="./pics/17.jpeg" alt="Gong, singing bowls and mats arranged for a sound bath"
                             loading="lazy" decoding="async">
                     </div>
                     <div class="service-card-body"><span class="service-number">04 / SOUND BATH</span>
                         <h3>Sound baths & chakra meditation</h3>
                         <p>A shared hour of guided chakra meditation and resonant instruments, including gongs, Tibetan
                             singing bowls and gentle drums. Lie down or sit comfortably; bring a mat and something warm.
-                        </p><a class="text-link" href="#sound-baths">See sound bath dates <span
+                        </p><a class="text-link" href="#events">See sound bath dates <span
                                 aria-hidden="true">↗</span></a>
+                        <button class="text-link service-open" type="button" data-open-dialog="sound-bath-dialog">What
+                            to expect <span aria-hidden="true">↗</span></button>
                     </div>
                 </article>
             </div>
         </section>
 
-        <section class="sound-bath-section" id="sound-baths">
-            <div class="sound-bath-image">
-                <img src="./pics/7.jpeg"
-                    alt="A small singing bowl held above participants during a sunset sound session" loading="lazy"
-                    decoding="async">
-                <span class="image-caption">Take time to settle in</span>
+        <dialog class="service-dialog" id="private-yoga-dialog" aria-labelledby="private-yoga-title">
+            <div class="service-dialog-layout">
+                <div class="service-dialog-image"><img src="./pics/4.jpeg"
+                        alt="Maureen stretching forward on her yoga mat" loading="lazy" decoding="async"></div>
+                <div class="service-dialog-copy">
+                    <button class="dialog-close" type="button" aria-label="Close details" data-close-dialog>×</button>
+                    <p class="eyebrow">One-to-one or small group</p>
+                    <h2 id="private-yoga-title">Private yoga, shaped around you.</h2>
+                    <p>Personal lessons can suit beginners wanting to build confidence, people who prefer a quieter
+                        setting, or anyone hoping to focus on a particular posture or practice. Sessions are available
+                        at Maureen's home studio or in your home.</p>
+                    <p>At the home studio: £40 for one hour, or four sessions for £140. At your home: £45 for one hour,
+                        or four sessions for £160.</p>
+                    <a class="button button-dark" href="#contact" data-dialog-contact>Ask Maureen about a session <span
+                            aria-hidden="true">↗</span></a>
+                </div>
             </div>
-            <div class="sound-bath-copy">
-                <p class="eyebrow">A shared pause</p>
-                <h2>Let the sound<br>carry you <em>away.</em></h2>
-                <p>Each sound bath begins with a guided chakra meditation. Then make yourself comfortable on the floor
-                    or in a chair and let the bowls, gongs and gentle percussion fill the room.</p>
-                <p>Pre-booking is essential. Bring a mat, blanket and cushions so you can settle in warmly. Some mats
-                    are available to borrow.</p>
-                <a class="button button-dark" href="#events">Find the next sound bath <span
-                        aria-hidden="true">↓</span></a>
+        </dialog>
+
+        <dialog class="service-dialog" id="reiki-dialog" aria-labelledby="reiki-title">
+            <div class="service-dialog-layout">
+                <div class="service-dialog-image"><img src="./pics/13.jpeg"
+                        alt="Candles and meditation objects arranged for Reiki" loading="lazy" decoding="async"></div>
+                <div class="service-dialog-copy">
+                    <button class="dialog-close" type="button" aria-label="Close details" data-close-dialog>×</button>
+                    <p class="eyebrow">A quiet, fully clothed treatment</p>
+                    <h2 id="reiki-title">Make space to rest.</h2>
+                    <p>Reiki is a Japanese complementary practice often chosen as a way to relax. During a session, you
+                        lie fully clothed on a treatment couch while Maureen uses a light touch or holds her hands just
+                        above the body. You can talk through comfort and preferences beforehand.</p>
+                    <p>Single treatment £40 · Course of three £105. Reiki is complementary and is not a substitute for
+                        medical care.</p>
+                    <a class="button button-dark" href="#contact" data-dialog-contact>Ask Maureen about Reiki <span
+                            aria-hidden="true">↗</span></a>
+                </div>
             </div>
-        </section>
+        </dialog>
+
+        <dialog class="service-dialog" id="bowl-dialog" aria-labelledby="bowl-title">
+            <div class="service-dialog-layout">
+                <div class="service-dialog-image"><img src="./pics/2.jpeg" alt="A singing bowl used for sound therapy"
+                        loading="lazy" decoding="async"></div>
+                <div class="service-dialog-copy">
+                    <button class="dialog-close" type="button" aria-label="Close details" data-close-dialog>×</button>
+                    <p class="eyebrow">A one-to-one sound session</p>
+                    <h2 id="bowl-title">Tibetan singing bowl therapy.</h2>
+                    <p>Settle fully clothed on a mattress on the floor while Maureen plays Tibetan singing bowls. The
+                        session is an hour, with time to get comfortable before the sounds begin.</p>
+                    <p>One-hour treatment · £50. Let Maureen know about any comfort or access needs when arranging your
+                        visit.</p>
+                    <a class="button button-dark" href="#contact" data-dialog-contact>Ask Maureen about a treatment
+                        <span aria-hidden="true">↗</span></a>
+                </div>
+            </div>
+        </dialog>
+
+        <dialog class="service-dialog" id="sound-bath-dialog" aria-labelledby="sound-bath-title">
+            <div class="service-dialog-layout">
+                <div class="service-dialog-image"><img src="./pics/6.jpeg"
+                        alt="Maureen leads a sound session while participants rest on mats" loading="lazy"
+                        decoding="async"></div>
+                <div class="service-dialog-copy">
+                    <button class="dialog-close" type="button" aria-label="Close details" data-close-dialog>×</button>
+                    <p class="eyebrow">A shared pause</p>
+                    <h2 id="sound-bath-title">Let the sound carry you away.</h2>
+                    <p>Begin with a guided chakra meditation; no meditation experience is needed. Then lie on a mat or
+                        sit comfortably while Maureen plays gongs, Tibetan singing bowls, gentle drums and other
+                        instruments.</p>
+                    <p>Bring a mat, blanket and cushions so you can settle in warmly. The hall floor can feel cold; a
+                        limited number of mats may be available to borrow. Wear comfortable clothes.</p>
+                    <p>Monthly at Baginton Village Hall, 6–7pm · £15 in advance or £18 on the day. Pre-booking is
+                        essential.</p>
+                    <a class="button button-dark" href="#events" data-dialog-contact>See upcoming sound bath dates <span
+                            aria-hidden="true">↓</span></a>
+                </div>
+            </div>
+        </dialog>
 
         <section class="about-section section-pad" id="about">
             <div class="about-image-wrap">
@@ -316,14 +385,14 @@
                         href="mailto:maureenthomson54@hotmail.com">Send an email <span aria-hidden="true">↗</span></a>
                 </div>
             </div>
-            <div class="contact-aside"><span class="contact-flower" aria-hidden="true">✳</span>
+            <div class="contact-aside"><span class="contact-flower" aria-hidden="true"><img src="./pics/lotus.svg" alt=""></span>
                 <p>Coventry<br>& Baginton</p><span>In person · Online · One-to-one</span>
             </div>
         </section>
     </main>
 
     <footer class="site-footer">
-        <a class="wordmark wordmark-footer" href="#top"><span>LOVE</span><span>YOGA LIFE</span></a>
+        <a class="wordmark wordmark-footer" href="#top" aria-label="Love Yoga Life home"><img class="brand-logo" src="./pics/logo-transparent.png" alt=""></a>
         <p>Yoga, sound & stillness with Maureen<br>Coventry and Baginton</p>
         <a class="footer-editor" href="./admin.html">Site editor <span aria-hidden="true">↗</span></a>
         <span class="footer-copy">© <span id="current-year"></span> Love Yoga Life</span>

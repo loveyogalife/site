@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 48" role="img" aria-labelledby="title">
+  <title id="title">Lotus flower</title>
+  <defs>
+    <linearGradient id="petal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#df8b70"/>
+      <stop offset="1" stop-color="#bd5c45"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#petal)">
+    <path d="M32 38C21 29 21 16 32 4c11 12 11 25 0 34Z"/>
+    <path d="M29 39C16 36 9 27 11 15c12 3 19 11 18 24Z"/>
+    <path d="M35 39c13-3 20-12 18-24-12 3-19 11-18 24Z"/>
+    <path d="M27 43C14 43 5 37 1 26c13 0 22 6 26 17Z"/>
+    <path d="M37 43c13 0 22-6 26-17-13 0-22 6-26 17Z"/>
+  </g>
+</svg>

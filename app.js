@@ -6,6 +6,7 @@ const monthFormatter = new Intl.DateTimeFormat('en-GB', { month: 'long', year: '
 const eventDateFormatter = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short' });
 let allEvents = [];
 let visibleEvents = [];
+let weeklyClasses = [];
 let calendarDate = new Date(today.getFullYear(), today.getMonth(), 1);
 let selectedDate = '';
 
@@ -50,7 +51,7 @@ function renderAnnouncements(announcements = []) {
     });
 }
 
-function makeEventCard(event) {
+function makeEventCard(event, isClass = false) {
     const card = makeElement('article', 'event-card');
     const date = parseDateKey(event.date);
     const dateBadge = makeElement('div', 'event-date');
@@ -59,6 +60,7 @@ function makeEventCard(event) {
         makeElement('span', '', new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(date))
     );
     const details = makeElement('div');
+    if (isClass) details.append(makeElement('span', 'event-type', 'Weekly class'));
     details.append(
         makeElement('h4', '', event.title),
         makeElement('p', '', `${event.time || ''}${event.location ? ` · ${event.location}` : ''}`)
@@ -69,20 +71,36 @@ function makeEventCard(event) {
     return card;
 }
 
+function getClassesOnDate(dateKey) {
+    const weekday = new Intl.DateTimeFormat('en-GB', { weekday: 'long' }).format(parseDateKey(dateKey));
+    return weeklyClasses
+        .filter((session) => session.day.toLowerCase() === weekday.toLowerCase())
+        .map((session) => ({
+            ...session,
+            date: dateKey,
+            location: session.place,
+            id: `${session.id}-${dateKey}`,
+            isClass: true
+        }));
+}
+
 function renderEventList() {
     const list = document.querySelector('#event-list');
     const count = document.querySelector('#event-count');
-    const events = selectedDate
-        ? visibleEvents.filter((event) => event.date === selectedDate)
+    const items = selectedDate
+        ? [
+            ...visibleEvents.filter((event) => event.date === selectedDate),
+            ...getClassesOnDate(selectedDate)
+        ]
         : visibleEvents.filter((event) => event.date >= todayKey).slice(0, 4);
     list.replaceChildren();
-    count.textContent = selectedDate ? 'Selected day' : `${events.length} ahead`;
-    if (selectedDate && events.length === 0) {
-        list.append(makeElement('p', 'event-empty', 'Nothing is planned for this day. Choose a marked date to see event details.'));
-    } else if (events.length === 0) {
+    count.textContent = selectedDate ? 'Selected day' : `${items.length} ahead`;
+    if (selectedDate && items.length === 0) {
+        list.append(makeElement('p', 'event-empty', 'No classes or events are scheduled for this day.'));
+    } else if (items.length === 0) {
         list.append(makeElement('p', 'event-empty', 'There are no upcoming dates just now. Check back soon or get in touch with Maureen.'));
     } else {
-        events.forEach((event) => list.append(makeEventCard(event)));
+        items.forEach((item) => list.append(makeEventCard(item, item.isClass)));
     }
 }
 
@@ -120,13 +138,20 @@ function renderCalendar() {
             cellDate = new Date(year, month, dayNumber);
         }
         const dateKey = formatDateKey(cellDate);
+        const weekdayName = new Intl.DateTimeFormat('en-GB', { weekday: 'long' }).format(cellDate);
+        const hasClass = weeklyClasses.some((session) =>
+            session.day.toLowerCase() === weekdayName.toLowerCase()
+        );
+        const hasEvent = eventDates.has(dateKey);
         const dayButton = makeElement('button', 'calendar-day', String(dayNumber));
         dayButton.type = 'button';
         dayButton.setAttribute('role', 'gridcell');
-        dayButton.setAttribute('aria-label', `${new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(cellDate)}${eventDates.has(dateKey) ? ', event' : ''}`);
+        const dayKinds = [hasClass ? 'weekly class' : '', hasEvent ? 'event' : ''].filter(Boolean).join(' and ');
+        dayButton.setAttribute('aria-label', `${new Intl.DateTimeFormat('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }).format(cellDate)}${dayKinds ? `, ${dayKinds}` : ''}`);
         if (outside) dayButton.classList.add('is-outside');
         if (dateKey === todayKey) dayButton.classList.add('is-today');
-        if (eventDates.has(dateKey)) dayButton.classList.add('has-event');
+        if (hasEvent) dayButton.classList.add('has-event');
+        if (hasClass) dayButton.classList.add('has-class');
         if (dateKey === selectedDate) dayButton.classList.add('is-selected');
         dayButton.setAttribute('aria-pressed', String(dateKey === selectedDate));
         dayButton.addEventListener('click', () => {
@@ -139,10 +164,10 @@ function renderCalendar() {
     }
 }
 
-function renderSchedule(weeklyClasses = []) {
+function renderSchedule(classes = []) {
     const schedule = document.querySelector('#schedule-list');
     schedule.replaceChildren();
-    weeklyClasses.forEach((item) => {
+    classes.forEach((item) => {
         const row = makeElement('article', 'schedule-item');
         row.append(
             makeElement('span', 'schedule-day', item.day),
@@ -162,7 +187,8 @@ async function loadContent() {
     if (!response.ok) throw new Error(`Content request failed (${response.status})`);
     const content = await response.json();
     renderAnnouncements(Array.isArray(content.announcements) ? content.announcements : []);
-    renderSchedule(Array.isArray(content.classes) ? content.classes : []);
+    weeklyClasses = Array.isArray(content.classes) ? content.classes : [];
+    renderSchedule(weeklyClasses);
     allEvents = Array.isArray(content.events) ? content.events : [];
     visibleEvents = allEvents.filter((event) => /^\d{4}-\d{2}-\d{2}$/.test(event.date) && event.date >= todayKey)
         .sort((first, second) => first.date.localeCompare(second.date));
@@ -197,10 +223,38 @@ document.querySelectorAll('#main-nav a').forEach((link) => {
         document.querySelector('#main-nav').classList.remove('is-open');
     });
 });
+
+document.querySelectorAll('[data-open-dialog]').forEach((button) => {
+    button.addEventListener('click', () => {
+        const dialog = document.getElementById(button.dataset.openDialog);
+        if (dialog && typeof dialog.showModal === 'function') dialog.showModal();
+    });
+});
+
+document.querySelectorAll('.service-dialog').forEach((dialog) => {
+    dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+    });
+    dialog.querySelectorAll('[data-close-dialog], [data-dialog-contact]').forEach((control) => {
+        control.addEventListener('click', () => dialog.close());
+    });
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const openDialogs = document.querySelectorAll('.service-dialog[open]');
+    const topDialog = openDialogs[openDialogs.length - 1];
+    if (topDialog) {
+        event.preventDefault();
+        topDialog.close();
+    }
+});
+
 document.querySelector('#current-year').textContent = String(today.getFullYear());
 loadContent().catch((error) => {
     console.error('Unable to load the latest announcements and events.', error);
     renderAnnouncements([]);
+    weeklyClasses = [];
     renderSchedule([]);
     visibleEvents = [];
     renderCalendar();

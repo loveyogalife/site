@@ -79,22 +79,15 @@ button {
 
 .wordmark {
     display: inline-flex;
-    flex-direction: column;
+    flex: 0 0 auto;
+    align-items: center;
     text-decoration: none;
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: 0;
 }
 
-.wordmark span:first-child {
-    color: var(--coral);
-    font-size: 10px;
-}
-
-.wordmark span:last-child {
-    font-size: 16px;
-    letter-spacing: .03em;
+.brand-logo {
+    display: block;
+    width: 112px;
+    height: auto;
 }
 
 .main-nav {
@@ -380,10 +373,13 @@ h2 em {
     width: 44px;
     aspect-ratio: 1;
     place-content: center;
-    border: 1px solid rgba(25, 61, 53, .35);
+    border: 1px solid rgba(198, 107, 80, .45);
     border-radius: 50%;
-    color: var(--forest);
-    font-size: 22px;
+}
+
+.announcement-icon img {
+    width: 28px;
+    height: auto;
 }
 
 .announcement-copy .eyebrow {
@@ -543,16 +539,29 @@ h2 em {
     content: '';
 }
 
-.calendar-day.has-event::after {
+.calendar-day.has-event::after,
+.calendar-day.has-class::after {
     position: absolute;
     bottom: 12%;
     left: 50%;
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: var(--coral);
     content: '';
     transform: translateX(-50%);
+}
+
+.calendar-day.has-event::after {
+    background: var(--coral);
+}
+
+.calendar-day.has-class::after {
+    background: var(--leaf);
+}
+
+.calendar-day.has-event.has-class::after {
+    width: 8px;
+    background: linear-gradient(90deg, var(--leaf) 50%, var(--coral) 50%);
 }
 
 .calendar-day.is-selected {
@@ -576,6 +585,16 @@ h2 em {
     height: 6px;
     margin: 0 .4rem 1px 0;
     border-radius: 50%;
+    background: var(--coral);
+}
+
+.calendar-legend .legend-class {
+    margin-left: .8rem;
+    background: var(--leaf);
+}
+
+.calendar-legend .legend-event {
+    margin-left: .8rem;
     background: var(--coral);
 }
 
@@ -870,6 +889,103 @@ h2 em {
     background: var(--white);
 }
 
+.service-dialog {
+    position: fixed;
+    inset: 50% auto auto 50%;
+    width: min(960px, calc(100vw - 48px));
+    max-width: none;
+    max-height: min(760px, calc(100dvh - 48px));
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    border: 0;
+    color: var(--ink);
+    background: var(--paper);
+    box-shadow: 0 24px 80px rgba(17, 46, 41, .28);
+    transform: translate(-50%, -50%);
+}
+
+.service-dialog::backdrop {
+    background: rgba(17, 34, 29, .68);
+    backdrop-filter: blur(3px);
+}
+
+.service-dialog-layout {
+    display: grid;
+    min-height: 510px;
+    grid-template-columns: .9fr 1.1fr;
+}
+
+.service-dialog-image {
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
+    background: #dce3d8;
+}
+
+.service-dialog-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.service-dialog-copy {
+    position: relative;
+    align-self: center;
+    padding: clamp(2rem, 4vw, 4rem);
+}
+
+.service-dialog-copy h2 {
+    max-width: 480px;
+    margin: 0 2rem 1.1rem 0;
+    color: var(--forest);
+    font-family: var(--serif);
+    font-size: clamp(34px, 4vw, 48px);
+    line-height: 1.05;
+}
+
+.service-dialog-copy > p:not(.eyebrow) {
+    max-width: 500px;
+    margin-bottom: .9rem;
+    color: #51584d;
+    font-size: 13px;
+}
+
+.service-dialog-copy .button {
+    margin-top: .5rem;
+}
+
+.dialog-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 1px solid var(--line);
+    color: var(--forest);
+    background: var(--white);
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.dialog-close:hover {
+    color: white;
+    background: var(--forest);
+}
+
+.service-open {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+}
+
 .service-photo {
     position: relative;
     min-height: 180px;
@@ -886,6 +1002,26 @@ h2 em {
 
 .service-card-body {
     padding: 1.4rem;
+}
+
+.service-details {
+    margin: .4rem 0 .8rem;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.service-details summary {
+    width: fit-content;
+    color: var(--forest);
+    font-size: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.service-details p {
+    min-height: 0;
+    margin: .55rem 0;
+    font-size: 11px;
 }
 
 .service-number {
@@ -1007,6 +1143,17 @@ h2 em {
     max-width: 470px;
     color: #51584d;
     font-size: 13px;
+}
+
+.sound-bath-copy .sound-bath-practical {
+    color: var(--forest);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.sound-bath-copy .service-details {
+    max-width: 470px;
+    margin: .7rem 0 1rem;
 }
 
 .sound-bath-copy .button {
@@ -1140,9 +1287,13 @@ h2 em {
 }
 
 .contact-flower {
-    color: var(--gold);
-    font-size: 66px;
-    line-height: 1.1;
+    display: block;
+    width: 72px;
+}
+
+.contact-flower img {
+    width: 100%;
+    height: auto;
 }
 
 .contact-aside p {
@@ -1168,8 +1319,8 @@ h2 em {
     background: var(--paper);
 }
 
-.wordmark-footer {
-    width: max-content;
+.wordmark-footer .brand-logo {
+    width: 132px;
 }
 
 .site-footer>p {
@@ -1261,6 +1412,14 @@ h2 em {
         z-index: 20;
         min-height: 70px;
         padding: 0 1.1rem;
+    }
+
+    .site-header .brand-logo {
+        width: 92px;
+    }
+
+    .site-footer .brand-logo {
+        width: 112px;
     }
 
     .menu-toggle {
@@ -1967,5 +2126,31 @@ h2 em {
     .admin-access-form .button,
     .admin-publish .button {
         align-self: stretch;
+    }
+}
+
+@media (max-width: 680px) {
+    .service-dialog {
+        width: calc(100vw - 24px);
+        max-height: calc(100dvh - 24px);
+    }
+
+    .service-dialog-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .service-dialog-image {
+        min-height: 230px;
+        height: 30vh;
+        max-height: 300px;
+    }
+
+    .service-dialog-copy {
+        padding: 1.6rem 1.25rem 1.8rem;
+    }
+
+    .service-dialog-copy h2 {
+        margin-right: 2.4rem;
+        font-size: 36px;
     }
 }
