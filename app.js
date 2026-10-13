@@ -38,15 +38,23 @@ function renderAnnouncements(announcements = []) {
 
     active.forEach((announcement) => {
         const item = makeElement('article', 'announcement-item');
+        const icon = makeElement('div', 'announcement-icon');
+        const iconImage = makeElement('img');
+        const content = makeElement('div', 'announcement-item-copy');
         const title = makeElement('h2', '', announcement.title || 'A note from Maureen');
         const message = makeElement('p', '', announcement.message || '');
-        item.append(title, message);
+        icon.setAttribute('aria-hidden', 'true');
+        iconImage.src = './pics/lotus.svg';
+        iconImage.alt = '';
+        icon.append(iconImage);
+        content.append(title, message);
         if (announcement.link && announcement.linkText && /^(https?:\/\/|mailto:|tel:|#)/i.test(announcement.link)) {
             const link = makeElement('a', 'text-link', announcement.linkText);
             link.href = announcement.link;
             link.append(makeElement('span', '', '↗'));
-            item.append(link);
+            content.append(link);
         }
+        item.append(icon, content);
         copy.append(item);
     });
 }
