@@ -577,8 +577,10 @@ h2 em {
 }
 
 .calendar-day.has-event.has-class::after {
-    width: 8px;
-    background: linear-gradient(90deg, var(--leaf) 50%, var(--coral) 50%);
+    width: 5px;
+    background: var(--leaf);
+    box-shadow: 9px 0 0 var(--coral);
+    transform: translateX(-7px);
 }
 
 .calendar-day.is-selected {
@@ -588,6 +590,10 @@ h2 em {
 
 .calendar-day.is-selected::after {
     background: var(--gold);
+}
+
+.calendar-day.is-selected.has-event.has-class::after {
+    box-shadow: 9px 0 0 var(--gold);
 }
 
 .calendar-legend {
