@@ -144,8 +144,29 @@ button {
     text-align: center;
 }
 
-.nav-contact span {
-    padding-left: .45rem;
+.ui-icon {
+    display: inline-block;
+    width: .8rem;
+    height: .8rem;
+    margin-left: .45rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+    vertical-align: -.08em;
+}
+
+.ui-icon-only {
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0;
+    vertical-align: middle;
+}
+
+.ui-icon-leading {
+    margin-right: 0;
+    margin-left: 0;
 }
 
 .menu-toggle {
@@ -313,12 +334,17 @@ h2 em {
     text-decoration: none;
 }
 
-.text-link span {
+.button .ui-icon,
+.text-link .ui-icon {
+    margin-left: 0;
+}
+
+.text-link .ui-icon {
     color: var(--coral);
     transition: transform .2s ease;
 }
 
-.text-link:hover span {
+.text-link:hover .ui-icon {
     transform: translate(3px, -2px);
 }
 
@@ -326,17 +352,8 @@ h2 em {
     color: var(--white);
 }
 
-.text-link-light span {
+.text-link-light .ui-icon {
     color: var(--gold);
-}
-
-.button span[aria-hidden],
-.text-link span[aria-hidden],
-.nav-contact span[aria-hidden],
-.footer-editor span[aria-hidden],
-.icon-button {
-    font-family: Arial, Helvetica, sans-serif;
-    font-variant-emoji: text;
 }
 
 .hero-note {
@@ -890,7 +907,7 @@ h2 em {
     color: white;
 }
 
-.price-panel .text-link span {
+.price-panel .text-link .ui-icon {
     color: var(--gold);
 }
 
@@ -1756,9 +1773,17 @@ h2 em {
         object-position: 60% 50%;
     }
 
+    .service-photo-bowls img {
+        object-position: 42% 50%;
+    }
+
     .wide-image img,
     #sound-bath-dialog .service-dialog-image img {
         object-position: 50% 42%;
+    }
+
+    #sound-baths .wide-image img {
+        object-position: 50% 100%;
     }
 
     .service-card-body {
