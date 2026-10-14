@@ -9,6 +9,23 @@ let visibleEvents = [];
 let weeklyClasses = [];
 let calendarDate = new Date(today.getFullYear(), today.getMonth(), 1);
 let selectedDate = '';
+const fallbackReviews = [
+    {
+        id: 'review-sam',
+        name: 'Sam',
+        quote: 'Maureen is the most wonderful Yoga teacher. I was immediately bowled over by her calm, patience, good humour, grace and expertise.'
+    },
+    {
+        id: 'review-kate',
+        name: 'Kate',
+        quote: 'For anyone wanting to try Yoga, Maureen provides an excellent class and I am constantly learning new things about Yoga.'
+    },
+    {
+        id: 'review-amber',
+        name: 'Amber',
+        quote: 'Her approach is open, honest, warm and friendly and she is a gem in the yoga world!'
+    }
+];
 
 function formatDateKey(date) {
     const year = date.getFullYear();
@@ -190,6 +207,18 @@ function renderSchedule(classes = []) {
     });
 }
 
+function renderReviews(reviews = fallbackReviews) {
+    const list = document.querySelector('#testimonial-list');
+    list.replaceChildren();
+    reviews.forEach((review) => {
+        const item = makeElement('blockquote');
+        const quote = makeElement('p', '', `“${review.quote || ''}”`);
+        const name = makeElement('footer', '', review.name || 'Yoga student');
+        item.append(quote, name);
+        list.append(item);
+    });
+}
+
 async function loadContent() {
     const response = await fetch(`${contentUrl.href}?v=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Content request failed (${response.status})`);
@@ -197,6 +226,7 @@ async function loadContent() {
     renderAnnouncements(Array.isArray(content.announcements) ? content.announcements : []);
     weeklyClasses = Array.isArray(content.classes) ? content.classes : [];
     renderSchedule(weeklyClasses);
+    renderReviews(Array.isArray(content.reviews) ? content.reviews : fallbackReviews);
     allEvents = Array.isArray(content.events) ? content.events : [];
     visibleEvents = allEvents.filter((event) => /^\d{4}-\d{2}-\d{2}$/.test(event.date) && event.date >= todayKey)
         .sort((first, second) => first.date.localeCompare(second.date));
@@ -259,11 +289,13 @@ document.addEventListener('keydown', (event) => {
 });
 
 document.querySelector('#current-year').textContent = String(today.getFullYear());
+renderReviews();
 loadContent().catch((error) => {
     console.error('Unable to load the latest announcements and events.', error);
     renderAnnouncements([]);
     weeklyClasses = [];
     renderSchedule([]);
+    renderReviews();
     visibleEvents = [];
     renderCalendar();
     renderEventList();

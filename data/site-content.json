@@ -72,5 +72,22 @@
       "title": "Yoga",
       "place": "Cheylesmore Community Centre 111 Arundel Road CV3 5JL (Oct–Apr) · War Memorial Park (May–Sep) · In person + Zoom"
     }
+  ],
+  "reviews": [
+    {
+      "id": "review-sam",
+      "name": "Sam",
+      "quote": "Maureen is the most wonderful Yoga teacher. I was immediately bowled over by her calm, patience, good humour, grace and expertise."
+    },
+    {
+      "id": "review-kate",
+      "name": "Kate",
+      "quote": "For anyone wanting to try Yoga, Maureen provides an excellent class and I am constantly learning new things about Yoga."
+    },
+    {
+      "id": "review-amber",
+      "name": "Amber",
+      "quote": "Her approach is open, honest, warm and friendly and she is a gem in the yoga world!"
+    }
   ]
 }

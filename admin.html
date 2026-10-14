@@ -8,8 +8,8 @@
     <link rel="icon" href="./pics/lotus.svg" type="image/svg+xml">
     <meta name="robots" content="noindex, nofollow">
     <title>Site editor | Love Yoga Life</title>
-    <link rel="stylesheet" href="./styles.css?v=20261013-5">
-    <script src="./admin.js?v=20261012-5" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20261014-3">
+    <script src="./admin.js?v=20261014-1" defer></script>
 </head>
 
 <body class="admin-page">
@@ -21,7 +21,7 @@
         <div class="admin-heading">
             <p class="eyebrow">Site editor</p>
             <h1>What's <em>on.</em></h1>
-            <p>Update announcements, events and weekly classes for the live website.</p>
+            <p>Update announcements, reviews, events and weekly classes for the live website.</p>
         </div>
 
         <section class="admin-access-gate" id="admin-access-gate" aria-labelledby="access-title">
@@ -65,6 +65,27 @@
                     <div class="admin-form-actions"><button class="button button-dark" type="submit">Save
                             announcement</button><button class="button button-quiet" type="button"
                             data-cancel="announcement" hidden>Cancel edit</button></div>
+                </form>
+            </section>
+
+            <section class="admin-section" aria-labelledby="review-admin-title">
+                <div class="admin-section-heading">
+                    <div>
+                        <p class="eyebrow">Homepage social proof</p>
+                        <h2 id="review-admin-title">Reviews</h2>
+                    </div><span class="admin-count" id="review-count-admin">0</span>
+                </div>
+                <div class="admin-records" id="review-records"></div>
+                <form id="review-form" class="admin-form">
+                    <input type="hidden" name="id">
+                    <h3 id="review-form-title">Add a review</h3>
+                    <label>Reviewer name<input name="name" type="text" maxlength="80" required
+                            placeholder="First name"></label>
+                    <label>Review<textarea name="quote" rows="5" maxlength="700" required
+                            placeholder="Add the review exactly as it should appear"></textarea></label>
+                    <div class="admin-form-actions"><button class="button button-dark" type="submit">Save
+                            review</button><button class="button button-quiet" type="button" data-cancel="review"
+                            hidden>Cancel edit</button></div>
                 </form>
             </section>
 

@@ -22,7 +22,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 86px;
+    scroll-padding-top: 135px;
 }
 
 body {
@@ -67,14 +67,17 @@ button {
 }
 
 .site-header {
-    min-height: 82px;
-    padding: 0 max(5vw, calc((100vw - var(--page)) / 2));
-    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 118px;
     align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+    padding: 0 max(5vw, calc((100vw - var(--page)) / 2));
     color: var(--forest);
     background: var(--paper);
+    box-shadow: 0 8px 22px rgba(17, 46, 41, .07);
 }
 
 .wordmark {
@@ -86,14 +89,36 @@ button {
 
 .brand-logo {
     display: block;
-    width: 112px;
+    width: clamp(145px, 11vw, 165px);
     height: auto;
 }
 
+.site-header>.wordmark {
+    justify-self: center;
+    padding: .55rem 1rem .4rem;
+}
+
 .main-nav {
-    display: flex;
-    align-items: center;
-    gap: clamp(1.1rem, 2.5vw, 2.5rem);
+    position: absolute;
+    top: 100%;
+    right: max(5vw, calc((100vw - var(--page)) / 2));
+    display: none;
+    width: min(360px, calc(100vw - 2rem));
+    align-items: stretch;
+    gap: 0;
+    padding: .65rem 1.1rem 1rem;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    box-shadow: 0 18px 35px rgba(17, 46, 41, .14);
+}
+
+.main-nav.is-open {
+    display: grid;
+}
+
+.main-nav a {
+    padding: .75rem 0;
+    border-bottom: 1px solid var(--line);
 }
 
 .main-nav a,
@@ -109,8 +134,10 @@ button {
 }
 
 .nav-contact {
-    padding: .65rem 1rem;
+    margin-top: .5rem;
+    padding: .65rem 1rem !important;
     border: 1px solid var(--forest);
+    text-align: center;
 }
 
 .nav-contact span {
@@ -118,52 +145,39 @@ button {
 }
 
 .menu-toggle {
-    display: none;
+    position: absolute;
+    top: 50%;
+    right: max(5vw, calc((100vw - var(--page)) / 2));
+    display: grid;
+    width: 44px;
+    height: 44px;
+    align-content: center;
+    justify-items: center;
+    gap: 6px;
+    border: 1px solid var(--forest);
+    border-radius: 0;
+    background: transparent;
+    cursor: pointer;
+    transform: translateY(-50%);
 }
 
-.service-rail {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: clamp(1rem, 4vw, 4.5rem);
-    min-height: 58px;
-    padding: .5rem 5vw;
-    color: var(--white);
+.menu-toggle span {
+    width: 18px;
+    height: 1px;
     background: var(--forest);
-}
-
-.service-rail a {
-    font-size: 12px;
-    text-decoration: none;
-}
-
-.service-rail a:hover {
-    color: var(--gold);
-}
-
-.service-rail a span {
-    margin-left: .35rem;
-    color: var(--gold);
-}
-
-.rail-label {
-    color: #cbd6c6;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
 }
 
 .hero {
     display: grid;
-    grid-template-columns: .88fr 1.12fr;
+    grid-template-columns: 1fr 1fr;
     min-height: 540px;
     background: var(--forest);
     color: var(--white);
 }
 
 .hero-copy {
-    width: min(100%, 620px);
-    padding: clamp(3.5rem, 8vw, 7rem) clamp(2rem, 7vw, 7rem) 3rem max(5vw, calc((100vw - var(--page)) / 2));
+    width: min(100%, 720px);
+    padding: clamp(3.5rem, 6vw, 5.5rem) clamp(2rem, 4vw, 4rem) 3rem max(5vw, calc((100vw - var(--page)) / 2));
     align-self: center;
 }
 
@@ -214,9 +228,9 @@ h1,
 }
 
 h1 {
-    max-width: 520px;
+    max-width: 590px;
     margin-bottom: 1.2rem;
-    font-size: clamp(48px, 5.5vw, 76px);
+    font-size: clamp(46px, 4.4vw, 64px);
     line-height: .99;
 }
 
@@ -226,8 +240,17 @@ h2 em {
     font-weight: 500;
 }
 
+.prayer-mark {
+    display: inline-block;
+    margin-left: .16em;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+    font-size: .48em;
+    font-style: normal;
+    vertical-align: .18em;
+}
+
 .hero-intro {
-    max-width: 410px;
+    max-width: 480px;
     margin-bottom: 1.7rem;
     color: #e1e7dc;
     font-size: 15px;
@@ -303,6 +326,15 @@ h2 em {
     color: var(--gold);
 }
 
+.button span[aria-hidden],
+.text-link span[aria-hidden],
+.nav-contact span[aria-hidden],
+.footer-editor span[aria-hidden],
+.icon-button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-variant-emoji: text;
+}
+
 .hero-note {
     margin: 2.2rem 0 0;
     color: #c8d5c9;
@@ -313,6 +345,10 @@ h2 em {
     position: relative;
     min-height: 500px;
     overflow: hidden;
+    background-color: var(--forest);
+    background-image: url('./pics/hero-original.jpeg');
+    background-position: 50% 38%;
+    background-size: cover;
 }
 
 .hero-image {
@@ -321,7 +357,7 @@ h2 em {
     position: absolute;
     inset: 0;
     object-fit: cover;
-    object-position: center 42%;
+    object-position: 50% 38%;
 }
 
 .hero-image-wrap::after {
@@ -698,6 +734,30 @@ h2 em {
     background: #ebeee5;
 }
 
+.class-photo {
+    position: relative;
+    width: min(100%, 720px);
+    height: auto;
+    margin: 0 auto clamp(2rem, 5vw, 4.5rem);
+    overflow: hidden;
+    background: #d8ded2;
+}
+
+.class-photo img {
+    width: 100%;
+    height: auto;
+}
+
+.class-photo figcaption {
+    position: absolute;
+    right: 1.2rem;
+    bottom: 1rem;
+    padding: .35rem .55rem;
+    color: white;
+    background: rgba(17, 46, 41, .72);
+    font-size: 10px;
+}
+
 .class-layout {
     display: grid;
     grid-template-columns: 1.35fr .65fr;
@@ -896,6 +956,12 @@ h2 em {
     font-weight: 700;
 }
 
+.testimonial-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+}
+
 .services-section {
     background: var(--white);
 }
@@ -952,6 +1018,26 @@ h2 em {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+#private-yoga-dialog .service-dialog-image img {
+    object-position: 55% 50%;
+}
+
+#reiki-dialog .service-dialog-image img {
+    object-position: 50% 48%;
+}
+
+#bowl-dialog .service-dialog-image img {
+    object-position: 50% 48%;
+}
+
+#sound-bath-dialog .service-dialog-image img {
+    object-position: 50% 45%;
+}
+
+#retreat-dialog .service-dialog-image img {
+    object-position: 52% 50%;
 }
 
 .service-dialog-copy {
@@ -1021,6 +1107,30 @@ h2 em {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.service-photo-yoga img {
+    object-position: 56% 50%;
+}
+
+.service-photo-reiki img {
+    object-position: 50% 48%;
+}
+
+.service-photo-bowls img {
+    object-position: 50% 48%;
+}
+
+.wide-image img {
+    object-position: 50% 45%;
+}
+
+.wide-image-retreats img {
+    object-position: 50% 40%;
+}
+
+.service-card-retreats .wide-image {
+    order: 2;
 }
 
 .service-card-body {
@@ -1186,7 +1296,7 @@ h2 em {
 .about-section {
     display: grid;
     grid-template-columns: .9fr 1.1fr;
-    align-items: center;
+    align-items: start;
     gap: clamp(3rem, 8vw, 8rem);
     background: var(--paper);
 }
@@ -1200,6 +1310,7 @@ h2 em {
     width: 100%;
     height: 410px;
     object-fit: cover;
+    object-position: 42% 40%;
 }
 
 .about-image-note {
@@ -1229,6 +1340,18 @@ h2 em {
 
 .about-copy .text-link {
     margin-top: .6rem;
+}
+
+.about-copy>p.about-signoff {
+    margin: 1.5rem 0 .8rem;
+    color: var(--forest);
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.about-signoff span {
+    font-style: italic;
 }
 
 .first-class-section {
@@ -1369,19 +1492,6 @@ h2 em {
 }
 
 @media (max-width: 900px) {
-    .site-header {
-        padding-right: 1.5rem;
-        padding-left: 1.5rem;
-    }
-
-    .main-nav {
-        gap: 1rem;
-    }
-
-    .service-rail {
-        gap: 1.3rem;
-    }
-
     .hero-copy {
         padding-left: 2rem;
     }
@@ -1426,19 +1536,22 @@ h2 em {
 
 @media (max-width: 680px) {
     html {
-        scroll-padding-top: 70px;
+        scroll-padding-top: 96px;
     }
 
     .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 20;
-        min-height: 70px;
+        grid-template-columns: 1fr auto;
+        min-height: 86px;
         padding: 0 1.1rem;
     }
 
+    .site-header>.wordmark {
+        justify-self: start;
+        padding: .4rem 0;
+    }
+
     .site-header .brand-logo {
-        width: 92px;
+        width: 112px;
     }
 
     .site-footer .brand-logo {
@@ -1446,15 +1559,9 @@ h2 em {
     }
 
     .menu-toggle {
-        display: grid;
+        right: 1.1rem;
         width: 42px;
         height: 42px;
-        align-content: center;
-        justify-items: center;
-        gap: 6px;
-        border: 1px solid var(--forest);
-        border-radius: 0;
-        background: transparent;
     }
 
     .menu-toggle span {
@@ -1464,20 +1571,11 @@ h2 em {
     }
 
     .main-nav {
-        display: none;
-        position: absolute;
-        top: 70px;
+        top: 86px;
         right: 0;
         left: 0;
-        align-items: stretch;
-        gap: 0;
+        width: 100%;
         padding: .5rem 1.1rem 1rem;
-        border-top: 1px solid var(--line);
-        background: var(--paper);
-    }
-
-    .main-nav.is-open {
-        display: grid;
     }
 
     .main-nav a {
@@ -1492,23 +1590,6 @@ h2 em {
         text-align: center;
     }
 
-    .service-rail {
-        justify-content: flex-start;
-        gap: 1rem;
-        min-height: 50px;
-        overflow-x: auto;
-        padding: .4rem 1.1rem;
-        white-space: nowrap;
-    }
-
-    .rail-label {
-        display: none;
-    }
-
-    .service-rail a {
-        font-size: 11px;
-    }
-
     .hero {
         grid-template-columns: 1fr;
     }
@@ -1519,7 +1600,7 @@ h2 em {
 
     h1 {
         max-width: 450px;
-        font-size: 54px;
+        font-size: 46px;
     }
 
     .hero-intro {
@@ -1532,6 +1613,11 @@ h2 em {
 
     .hero-image-wrap {
         min-height: 320px;
+        background-position: 50% 34%;
+    }
+
+    .hero-image {
+        object-position: 50% 34%;
     }
 
     .hero-stamp {
@@ -1599,6 +1685,12 @@ h2 em {
         gap: 1.7rem;
     }
 
+    .class-photo {
+        width: 100%;
+        height: auto;
+        margin-bottom: 2rem;
+    }
+
     .schedule-item {
         grid-template-columns: 58px 92px 1fr;
         gap: .5rem;
@@ -1649,6 +1741,15 @@ h2 em {
         min-height: 100%;
     }
 
+    .service-photo-yoga img {
+        object-position: 60% 50%;
+    }
+
+    .wide-image img,
+    #sound-bath-dialog .service-dialog-image img {
+        object-position: 50% 42%;
+    }
+
     .service-card-body {
         padding: 1rem;
     }
@@ -1672,6 +1773,15 @@ h2 em {
 
     .service-card-wide .service-card-body {
         padding: 1.3rem;
+    }
+
+    .service-card-retreats .wide-image {
+        order: 0;
+    }
+
+    .wide-image-retreats img,
+    #retreat-dialog .service-dialog-image img {
+        object-position: 50% 42%;
     }
 
     .sound-bath-section {
@@ -1760,7 +1870,22 @@ h2 em {
 }
 
 .admin-header {
+    position: relative;
+    display: flex;
+    min-height: 82px;
+    justify-content: space-between;
+    padding: 0 max(5vw, calc((100vw - var(--page)) / 2));
     border-bottom: 1px solid var(--line);
+    box-shadow: none;
+}
+
+.admin-header>.wordmark {
+    justify-self: auto;
+    padding: 0;
+}
+
+.admin-header .brand-logo {
+    width: 112px;
 }
 
 .admin-main {

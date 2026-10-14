@@ -2,6 +2,7 @@ const contentPath = 'data/site-content.json';
 const contentRepository = 'loveyogalife/site';
 const contentUrl = new URL(`./${contentPath}`, document.baseURI);
 const announcementForm = document.querySelector('#announcement-form');
+const reviewForm = document.querySelector('#review-form');
 const eventForm = document.querySelector('#event-form');
 const classForm = document.querySelector('#class-form');
 const accessForm = document.querySelector('#access-form');
@@ -11,7 +12,7 @@ const editorGate = document.querySelector('#admin-access-gate');
 const editorContent = document.querySelector('#editor-content');
 const publishBar = document.querySelector('#publish-bar');
 const statusNode = document.querySelector('#admin-status');
-let siteContent = { announcements: [], events: [], classes: [] };
+let siteContent = { announcements: [], reviews: [], events: [], classes: [] };
 let publishToken = '';
 
 function createId(prefix) {
@@ -116,6 +117,20 @@ function renderAnnouncements() {
     if (!siteContent.announcements.length) container.append(emptyRecord('No announcements yet. Add one below.'));
 }
 
+function renderReviews() {
+    const container = document.querySelector('#review-records');
+    container.replaceChildren();
+    document.querySelector('#review-count-admin').textContent = String(siteContent.reviews.length);
+    siteContent.reviews.forEach((review) => {
+        container.append(buildRecordCard(review.name || 'Anonymous reviewer', review.quote || '', () => editReview(review.id), () => {
+            siteContent.reviews = siteContent.reviews.filter((item) => item.id !== review.id);
+            renderReviews();
+            setStatus('Review removed from this draft. Publish to update the website.');
+        }));
+    });
+    if (!siteContent.reviews.length) container.append(emptyRecord('No reviews yet. Add one below.'));
+}
+
 function renderEvents() {
     const container = document.querySelector('#event-records');
     container.replaceChildren();
@@ -159,11 +174,23 @@ function resetForm(form, title, cancelSelector) {
     form.elements.id.value = '';
     const defaultTitles = {
         '#announcement-form-title': 'Add an announcement',
+        '#review-form-title': 'Add a review',
         '#event-form-title': 'Add an event',
         '#class-form-title': 'Add a weekly class'
     };
     document.querySelector(title).textContent = defaultTitles[title];
     document.querySelector(`[data-cancel="${cancelSelector}"]`).hidden = true;
+}
+
+function editReview(id) {
+    const review = siteContent.reviews.find((item) => item.id === id);
+    if (!review) return;
+    reviewForm.elements.id.value = review.id;
+    reviewForm.elements.name.value = review.name || '';
+    reviewForm.elements.quote.value = review.quote || '';
+    document.querySelector('#review-form-title').textContent = 'Edit review';
+    document.querySelector('[data-cancel="review"]').hidden = false;
+    reviewForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 function editAnnouncement(id) {
@@ -228,6 +255,23 @@ announcementForm.addEventListener('submit', (formEvent) => {
     setStatus('Announcement saved in this draft. Publish changes to show it on the website.');
 });
 
+reviewForm.addEventListener('submit', (formEvent) => {
+    formEvent.preventDefault();
+    const values = new FormData(reviewForm);
+    const id = values.get('id') || createId('review');
+    const review = {
+        id,
+        name: values.get('name').trim(),
+        quote: values.get('quote').trim()
+    };
+    const index = siteContent.reviews.findIndex((item) => item.id === id);
+    if (index < 0) siteContent.reviews.push(review);
+    else siteContent.reviews[index] = review;
+    resetForm(reviewForm, '#review-form-title', 'review');
+    renderReviews();
+    setStatus('Review saved in this draft. Publish changes to show it on the website.');
+});
+
 eventForm.addEventListener('submit', (formEvent) => {
     formEvent.preventDefault();
     const values = new FormData(eventForm);
@@ -271,6 +315,7 @@ classForm.addEventListener('submit', (formEvent) => {
 document.querySelectorAll('[data-cancel]').forEach((button) => {
     button.addEventListener('click', () => {
         if (button.dataset.cancel === 'announcement') resetForm(announcementForm, '#announcement-form-title', 'announcement');
+        if (button.dataset.cancel === 'review') resetForm(reviewForm, '#review-form-title', 'review');
         if (button.dataset.cancel === 'event') resetForm(eventForm, '#event-form-title', 'event');
         if (button.dataset.cancel === 'class') resetForm(classForm, '#class-form-title', 'class');
     });
@@ -283,15 +328,18 @@ async function loadSiteContent() {
         const content = await response.json();
         siteContent = {
             announcements: Array.isArray(content.announcements) ? content.announcements : [],
+            reviews: Array.isArray(content.reviews) ? content.reviews : [],
             events: Array.isArray(content.events) ? content.events : [],
             classes: Array.isArray(content.classes) ? content.classes : []
         };
         renderAnnouncements();
+        renderReviews();
         renderEvents();
         renderClasses();
     } catch (error) {
         setStatus('Could not load the website content. Open this editor from the deployed website or run it on a local web server.', 'error');
         renderAnnouncements();
+        renderReviews();
         renderEvents();
         renderClasses();
     }
@@ -329,7 +377,7 @@ async function publishChanges() {
         let binary = '';
         bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
         const payload = {
-            message: 'Update announcements and events from site editor',
+            message: 'Update website content from site editor',
             content: btoa(binary)
         };
         if (sha) payload.sha = sha;
@@ -352,6 +400,7 @@ async function publishChanges() {
 accessForm.addEventListener('submit', unlockEditor);
 document.querySelector('#publish-button').addEventListener('click', publishChanges);
 renderAnnouncements();
+renderReviews();
 renderEvents();
 renderClasses();
 loadSiteContent();
