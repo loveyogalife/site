@@ -7,14 +7,6 @@
       "linkText": "Ask Maureen to reserve your place",
       "link": "mailto:maureenthomson54@hotmail.com?subject=Sound%20bath%20booking",
       "active": true
-    },
-    {
-      "id": "announcement-5b8d62ac-f5e4-4c10-be63-0aa1ceaeecfa",
-      "title": "got magazine for you",
-      "message": "how's maaaam",
-      "linkText": "",
-      "link": "",
-      "active": true
     }
   ],
   "events": [
