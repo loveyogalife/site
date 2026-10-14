@@ -1773,8 +1773,16 @@ h2 em {
         object-position: 60% 50%;
     }
 
+    #singing-bowls {
+        grid-template-columns: 1fr;
+    }
+
+    #singing-bowls .service-photo {
+        min-height: 210px;
+    }
+
     .service-photo-bowls img {
-        object-position: 42% 50%;
+        object-position: 50% 90%;
     }
 
     .wide-image img,
@@ -1783,7 +1791,7 @@ h2 em {
     }
 
     #sound-baths .wide-image img {
-        object-position: 50% 100%;
+        object-position: 50% 82%;
     }
 
     .service-card-body {
