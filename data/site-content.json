@@ -184,70 +184,6 @@
       "active": true
     }
   ],
-  "events": [
-    {
-      "id": "sound-bath-2026-10-17",
-      "title": "Sound bath & chakra meditation",
-      "date": "2026-10-17",
-      "time": "6:00–7:00pm",
-      "location": "Baginton Village Hall, Frances Road, Baginton CV8 3AB",
-      "description": "Join us for a journey of pure sound and vibration.  Bathe in the healing vibrations of Gongs, Tibetan Singing bowls, gentle drums and many other instruments known for their vibratory healing frequencies -  Calming the mind, releasing tension & restoring inner balance🙏.  Pre booking essential x",
-      "price": "£15 in advance · £18 on the day"
-    },
-    {
-      "id": "sound-bath-2026-11-14",
-      "title": "Sound bath & chakra meditation",
-      "date": "2026-11-14",
-      "time": "6:00–7:00pm",
-      "location": "Baginton Village Hall, Frances Road, Baginton CV8 3AB",
-      "description": "Join us for a journey of pure sound and vibration.  Bathe in the healing vibrations of Gongs, Tibetan Singing bowls, gentle drums and many other instruments known for their vibratory healing frequencies -  Calming the mind, releasing tension & restoring inner balance🙏.  Pre booking essential x",
-      "price": "£15 in advance · £18 on the day"
-    }
-  ],
-  "classes": [
-    {
-      "id": "class-monday-gentle",
-      "day": "Monday",
-      "time": "10:00–11:00",
-      "title": "Gentle Yoga for the Young at Heart",
-      "place": "West Orchard United Reformed Church Hall, 83 Baginton Road, Styvechale CV3 6FQ · In person + Zoom"
-    },
-    {
-      "id": "class-tuesday-gentle",
-      "day": "Tuesday",
-      "time": "10:00–11:00",
-      "title": "Gentle Yoga for the Young at Heart",
-      "place": "Christ the King Community Centre, 14 Westhill Road, Coundon · In person + Zoom"
-    },
-    {
-      "id": "class-tuesday-evening",
-      "day": "Tuesday",
-      "time": "6:30–8:00",
-      "title": "Yoga",
-      "place": "Online via Zoom · Contact Maureen for details"
-    },
-    {
-      "id": "class-wednesday-evening",
-      "day": "Wednesday",
-      "time": "6:30–8:00",
-      "title": "Yoga",
-      "place": "Christ the King Community Centre, 14 Westhill Road, Coundon · In person + Zoom"
-    },
-    {
-      "id": "class-friday-afternoon",
-      "day": "Friday",
-      "time": "3:30–5:00",
-      "title": "Yoga",
-      "place": "Baginton Village Hall, Frances Road, Baginton CV8 3AB · In person + Zoom"
-    },
-    {
-      "id": "class-saturday-morning",
-      "day": "Saturday",
-      "time": "10:00–11:30",
-      "title": "Yoga",
-      "place": "Cheylesmore Community Centre 111 Arundel Road CV3 5JL (Oct–Apr) · War Memorial Park (May–Sep) · In person + Zoom"
-    }
-  ],
   "reviews": [
     {
       "id": "review-sam",
@@ -324,6 +260,70 @@
       "id": "review-lyn-first-weeks",
       "name": "Lyn",
       "quote": "I’ve been going to Maureen’s class on a Friday for a few weeks now. It’s wonderful, as I go straight from work. Friday is so busy for me and this is such a lovely end to the day and a great start to the weekend. I look forward to it so much. It’s time just for yourself to relax and really feel you’re doing something good for your body. I’m noticing differences already! Maureen is so calm and friendly, and encourages everyone in how they are progressing as the weeks go on. When you’ve got such a busy life, it’s fantastic to just stop — while doing some stretches, of course!"
+    }
+  ],
+  "events": [
+    {
+      "id": "sound-bath-2026-10-17",
+      "title": "Sound bath & chakra meditation",
+      "date": "2026-10-17",
+      "time": "6:00–7:00pm",
+      "location": "Baginton Village Hall, Frances Road, Baginton CV8 3AB",
+      "description": "Join us for a journey of pure sound and vibration.  Bathe in the healing vibrations of Gongs, Tibetan Singing bowls, gentle drums and many other instruments known for their vibratory healing frequencies -  Calming the mind, releasing tension & restoring inner balance🙏.  Pre booking essential x",
+      "price": "£15 in advance · £18 on the day"
+    },
+    {
+      "id": "sound-bath-2026-11-14",
+      "title": "Sound bath & chakra meditation",
+      "date": "2026-11-14",
+      "time": "6:00–7:00pm",
+      "location": "Baginton Village Hall, Frances Road, Baginton CV8 3AB",
+      "description": "Join us for a journey of pure sound and vibration.  Bathe in the healing vibrations of Gongs, Tibetan Singing bowls, gentle drums and many other instruments known for their vibratory healing frequencies -  Calming the mind, releasing tension & restoring inner balance🙏.  Pre booking essential x",
+      "price": "£15 in advance · £18 on the day"
+    }
+  ],
+  "classes": [
+    {
+      "id": "class-monday-gentle",
+      "day": "Monday",
+      "time": "10:00–11:00",
+      "title": "Gentle Yoga for the Young at Heart",
+      "place": "West Orchard United Reformed Church Hall, 83 Baginton Road, Styvechale CV3 6FQ · In person + Zoom"
+    },
+    {
+      "id": "class-tuesday-gentle",
+      "day": "Tuesday",
+      "time": "10:00–11:00",
+      "title": "Gentle Yoga for the Young at Heart",
+      "place": "Christ the King Community Centre, 14 Westhill Road, Coundon · In person + Zoom"
+    },
+    {
+      "id": "class-tuesday-evening",
+      "day": "Tuesday",
+      "time": "6:30–8:00",
+      "title": "Yoga",
+      "place": "Online via Zoom · Contact Maureen for details"
+    },
+    {
+      "id": "class-wednesday-evening",
+      "day": "Wednesday",
+      "time": "6:30–8:00",
+      "title": "Yoga",
+      "place": "Christ the King Community Centre, 14 Westhill Road, Coundon · In person + Zoom"
+    },
+    {
+      "id": "class-friday-afternoon",
+      "day": "Friday",
+      "time": "3:30–5:00",
+      "title": "Yoga",
+      "place": "Baginton Village Hall, Frances Road, Baginton CV8 3AB · In person + Zoom"
+    },
+    {
+      "id": "class-saturday-morning",
+      "day": "Saturday",
+      "time": "10:00–11:30",
+      "title": "Yoga",
+      "place": "Cheylesmore Community Centre 111 Arundel Road CV3 5JL (Oct–Apr) · War Memorial Park (May–Sep) · In person + Zoom"
     }
   ]
 }
