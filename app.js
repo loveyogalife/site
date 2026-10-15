@@ -9,21 +9,29 @@ let visibleEvents = [];
 let weeklyClasses = [];
 let calendarDate = new Date(today.getFullYear(), today.getMonth(), 1);
 let selectedDate = '';
+let testimonialResizeObserver;
+const retreatGalleriesTemplate = document.querySelector('.retreat-galleries')?.cloneNode(true);
 const fallbackReviews = [
     {
         id: 'review-sam',
         name: 'Sam',
-        quote: 'Maureen is the most wonderful Yoga teacher. I was immediately bowled over by her calm, patience, good humour, grace and expertise.'
+        quote: 'Maureen is the most wonderful Yoga teacher. I was immediately bowled over by her calm, patience, good humour, grace and expertise.',
+        featured: true,
+        highlight: 'Maureen is the most wonderful Yoga teacher. I was immediately bowled over by her calm, patience, good humour, grace and expertise.'
     },
     {
         id: 'review-kate',
         name: 'Kate',
-        quote: 'For anyone wanting to try Yoga, Maureen provides an excellent class and I am constantly learning new things about Yoga.'
+        quote: 'For anyone wanting to try Yoga, Maureen provides an excellent class and I am constantly learning new things about Yoga.',
+        featured: true,
+        highlight: 'For anyone wanting to try Yoga, Maureen provides an excellent class and I am constantly learning new things about Yoga.'
     },
     {
         id: 'review-amber',
         name: 'Amber',
-        quote: 'Her approach is open, honest, warm and friendly and she is a gem in the yoga world!'
+        quote: 'Her approach is open, honest, warm and friendly and she is a gem in the yoga world!',
+        featured: true,
+        highlight: 'Her approach is open, honest, warm and friendly and she is a gem in the yoga world!'
     }
 ];
 
@@ -44,6 +52,18 @@ function makeElement(tag, className, text) {
     if (className) element.className = className;
     if (text) element.textContent = text;
     return element;
+}
+
+function makeUiIcon(pathData) {
+    const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    icon.setAttribute('class', 'ui-icon');
+    icon.setAttribute('viewBox', '0 0 12 12');
+    icon.setAttribute('aria-hidden', 'true');
+    icon.setAttribute('focusable', 'false');
+    path.setAttribute('d', pathData);
+    icon.append(path);
+    return icon;
 }
 
 function renderAnnouncements(announcements = []) {
@@ -209,13 +229,196 @@ function renderSchedule(classes = []) {
 
 function renderReviews(reviews = fallbackReviews) {
     const list = document.querySelector('#testimonial-list');
-    list.replaceChildren();
+    const carousel = document.querySelector('#testimonial-carousel');
+    const viewport = document.querySelector('#testimonial-carousel-viewport');
+    const previous = document.querySelector('#testimonial-previous');
+    const next = document.querySelector('#testimonial-next');
+    const currentLabel = document.querySelector('#testimonial-current');
+    const totalLabel = document.querySelector('#testimonial-total');
+    const featured = reviews.filter((review) => review.featured).slice(0, 3);
+    const featuredIds = new Set(featured.map((review) => review.id));
+
     reviews.forEach((review) => {
+        if (featured.length < 3 && !featuredIds.has(review.id)) {
+            featured.push(review);
+            featuredIds.add(review.id);
+        }
+    });
+
+    const makeReview = (review, quoteText = review.quote) => {
         const item = makeElement('blockquote');
-        const quote = makeElement('p', '', `“${review.quote || ''}”`);
+        const quote = makeElement('p', '', `“${quoteText || ''}”`);
         const name = makeElement('footer', '', review.name || 'Yoga student');
         item.append(quote, name);
-        list.append(item);
+        return item;
+    };
+
+    list.replaceChildren(...featured.map((review) => makeReview(review, review.highlight || review.quote)));
+    const remaining = reviews.filter((review) => !featuredIds.has(review.id));
+    const pageCount = reviews.length ? remaining.length + 1 : 0;
+    carousel.hidden = pageCount === 0;
+    if (!pageCount) return;
+    previous.hidden = pageCount === 1;
+    next.hidden = pageCount === 1;
+
+    let currentPage = 0;
+    let pointerStartX = null;
+    const showPage = (nextPage) => {
+        currentPage = (nextPage + pageCount) % pageCount;
+        viewport.replaceChildren(currentPage === 0 ? list : makeReview(remaining[currentPage - 1]));
+        viewport.scrollTop = 0;
+        currentLabel.textContent = String(currentPage + 1);
+        totalLabel.textContent = String(pageCount);
+    };
+    previous.onclick = () => showPage(currentPage - 1);
+    next.onclick = () => showPage(currentPage + 1);
+    viewport.onkeydown = (event) => {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+        event.preventDefault();
+        showPage(currentPage + (event.key === 'ArrowRight' ? 1 : -1));
+    };
+    viewport.onpointerdown = (event) => {
+        if (event.isPrimary) pointerStartX = event.clientX;
+    };
+    viewport.onpointerup = (event) => {
+        if (pointerStartX === null || !event.isPrimary) return;
+        const distance = event.clientX - pointerStartX;
+        pointerStartX = null;
+        if (Math.abs(distance) >= 45) showPage(currentPage + (distance < 0 ? 1 : -1));
+    };
+    viewport.onpointercancel = () => { pointerStartX = null; };
+    showPage(0);
+
+    const syncHeight = () => {
+        const featuredHeight = Math.ceil(list.getBoundingClientRect().height);
+        const style = getComputedStyle(viewport);
+        const chromeHeight = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom)
+            + parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
+        if (featuredHeight) carousel.style.setProperty('--testimonial-gallery-height', `${Math.ceil(featuredHeight + chromeHeight)}px`);
+    };
+    testimonialResizeObserver?.disconnect();
+    if (typeof ResizeObserver === 'function') {
+        testimonialResizeObserver = new ResizeObserver(syncHeight);
+        testimonialResizeObserver.observe(list);
+    }
+    requestAnimationFrame(syncHeight);
+}
+
+function applyPageContent(page = {}) {
+    document.querySelectorAll('[data-page]').forEach((element) => {
+        const value = page[element.dataset.page];
+        if (typeof value === 'string' && value.trim()) element.textContent = value;
+    });
+}
+
+function initSlideshows(root = document) {
+    root.querySelectorAll('[data-slideshow]').forEach((slideshow) => {
+        if (slideshow.dataset.initialized) return;
+        slideshow.dataset.initialized = 'true';
+        const slides = Array.from(slideshow.querySelectorAll('.retreat-slide'));
+        const currentLabel = slideshow.querySelector('[data-slide-current]');
+        let currentIndex = 0;
+        let pointerStartX = null;
+        const showSlide = (nextIndex) => {
+            currentIndex = (nextIndex + slides.length) % slides.length;
+            slides.forEach((slide, index) => { slide.hidden = index !== currentIndex; });
+            currentLabel.textContent = String(currentIndex + 1);
+        };
+        slideshow.querySelector('[data-slide-previous]').addEventListener('click', () => showSlide(currentIndex - 1));
+        slideshow.querySelector('[data-slide-next]').addEventListener('click', () => showSlide(currentIndex + 1));
+        slideshow.addEventListener('keydown', (event) => {
+            if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+            event.preventDefault();
+            showSlide(currentIndex + (event.key === 'ArrowRight' ? 1 : -1));
+        });
+        slideshow.addEventListener('pointerdown', (event) => {
+            if (event.isPrimary) pointerStartX = event.clientX;
+        });
+        slideshow.addEventListener('pointerup', (event) => {
+            if (pointerStartX === null || !event.isPrimary) return;
+            const distance = event.clientX - pointerStartX;
+            pointerStartX = null;
+            if (Math.abs(distance) >= 45) showSlide(currentIndex + (distance < 0 ? 1 : -1));
+        });
+        slideshow.addEventListener('pointercancel', () => { pointerStartX = null; });
+    });
+}
+
+function renderServices(services = []) {
+    if (!services.length) return;
+    const grid = document.querySelector('#service-grid');
+    const aboutSection = document.querySelector('#about');
+    const dialogIds = {
+        'private-yoga': 'private-yoga-dialog',
+        reiki: 'reiki-dialog',
+        'singing-bowls': 'bowl-dialog',
+        'sound-baths': 'sound-bath-dialog',
+        retreats: 'retreat-dialog'
+    };
+    grid.replaceChildren();
+    document.querySelectorAll('.service-dialog').forEach((dialog) => dialog.remove());
+
+    services.forEach((service) => {
+        const dialogId = dialogIds[service.id] || `${service.id}-dialog`;
+        const card = makeElement('article', `service-card${service.featured ? ' service-card-featured' : ''}${service.wide ? ' service-card-wide' : ''}`);
+        card.id = service.id;
+        const imageWrap = makeElement('div', service.wide ? 'wide-image' : 'service-photo');
+        const image = makeElement('img');
+        image.src = service.image || './pics/lotus.svg';
+        image.alt = service.imageAlt || '';
+        image.style.objectPosition = `${service.focalX ?? 50}% ${service.focalY ?? 50}%`;
+        imageWrap.append(image);
+        const body = makeElement('div', 'service-card-body');
+        body.append(makeElement('span', 'service-number', service.label || 'SERVICE'));
+        body.append(makeElement('h3', '', service.title || 'Untitled service'));
+        body.append(makeElement('p', '', service.summary || ''));
+        if (service.price) body.append(makeElement('p', 'service-price', service.price));
+        const open = makeElement('button', 'text-link service-open', service.openLabel || `More about ${service.title || 'this service'}`);
+        open.type = 'button';
+        open.dataset.openDialog = dialogId;
+        open.append(' ', makeUiIcon('M2 10 10 2M4 2h6v6'));
+        body.append(open);
+        card.append(imageWrap, body);
+        grid.append(card);
+
+        const dialog = makeElement('dialog', 'service-dialog');
+        dialog.id = dialogId;
+        dialog.setAttribute('aria-labelledby', `${service.id}-title`);
+        const layout = makeElement('div', 'service-dialog-layout');
+        const dialogImage = makeElement('div', 'service-dialog-image');
+        const dialogPicture = image.cloneNode();
+        dialogImage.append(dialogPicture);
+        const copy = makeElement('div', 'service-dialog-copy');
+        const close = makeElement('button', 'dialog-close', '×');
+        close.type = 'button';
+        close.setAttribute('aria-label', 'Close details');
+        close.dataset.closeDialog = '';
+        copy.append(close);
+        if (service.modalEyebrow) copy.append(makeElement('p', 'eyebrow', service.modalEyebrow));
+        const title = makeElement('h2', '', service.modalTitle || service.title || 'Service details');
+        title.id = `${service.id}-title`;
+        copy.append(title);
+        String(service.modalBody || '').split(/\n\s*\n/).filter(Boolean).forEach((paragraph) => {
+            const [firstLine, ...remainingLines] = paragraph.split('\n');
+            if (service.special === 'retreat' && /^(Poland|Spain)\s+—/.test(firstLine) && remainingLines.length) {
+                const option = makeElement('div', 'retreat-option');
+                option.append(makeElement('h3', '', firstLine), makeElement('p', '', remainingLines.join(' ')));
+                copy.append(option);
+            } else copy.append(makeElement('p', '', paragraph.replace(/\n+/g, ' ')));
+        });
+        if (service.modalDetails) copy.append(makeElement('p', '', service.modalDetails));
+        if (service.ctaLabel) {
+            const link = makeElement('a', 'button button-dark', service.ctaLabel);
+            link.href = /^(https?:\/\/|mailto:|tel:|#)/i.test(service.ctaHref || '') ? service.ctaHref : '#contact';
+            link.dataset.dialogContact = '';
+            link.append(' ', makeUiIcon('M2 10 10 2M4 2h6v6'));
+            copy.append(link);
+        }
+        layout.append(dialogImage, copy);
+        if (service.special === 'retreat' && retreatGalleriesTemplate) layout.append(retreatGalleriesTemplate.cloneNode(true));
+        dialog.append(layout);
+        aboutSection.before(dialog);
+        initSlideshows(dialog);
     });
 }
 
@@ -223,6 +426,8 @@ async function loadContent() {
     const response = await fetch(`${contentUrl.href}?v=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Content request failed (${response.status})`);
     const content = await response.json();
+    applyPageContent(content.page && typeof content.page === 'object' ? content.page : {});
+    renderServices(Array.isArray(content.services) ? content.services : []);
     renderAnnouncements(Array.isArray(content.announcements) ? content.announcements : []);
     weeklyClasses = Array.isArray(content.classes) ? content.classes : [];
     renderSchedule(weeklyClasses);
@@ -262,20 +467,21 @@ document.querySelectorAll('#main-nav a').forEach((link) => {
     });
 });
 
-document.querySelectorAll('[data-open-dialog]').forEach((button) => {
-    button.addEventListener('click', () => {
-        const dialog = document.getElementById(button.dataset.openDialog);
-        if (dialog && typeof dialog.showModal === 'function') dialog.showModal();
-    });
-});
+initSlideshows();
 
-document.querySelectorAll('.service-dialog').forEach((dialog) => {
-    dialog.addEventListener('click', (event) => {
-        if (event.target === dialog) dialog.close();
-    });
-    dialog.querySelectorAll('[data-close-dialog], [data-dialog-contact]').forEach((control) => {
-        control.addEventListener('click', () => dialog.close());
-    });
+document.addEventListener('click', (event) => {
+    const opener = event.target.closest('[data-open-dialog]');
+    if (opener) {
+        const dialog = document.getElementById(opener.dataset.openDialog);
+        if (dialog && typeof dialog.showModal === 'function') dialog.showModal();
+        return;
+    }
+    const closer = event.target.closest('[data-close-dialog], [data-dialog-contact]');
+    if (closer) {
+        closer.closest('.service-dialog')?.close();
+        return;
+    }
+    if (event.target.matches('.service-dialog')) event.target.close();
 });
 
 document.addEventListener('keydown', (event) => {

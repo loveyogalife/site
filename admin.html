@@ -8,8 +8,8 @@
     <link rel="icon" href="./pics/lotus.svg" type="image/svg+xml">
     <meta name="robots" content="noindex, nofollow">
     <title>Site editor | Love Yoga Life</title>
-    <link rel="stylesheet" href="./styles.css?v=20261015-4">
-    <script src="./admin.js?v=20261014-1" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20261015-7">
+    <script src="./admin.js?v=20261015-3" defer></script>
 </head>
 
 <body class="admin-page">
@@ -22,7 +22,7 @@
         <div class="admin-heading">
             <p class="eyebrow">Site editor</p>
             <h1>What's <em>on.</em></h1>
-            <p>Update announcements, reviews, events and weekly classes for the live website.</p>
+            <p>Edit page copy, services, pictures, announcements, reviews, events and weekly classes.</p>
         </div>
 
         <section class="admin-access-gate" id="admin-access-gate" aria-labelledby="access-title">
@@ -40,7 +40,74 @@
 
         <div class="admin-status" id="admin-status" role="status" aria-live="polite" hidden></div>
 
-        <div class="admin-columns" id="editor-content" hidden>
+        <div id="editor-content" hidden>
+            <nav class="admin-tabs" aria-label="Editor sections" role="tablist">
+                <button type="button" class="is-active" data-admin-tab="page" role="tab" aria-selected="true" aria-controls="admin-panel-page">Page text</button>
+                <button type="button" data-admin-tab="services" role="tab" aria-selected="false" aria-controls="admin-panel-services">Services</button>
+                <button type="button" data-admin-tab="updates" role="tab" aria-selected="false" aria-controls="admin-panel-updates">Updates &amp; schedules</button>
+            </nav>
+
+            <div class="admin-panel" id="admin-panel-page" data-admin-panel="page" role="tabpanel">
+                <section class="admin-section admin-section-wide" aria-labelledby="page-content-title">
+                    <div class="admin-section-heading">
+                        <div><p class="eyebrow">Words across the homepage</p><h2 id="page-content-title">Page text</h2></div>
+                    </div>
+                    <p class="admin-help">Edit the wording below. Heading fields are split so the highlighted italic words keep their styling.</p>
+                    <form id="page-content-form" class="admin-form">
+                        <div class="page-content-fields" id="page-content-fields"></div>
+                        <div class="admin-form-actions"><button class="button button-dark" type="submit">Save page text</button></div>
+                    </form>
+                </section>
+            </div>
+
+            <div class="admin-panel" id="admin-panel-services" data-admin-panel="services" role="tabpanel" hidden>
+                <section class="admin-section admin-section-wide" aria-labelledby="service-admin-title">
+                    <div class="admin-section-heading">
+                        <div><p class="eyebrow">Cards and pop-up details</p><h2 id="service-admin-title">Services</h2></div>
+                        <span class="admin-count" id="service-count-admin">0</span>
+                    </div>
+                    <p class="admin-help">Existing specialist layouts are preserved. New services use the standard card and modal design.</p>
+                    <div class="admin-records" id="service-records"></div>
+                    <form id="service-form" class="admin-form">
+                        <input type="hidden" name="id">
+                        <input type="hidden" name="image">
+                        <input type="hidden" name="special">
+                        <h3 id="service-form-title">Add a service</h3>
+                        <div class="admin-form-row">
+                            <label>Small category label<input name="label" type="text" maxlength="50" required placeholder="06 / WELLBEING"></label>
+                            <label>Card title<input name="title" type="text" maxlength="100" required placeholder="New wellbeing service"></label>
+                        </div>
+                        <label>Card description<textarea name="summary" rows="3" maxlength="500" required></textarea></label>
+                        <div class="admin-form-row">
+                            <label>Price or short detail <span>Optional</span><input name="price" type="text" maxlength="100"></label>
+                            <label>Card size<select name="wide"><option value="false">Standard</option><option value="true">Wide</option></select></label>
+                        </div>
+                        <div class="admin-form-row">
+                            <label>Modal eyebrow<input name="modalEyebrow" type="text" maxlength="100" placeholder="A little time for yourself"></label>
+                            <label>Modal heading<input name="modalTitle" type="text" maxlength="140" required></label>
+                        </div>
+                        <label>Modal text <span>Separate paragraphs with a blank line</span><textarea name="modalBody" rows="8" maxlength="5000" required></textarea></label>
+                        <label>Modal price or final detail <span>Optional</span><input name="modalDetails" type="text" maxlength="240"></label>
+                        <div class="admin-form-row">
+                            <label>Button label<input name="ctaLabel" type="text" maxlength="80" value="Ask Maureen for details"></label>
+                            <label>Button link<input name="ctaHref" type="text" maxlength="300" value="#contact"></label>
+                        </div>
+                        <fieldset class="admin-image-field">
+                            <legend>Card and modal picture</legend>
+                            <div class="admin-image-preview" id="service-image-preview"><span>No picture selected</span></div>
+                            <label>Choose picture<input name="imageFile" type="file" accept="image/jpeg,image/png,image/webp"></label>
+                            <label>Image description<input name="imageAlt" type="text" maxlength="180" placeholder="Describe what is visible in the picture"></label>
+                            <div class="admin-form-row">
+                                <label>Horizontal focus <span><output id="focal-x-output">50%</output></span><input name="focalX" type="range" min="0" max="100" value="50"></label>
+                                <label>Vertical focus <span><output id="focal-y-output">50%</output></span><input name="focalY" type="range" min="0" max="100" value="50"></label>
+                            </div>
+                        </fieldset>
+                        <div class="admin-form-actions"><button class="button button-dark" type="submit">Save service</button><button class="button button-quiet" type="button" data-cancel="service" hidden>Cancel edit</button></div>
+                    </form>
+                </section>
+            </div>
+
+            <div class="admin-columns admin-panel" id="admin-panel-updates" data-admin-panel="updates" role="tabpanel" hidden>
             <section class="admin-section" aria-labelledby="announcement-admin-title">
                 <div class="admin-section-heading">
                     <div>
@@ -83,7 +150,7 @@
                     <h3 id="review-form-title">Add a review</h3>
                     <label>Reviewer name<input name="name" type="text" maxlength="80" required
                             placeholder="First name"></label>
-                    <label>Review<textarea name="quote" rows="5" maxlength="700" required
+                    <label>Review<textarea name="quote" rows="5" maxlength="3000" required
                             placeholder="Add the review exactly as it should appear"></textarea></label>
                     <div class="admin-form-actions"><button class="button button-dark" type="submit">Save
                             review</button><button class="button button-quiet" type="button" data-cancel="review"
@@ -156,6 +223,7 @@
                             hidden>Cancel edit</button></div>
                 </form>
             </section>
+            </div>
         </div>
 
         <div class="admin-publish" id="publish-bar" hidden>

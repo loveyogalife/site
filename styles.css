@@ -957,13 +957,20 @@ h2 em {
     gap: 2rem;
 }
 
-.testimonial-list blockquote {
+.testimonial-list[hidden],
+.testimonial-carousel[hidden] {
+    display: none;
+}
+
+.testimonial-list blockquote,
+.testimonial-carousel blockquote {
     margin: 0;
     padding-top: 1rem;
     border-top: 1px solid var(--leaf);
 }
 
-.testimonial-list blockquote p {
+.testimonial-list blockquote p,
+.testimonial-carousel blockquote p {
     margin: 0 0 1rem;
     color: var(--forest);
     font-family: var(--serif);
@@ -971,15 +978,99 @@ h2 em {
     line-height: 1.4;
 }
 
-.testimonial-list footer {
+.testimonial-list footer,
+.testimonial-carousel footer {
     color: var(--forest);
     font-size: 10px;
     font-weight: 700;
 }
 
+.testimonial-carousel {
+    margin-top: 2.5rem;
+}
+
+.testimonial-carousel-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: .75rem;
+}
+
+.testimonial-carousel-heading h3 {
+    margin: 0;
+    color: var(--forest);
+    font-family: var(--serif);
+    font-size: 25px;
+}
+
+.testimonial-carousel-count {
+    color: var(--forest);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+}
+
+.testimonial-carousel-frame {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+}
+
+.testimonial-carousel-viewport {
+    height: var(--testimonial-gallery-height, 250px);
+    padding: 1.25rem;
+    overflow-y: auto;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, .5);
+    overscroll-behavior: contain;
+    scrollbar-color: var(--leaf) transparent;
+    touch-action: pan-y;
+}
+
+.testimonial-carousel-viewport:focus-visible {
+    outline: 3px solid rgba(25, 61, 53, .25);
+    outline-offset: 3px;
+}
+
+.testimonial-carousel-viewport blockquote {
+    max-width: 760px;
+    margin-inline: auto;
+}
+
+.testimonial-carousel-control {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    place-items: center;
+    border: 1px solid var(--forest);
+    border-radius: 50%;
+    color: var(--forest);
+    background: transparent;
+    cursor: pointer;
+}
+
+.testimonial-carousel-control:hover,
+.testimonial-carousel-control:focus-visible {
+    color: white;
+    background: var(--forest);
+}
+
+.testimonial-carousel-control .ui-icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    vertical-align: 0;
+}
+
 .testimonial-actions {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
     margin-top: 2.5rem;
 }
 
@@ -1061,6 +1152,10 @@ h2 em {
     object-position: 52% 50%;
 }
 
+#retreat-dialog {
+    width: min(1080px, calc(100vw - 48px));
+}
+
 .service-dialog-copy {
     position: relative;
     align-self: center;
@@ -1081,6 +1176,142 @@ h2 em {
     margin-bottom: .9rem;
     color: #51584d;
     font-size: 13px;
+}
+
+.retreat-option {
+    max-width: 500px;
+    margin: 1.1rem 0;
+}
+
+.retreat-option h3 {
+    margin: 0 0 .3rem;
+    color: var(--forest);
+    font-family: var(--serif);
+    font-size: 20px;
+}
+
+.retreat-option p {
+    margin: 0;
+    color: #51584d;
+    font-size: 13px;
+}
+
+.retreat-galleries {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(1.25rem, 3vw, 2.5rem);
+    padding: 0 clamp(1.5rem, 4vw, 4rem) clamp(2rem, 4vw, 4rem);
+}
+
+.retreat-gallery {
+    min-width: 0;
+}
+
+.retreat-gallery-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: .65rem;
+}
+
+.retreat-gallery-heading h3 {
+    margin: 0;
+    color: var(--forest);
+    font-family: var(--serif);
+    font-size: 24px;
+}
+
+.retreat-gallery-heading span {
+    color: #687068;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.retreat-slideshow {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #dce3d8;
+    touch-action: pan-y;
+}
+
+.retreat-slideshow:focus-visible {
+    outline: 3px solid rgba(25, 61, 53, .35);
+    outline-offset: 3px;
+}
+
+.retreat-slides {
+    aspect-ratio: 4 / 3;
+}
+
+.retreat-slide {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #dce3d8;
+}
+
+.retreat-slide[hidden] {
+    display: none;
+}
+
+.slideshow-control {
+    position: absolute;
+    top: 50%;
+    display: grid;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    color: var(--forest);
+    background: rgba(255, 255, 255, .9);
+    box-shadow: 0 3px 16px rgba(17, 46, 41, .18);
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.slideshow-control:hover,
+.slideshow-control:focus-visible {
+    color: white;
+    background: var(--forest);
+}
+
+.slideshow-control svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+}
+
+.slideshow-previous {
+    left: .75rem;
+}
+
+.slideshow-next {
+    right: .75rem;
+}
+
+.slideshow-count {
+    position: absolute;
+    right: .75rem;
+    bottom: .75rem;
+    padding: .35rem .55rem;
+    border-radius: 20px;
+    color: white;
+    background: rgba(17, 46, 41, .78);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
 }
 
 .service-dialog-copy .button {
@@ -1755,6 +1986,19 @@ h2 em {
         gap: 1.5rem;
     }
 
+    .testimonial-carousel-frame {
+        gap: .45rem;
+    }
+
+    .testimonial-carousel-control {
+        width: 40px;
+        height: 40px;
+    }
+
+    .testimonial-carousel-viewport {
+        padding: 1rem;
+    }
+
     .service-grid {
         grid-template-columns: 1fr;
     }
@@ -2099,6 +2343,106 @@ h2 em {
     background: #f5e1d9;
 }
 
+.admin-tabs {
+    display: flex;
+    gap: .45rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: .7rem;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--line);
+}
+
+.admin-tabs button {
+    min-height: 40px;
+    padding: .65rem 1rem;
+    border: 1px solid var(--line);
+    color: var(--forest);
+    background: var(--white);
+    font: 700 11px var(--sans);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.admin-tabs button:hover,
+.admin-tabs button.is-active {
+    border-color: var(--forest);
+    color: white;
+    background: var(--forest);
+}
+
+.admin-panel {
+    min-width: 0;
+}
+
+.admin-help {
+    margin: -.25rem 0 1.25rem;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.page-content-fields {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.page-field-group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .8rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    background: #f7f8f4;
+}
+
+.page-field-group h3 {
+    grid-column: 1 / -1;
+    font-size: 22px;
+}
+
+.page-field-group .is-wide {
+    grid-column: 1 / -1;
+}
+
+.admin-image-field {
+    display: grid;
+    gap: .85rem;
+    margin: .2rem 0;
+    padding: 1rem;
+    border: 1px solid var(--line);
+}
+
+.admin-image-field legend {
+    padding: 0 .35rem;
+    color: var(--forest);
+    font: 700 11px var(--sans);
+}
+
+.admin-image-preview {
+    display: grid;
+    width: min(100%, 420px);
+    aspect-ratio: 16 / 9;
+    place-items: center;
+    overflow: hidden;
+    color: var(--muted);
+    background: #e8ece4;
+    font-size: 11px;
+}
+
+.admin-image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-image-field input[type="file"] {
+    padding: .5rem;
+}
+
+.admin-image-field input[type="range"] {
+    width: 100%;
+    accent-color: var(--leaf);
+}
+
 .admin-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2185,6 +2529,11 @@ h2 em {
 
 .admin-small-button:hover {
     border-color: var(--forest);
+}
+
+.admin-small-button:disabled {
+    opacity: .4;
+    cursor: not-allowed;
 }
 
 .admin-small-button.is-remove:hover {
@@ -2319,12 +2668,25 @@ h2 em {
     .admin-publish .button {
         align-self: stretch;
     }
+
+    .page-field-group,
+    .admin-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .page-field-group .is-wide {
+        grid-column: auto;
+    }
 }
 
 @media (max-width: 680px) {
     .service-dialog {
         width: calc(100vw - 24px);
         max-height: calc(100dvh - 24px);
+    }
+
+    #retreat-dialog {
+        width: calc(100vw - 24px);
     }
 
     .service-dialog-layout {
@@ -2344,5 +2706,19 @@ h2 em {
     .service-dialog-copy h2 {
         margin-right: 2.4rem;
         font-size: 36px;
+    }
+
+    .retreat-galleries {
+        grid-template-columns: 1fr;
+        padding: 0 1.25rem 1.8rem;
+    }
+
+    .retreat-gallery-heading {
+        align-items: flex-end;
+    }
+
+    .slideshow-control {
+        width: 44px;
+        height: 44px;
     }
 }

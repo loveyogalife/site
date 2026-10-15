@@ -1,4 +1,179 @@
 {
+  "page": {
+    "heroEyebrow": "Yoga, sound therapy & Reiki in Coventry",
+    "heroTitle": "Find a little more room to",
+    "heroAccent": "breathe.",
+    "heroIntro": "Welcome to Love Yoga Life🙏. Whether you join me for yoga, sound therapy, Reiki or a yoga retreat, you're not just joining a class or experience — you're becoming part of a warm, supportive community where we can learn, grow and reconnect with ourselves and one another. I look forward to welcoming you and sharing the journey together.",
+    "heroPrimary": "Explore classes",
+    "heroSecondary": "Call Maureen",
+    "heroCaption": "A practice that meets you where you are",
+    "heroStamp": "move gently",
+    "eventsEyebrow": "Make a little space",
+    "eventsTitle": "What's coming",
+    "eventsAccent": "up",
+    "eventsIntro": "Classes, sound baths, retreats & special events. Choose a date to see what's happening.",
+    "eventsListTitle": "Upcoming events",
+    "classesEyebrow": "A class for your week",
+    "classesTitle": "Move at your",
+    "classesAccent": "own pace.",
+    "classesIntro": "Weekly classes around Coventry, with a welcoming mix of experience levels. Join in person or online where available.",
+    "classesCaption": "Practising together in a warm, welcoming space",
+    "classesNote": "Class times and venues can change. Please check with Maureen before your first visit.",
+    "priceEyebrow": "Simple, flexible pricing",
+    "priceTitle": "Make yoga part of your week.",
+    "priceDropLabel": "Drop-in class",
+    "priceDropValue": "£10",
+    "priceFiveLabel": "5-class pass",
+    "priceFiveValue": "£45",
+    "priceTenLabel": "10-class pass",
+    "priceTenValue": "£80",
+    "priceGentleLabel": "Gentle yoga",
+    "priceGentleValue": "£6",
+    "priceFootnote": "Ask Maureen about class suitability and availability.",
+    "classCta": "Ask about a class",
+    "quoteText": "My classes feel like a gathering of friends — sharing the challenges and incredible rewards of each yoga practice.",
+    "quoteName": "Maureen",
+    "reviewsEyebrow": "Shared by students",
+    "reviewsTitle": "A few kind",
+    "reviewsAccent": "words.",
+    "reviewsIntro": "Reflections shared by students over the years.",
+    "reviewsGalleryTitle": "More kind words",
+    "reviewSubmit": "Submit a review",
+    "servicesEyebrow": "Ways to work together",
+    "servicesTitle": "Find what feels",
+    "servicesAccent": "right.",
+    "servicesIntro": "From your first class to one-to-one support, there's space to explore at your own pace.",
+    "aboutEyebrow": "A little about your teacher",
+    "aboutTitle": "Meet",
+    "aboutAccent": "Maureen.",
+    "aboutBody1": "My journey with yoga began with a desire to feel healthier, happier and more balanced, and over the years it has become so much more than a physical practice. For the past 18 years, I’ve had the privilege of sharing yoga with others, and I continue to be inspired by the way it can support us through the different stages of life, helping us to find strength, stillness and a deeper connection with ourselves.",
+    "aboutBody2": "My love of yoga has taken me to India on several occasions, where I’ve explored the roots of yoga, deepened my understanding of its ancient philosophy and learned more about Ayurveda. These experiences have strengthened my belief that yoga is about far more than the poses on the mat — it’s a way of living that can bring greater awareness, balance and contentment into our everyday lives.",
+    "aboutBody3": "For me, yoga is also a journey of self-discovery — an opportunity to explore the connection between body, mind and spirit. I’m drawn to the wisdom of the ancient teachings and the way they invite us to live with greater awareness, compassion and connection, both with ourselves and with the world around us. This sense of inner connection continues to inspire my teaching and my own journey.",
+    "aboutBody4": "Alongside yoga, I now offer Reiki and singing bowl therapy, as well as monthly sound baths and yoga retreats. Each offers a different opportunity to slow down, release tension and nurture our wellbeing, creating space to reconnect with ourselves and find a little more peace in our often busy lives.",
+    "aboutBody5": "What I treasure most is the sense of connection that grows when people come together through yoga and shared experiences. Whether you join me for a class, a sound bath, an individual treatment or a retreat, my hope is that you feel welcomed, supported and part of a community where you can simply be yourself.",
+    "aboutBody6": "I look forward to welcoming you.",
+    "aboutSignoff": "Love & light,",
+    "aboutName": "Maureen",
+    "aboutCta": "Come and say hello",
+    "firstEyebrow": "New to yoga?",
+    "firstTitle": "Your first class,",
+    "firstAccent": "made easy.",
+    "firstIntro": "No special kit or experience needed. The most important thing is to let Maureen know if you have an injury or health concern before class begins.",
+    "firstOneTitle": "Wear what moves",
+    "firstOneBody": "Comfortable clothes such as leggings, loose trousers or a T-shirt. Yoga is practised in bare feet.",
+    "firstTwoTitle": "Everything else is here",
+    "firstTwoBody": "Mats are available, along with blocks, belts and blankets. Bring your own mat if you prefer.",
+    "firstThreeTitle": "Take it at your pace",
+    "firstThreeBody": "All ages, body types and experience levels are welcome. There is no need to keep up or compete.",
+    "contactEyebrow": "Questions, bookings, or just saying hello",
+    "contactTitle": "Let's find your",
+    "contactAccent": "next step.",
+    "contactIntro": "Get in touch with Maureen about a class, private session, sound treatment or retreat. She'll be happy to help you find the right fit.",
+    "contactPhone": "Call 07507 636623",
+    "contactEmail": "Send an email",
+    "contactPlace": "Coventry & Baginton",
+    "contactFormats": "In person · Online · One-to-one",
+    "footerText": "Yoga, sound therapy & Reiki with Maureen — Coventry and Baginton"
+  },
+  "services": [
+    {
+      "id": "private-yoga",
+      "label": "01 / YOGA",
+      "title": "Private & small-group yoga",
+      "summary": "Personal sessions shaped around your experience, goals and schedule — at Maureen's home studio or in your own home.",
+      "price": "£40 per hour",
+      "wide": false,
+      "featured": true,
+      "image": "./pics/4.jpeg",
+      "imageAlt": "Maureen stretching forward on her yoga mat",
+      "focalX": 55,
+      "focalY": 50,
+      "openLabel": "More about private yoga",
+      "modalEyebrow": "One-to-one or small group",
+      "modalTitle": "Private yoga, shaped around you.",
+      "modalBody": "Personal lessons can suit beginners wanting to build confidence, people who prefer a quieter setting, or anyone hoping to focus on a particular posture or practice. Sessions are available at Maureen's home studio or in your home.",
+      "modalDetails": "£40 per hour at Maureen's home studio.",
+      "ctaLabel": "Ask Maureen about a session",
+      "ctaHref": "#contact"
+    },
+    {
+      "id": "reiki",
+      "label": "02 / REIKI",
+      "title": "Reiki",
+      "summary": "A gentle, hands-on or hands-above treatment intended to support deep rest and relaxation. You remain fully clothed.",
+      "price": "£40 single session",
+      "wide": false,
+      "image": "./pics/13.jpeg",
+      "imageAlt": "Candles and meditation objects arranged for Reiki",
+      "focalX": 50,
+      "focalY": 48,
+      "openLabel": "More about Reiki",
+      "modalEyebrow": "A quiet, fully clothed treatment",
+      "modalTitle": "Make space to rest.",
+      "modalBody": "Reiki is a Japanese complementary practice often chosen as a way to relax. During a session, you lie fully clothed on a treatment couch while Maureen uses a light touch or holds her hands just above the body. You can talk through comfort and preferences beforehand.",
+      "modalDetails": "Single treatment £40. Reiki is complementary and is not a substitute for medical care.",
+      "ctaLabel": "Ask Maureen about Reiki",
+      "ctaHref": "#contact"
+    },
+    {
+      "id": "singing-bowls",
+      "label": "03 / SOUND",
+      "title": "Singing bowl therapy",
+      "summary": "A one-to-one sound session with Tibetan singing bowls. Lie comfortably, fully clothed, and take time to unwind.",
+      "price": "One-hour treatment · £50",
+      "wide": false,
+      "image": "./pics/20.jpeg",
+      "imageAlt": "Singing bowls arranged for a one-to-one sound therapy session",
+      "focalX": 50,
+      "focalY": 88,
+      "openLabel": "More about singing bowl therapy",
+      "modalEyebrow": "A one-to-one sound session",
+      "modalTitle": "Tibetan singing bowl therapy.",
+      "modalBody": "Settle fully clothed on a mattress on the floor while Maureen plays Tibetan singing bowls. The session is an hour, with time to get comfortable before the sounds begin.",
+      "modalDetails": "One-hour treatment · £50. Let Maureen know about any comfort or access needs when arranging your visit.",
+      "ctaLabel": "Ask Maureen about a treatment",
+      "ctaHref": "#contact"
+    },
+    {
+      "id": "sound-baths",
+      "label": "04 / SOUND BATH",
+      "title": "Sound baths & chakra meditation",
+      "summary": "Come and join us for a deeply relaxing and therapeutic sound experience with gongs, singing bowls, gentle drums & lots of instruments known for their healing & relaxing qualities.",
+      "price": "",
+      "wide": true,
+      "image": "./pics/17.jpeg",
+      "imageAlt": "Gong, singing bowls and mats arranged for a sound bath",
+      "focalX": 50,
+      "focalY": 82,
+      "openLabel": "What to expect",
+      "modalEyebrow": "A shared pause",
+      "modalTitle": "What is a sound bath?",
+      "modalBody": "A sound bath is a journey of pure sound and vibration. It is called a sound bath because you are bathed in the healing vibrations of gongs, Tibetan singing bowls, gentle drums and many other instruments known for their vibratory healing frequencies.\n\nThe demands of our daily lives can lead to an increase in stress-related disease. Many influences, such as the foods we eat, people we encounter, thoughts we think, sounds we hear and environments we move within, can have a negative effect on our wellbeing. Sound and vibration help facilitate a deep sense of peace, release tension and blocked energy, and balance the energy centres in the body. They work at a cellular level to rebalance the physical, emotional and spiritual bodies.\n\nBring a mat, blanket and cushions so you can settle in warmly. The hall floor can feel cold; a limited number of mats may be available to borrow. Wear comfortable clothes.",
+      "modalDetails": "Monthly at Baginton Village Hall, 6–7pm · £15 in advance or £18 on the day. Pre-booking is essential.",
+      "ctaLabel": "See upcoming sound bath dates",
+      "ctaHref": "#events"
+    },
+    {
+      "id": "retreats",
+      "label": "05 / RETREATS",
+      "title": "Yoga & wellbeing retreats",
+      "summary": "Step away from the everyday and give yourself the gift of time, space and stillness. Join me in Poland in May or Spain in September for a nourishing retreat combining yoga, relaxation and deeper connection with yourself.",
+      "price": "",
+      "wide": true,
+      "special": "retreat",
+      "image": "./pics/6.jpeg",
+      "imageAlt": "A relaxing sound session on the beach during a yoga retreat",
+      "focalX": 52,
+      "focalY": 42,
+      "openLabel": "More about retreats",
+      "modalEyebrow": "Twice-yearly time away",
+      "modalTitle": "A Journey Back to Yourself",
+      "modalBody": "My yoga retreats are an invitation to slow down, breathe deeply and reconnect with what truly matters. Away from the demands of everyday life, we create space to nurture body, mind and spirit through yoga, relaxation, meditation, mantra, pranayama and moments of quiet reflection.\n\nRooted in the traditional teachings of yoga, these retreats offer more than simply a physical practice. Alongside asana, we explore the deeper dimensions of yoga through breathwork, mantra and yoga philosophy, creating opportunities to cultivate self-compassion, inner awareness and a greater sense of balance, peace and connection within yourself.\n\nWhether you are looking to deepen your practice, explore yoga’s ancient wisdom, find some stillness or simply give yourself time to recharge, you will be welcomed into a warm and supportive space where you can come just as you are.\n\nI offer two retreats each year, each with its own unique setting and atmosphere:\n\nPoland — End of May\nA springtime opportunity to step away from familiar routines, reconnect with nature and welcome a fresh sense of energy and possibility.\n\nSpain — End of September\nA late-summer retreat offering time to slow down, turn inward and enjoy a more grounded, reflective approach to yoga and wellbeing.\n\nEach retreat is an opportunity to pause, reconnect and return home feeling nourished — not only in body, but in mind and spirit.",
+      "modalDetails": "",
+      "ctaLabel": "Ask about the next retreat",
+      "ctaHref": "mailto:maureenthomson54@hotmail.com?subject=Yoga%20retreat%20enquiry"
+    }
+  ],
   "announcements": [
     {
       "id": "autumn-sound-baths",
@@ -77,17 +252,78 @@
     {
       "id": "review-sam",
       "name": "Sam",
-      "quote": "Maureen is the most wonderful Yoga teacher. I was immediately bowled over by her calm, patience, good humour, grace and expertise."
+      "quote": "Maureen is the most wonderful Yoga teacher. I am very easily irritated by poor teaching and need very little to put me off doing exercise! I started attending yoga classes on the recommendation of my physio, who also happens to be my partner. I was sure I wouldn’t be very good at it and, indeed, I felt so weak and incompetent that I had to treat the sessions as medicine to compel myself to go. I was immediately bowled over by Maureen’s calm, patience, good humour, grace and expertise. It took just a few weeks of regular practice to get my back pain under control, and a few weeks more for my long-term back problems to have abated. I now love going to yoga and am desperately sad to have to stop being one of Maureen’s yogis because of a move away from Coventry. Namaste, Maureen, and thank you for everything x",
+      "featured": true,
+      "highlight": "Maureen is the most wonderful Yoga teacher. I was immediately bowled over by her calm, patience, good humour, grace and expertise."
     },
     {
       "id": "review-kate",
       "name": "Kate",
-      "quote": "For anyone wanting to try Yoga, Maureen provides an excellent class and I am constantly learning new things about Yoga."
+      "quote": "I have been attending Maureen’s class for the past couple of years and have just been on my first yoga retreat, which was a wonderful experience. For anyone wanting to try yoga, Maureen provides an excellent class and I am constantly learning new things about yoga.",
+      "featured": true,
+      "highlight": "For anyone wanting to try Yoga, Maureen provides an excellent class and I am constantly learning new things about Yoga."
     },
     {
       "id": "review-amber",
       "name": "Amber",
-      "quote": "Her approach is open, honest, warm and friendly and she is a gem in the yoga world!"
+      "quote": "Maureen was kind enough to support me through my own yoga teacher training journey and I thank her so much for that. She is an inspiration to all yogis and yoginis and I recommend her to anyone I meet. Her approach is open, honest, warm and friendly and she is a gem in the yoga world! Her yoga is beautiful, challenging and life-changing. Don’t miss an opportunity to take a class with her — I can’t recommend her highly enough!",
+      "featured": true,
+      "highlight": "Her approach is open, honest, warm and friendly and she is a gem in the yoga world!"
+    },
+    {
+      "id": "review-jane-nicol",
+      "name": "Jane Nicol, trainee yoga teacher",
+      "quote": "Throughout the lesson Maureen’s voice was gentle, clear and concise. She demonstrated all the poses, used encouraging cues and skilfully balanced demonstrating, observing and verbally adjusting as required. Students were continuously encouraged to be kind to themselves, honouring their bodies as they are today. It was remarkable to witness."
+    },
+    {
+      "id": "review-fliss",
+      "name": "Fliss",
+      "quote": "I was very fortunate to attend Maureen Thomson’s yoga retreat in Cieplice, Poland, despite being a sporadic attendee at her yoga classes. I met Maureen through my partner Nev attending her classes in Coventry. Despite my non-attendance, as Nev and I now reside in Wolverhampton, Maureen contacted me when the retreat was going ahead and I was very fortunate to reserve a place. I have yet to find a yoga teacher who surpasses her holistic approach in all aspects of her yoga practice. Whether you are experienced or not, you are able to follow her well-thought-out, seamlessly guided classes. Her verbal prompts aid your adjustment, while her ability to demonstrate postures with ease leaves you in awe. She always reminds us of our own practice and never to compete. Her tone is exquisite when it comes to meditation and relaxation. The organisation of the trip could not be faulted. There were constant updates, lots of information was given and nothing was too much trouble. The hotel was beautiful, clean and served wonderful food. I had some doubts about spending a whole week with a large group, but it was truly inspirational. There were so many talented and motivated individuals of all ages with invigorating energy. I felt positively rejuvenated and blessed to share conversations and practice within their company. A big thank you to you all."
+    },
+    {
+      "id": "review-alison",
+      "name": "Alison",
+      "quote": "I have been attending Maureen’s classes for the last four months and they are fantastic. She is a sensitive and considerate teacher who focuses on the soul of yoga and what it can give us. She is an inspiration and I feel my practice has progressed and deepened since I started, even though I don’t have much time or space for self-practice. Thanks a lot, Maureen. I’m so glad I know you!"
+    },
+    {
+      "id": "review-lyn-reiki",
+      "name": "Lyn",
+      "quote": "I had the most wonderful Reiki session with Maureen. The ambience in the room was amazing. I had been so busy with work and had a few illnesses which made me feel a little low in myself, but Maureen chatted to me at the beginning and end of the session, which really added to the quality of the whole experience. The Reiki itself was so calming and relaxing, I almost fell fast asleep and felt in a much more positive state of mind all the way home. Thank you, Maureen!"
+    },
+    {
+      "id": "review-dave",
+      "name": "Dave",
+      "quote": "Since I was diagnosed with Crohn’s Disease at the age of 18, I have been seeking help from both conventional and alternative therapies. It was my wife who encouraged me to go with her to one of Maureen’s classes, as she had found it both physically and emotionally beneficial. With an open mind I started to attend and, more than 12 months later, I am now a fully signed-up member of the class. My overall fitness and energy level have increased significantly and I am pleased to say I have been symptom- and drug-free since practising yoga once a week. I would wholeheartedly encourage anyone experiencing low energy or an emotional or physical health condition to contact Maureen to find out if yoga could benefit them as it has me."
+    },
+    {
+      "id": "review-jo-reiki",
+      "name": "Jo",
+      "quote": "Reiki has to be the most amazing gift a person can give another human. After having Reiki with Maureen, I now feel amazing. After a few days, my energy returned and once again I was feeling so positive about the world. Thank you, Maureen. You’re so kind and full of love. You are an inspiration. Love and light."
+    },
+    {
+      "id": "review-sue",
+      "name": "Sue",
+      "quote": "I was having great difficulties with mobility and in some considerable pain in my hips, back and feet. I also had intermittent sciatica. Since joining Maureen’s Gentle Yoga for OAPs class, my life has been transformed. The sciatica has gone, the depression caused by permanent pain has lifted and I am able to work in my garden again. I recommend this type of class for anyone who has back and hip problems. You don’t have to be over 60!"
+    },
+    {
+      "id": "review-jo-yoga",
+      "name": "Jo",
+      "quote": "Maureen’s classes are amazing. I love doing yoga with Maureen. She’s a gentle yet encouraging teacher who helps her students maintain good posture while learning strong new poses, and gives you the confidence to feel you can achieve the impossible. Thank you, Maureen, for being a fantastic teacher. Your kind and gentle ways have helped me in so many ways, and the breathing techniques you teach have been of great benefit to my overall health and wellbeing. I always look forward to your classes each week. Love and light."
+    },
+    {
+      "id": "review-vikki",
+      "name": "Vikki",
+      "quote": "Maureen is fab, always there for you and a brilliant teacher. I go very irregularly to classes, but she is always so welcoming when you go back. Thank you x"
+    },
+    {
+      "id": "review-lyn-longtime",
+      "name": "Lyn",
+      "quote": "I’ve now been going to Maureen’s class for just over a year. For a time I started going twice a week, which made even more of a difference to how I felt. There are a few of us on a Friday who have been going for as long, and we find we are all strong at different things and need support with different things. Maureen is really encouraging. It’s such a friendly group and a great way to have some time for yourself."
+    },
+    {
+      "id": "review-lyn-first-weeks",
+      "name": "Lyn",
+      "quote": "I’ve been going to Maureen’s class on a Friday for a few weeks now. It’s wonderful, as I go straight from work. Friday is so busy for me and this is such a lovely end to the day and a great start to the weekend. I look forward to it so much. It’s time just for yourself to relax and really feel you’re doing something good for your body. I’m noticing differences already! Maureen is so calm and friendly, and encourages everyone in how they are progressing as the weeks go on. When you’ve got such a busy life, it’s fantastic to just stop — while doing some stretches, of course!"
     }
   ]
 }

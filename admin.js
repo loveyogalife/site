@@ -5,6 +5,8 @@ const announcementForm = document.querySelector('#announcement-form');
 const reviewForm = document.querySelector('#review-form');
 const eventForm = document.querySelector('#event-form');
 const classForm = document.querySelector('#class-form');
+const pageContentForm = document.querySelector('#page-content-form');
+const serviceForm = document.querySelector('#service-form');
 const accessForm = document.querySelector('#access-form');
 const accessPassword = document.querySelector('#access-password');
 const accessButton = document.querySelector('#access-button');
@@ -12,8 +14,54 @@ const editorGate = document.querySelector('#admin-access-gate');
 const editorContent = document.querySelector('#editor-content');
 const publishBar = document.querySelector('#publish-bar');
 const statusNode = document.querySelector('#admin-status');
-let siteContent = { announcements: [], reviews: [], events: [], classes: [] };
+let siteContent = { page: {}, services: [], announcements: [], reviews: [], events: [], classes: [] };
 let publishToken = '';
+const pendingUploads = new Map();
+const pageFieldGroups = [
+    { title: 'Hero banner', fields: [
+        ['heroEyebrow', 'Small heading'], ['heroTitle', 'Main heading'], ['heroAccent', 'Highlighted words'],
+        ['heroIntro', 'Introduction', 'textarea'], ['heroPrimary', 'Classes button'], ['heroSecondary', 'Telephone link'],
+        ['heroCaption', 'Photo caption'], ['heroStamp', 'Photo stamp']
+    ] },
+    { title: 'What’s coming up', fields: [
+        ['eventsEyebrow', 'Small heading'], ['eventsTitle', 'Heading'], ['eventsAccent', 'Highlighted words'],
+        ['eventsIntro', 'Introduction', 'textarea'], ['eventsListTitle', 'Upcoming list heading']
+    ] },
+    { title: 'Classes and pricing', fields: [
+        ['classesEyebrow', 'Small heading'], ['classesTitle', 'Heading'], ['classesAccent', 'Highlighted words'],
+        ['classesIntro', 'Introduction', 'textarea'], ['classesCaption', 'Photo caption'], ['classesNote', 'Timetable note', 'textarea'],
+        ['priceEyebrow', 'Pricing small heading'], ['priceTitle', 'Pricing heading'], ['priceFootnote', 'Pricing note', 'textarea'],
+        ['priceDropLabel', 'Drop-in label'], ['priceDropValue', 'Drop-in price'], ['priceFiveLabel', '5-class label'], ['priceFiveValue', '5-class price'],
+        ['priceTenLabel', '10-class label'], ['priceTenValue', '10-class price'], ['priceGentleLabel', 'Gentle yoga label'], ['priceGentleValue', 'Gentle yoga price'],
+        ['classCta', 'Pricing link'], ['quoteText', 'Quote', 'textarea'], ['quoteName', 'Quote name']
+    ] },
+    { title: 'Reviews', fields: [
+        ['reviewsEyebrow', 'Small heading'], ['reviewsTitle', 'Heading'], ['reviewsAccent', 'Highlighted words'],
+        ['reviewsIntro', 'Introduction', 'textarea'], ['reviewsGalleryTitle', 'Review gallery heading'], ['reviewSubmit', 'Submit button']
+    ] },
+    { title: 'Services', fields: [
+        ['servicesEyebrow', 'Small heading'], ['servicesTitle', 'Heading'], ['servicesAccent', 'Highlighted words'],
+        ['servicesIntro', 'Introduction', 'textarea']
+    ] },
+    { title: 'About Maureen', fields: [
+        ['aboutEyebrow', 'Small heading'], ['aboutTitle', 'Heading'], ['aboutAccent', 'Highlighted words'],
+        ['aboutBody1', 'Paragraph 1', 'textarea'], ['aboutBody2', 'Paragraph 2', 'textarea'],
+        ['aboutBody3', 'Paragraph 3', 'textarea'], ['aboutBody4', 'Paragraph 4', 'textarea'],
+        ['aboutBody5', 'Paragraph 5', 'textarea'], ['aboutBody6', 'Paragraph 6', 'textarea'],
+        ['aboutSignoff', 'Sign-off'], ['aboutName', 'Name'], ['aboutCta', 'Contact link']
+    ] },
+    { title: 'Your first class', fields: [
+        ['firstEyebrow', 'Small heading'], ['firstTitle', 'Heading'], ['firstAccent', 'Highlighted words'],
+        ['firstIntro', 'Introduction', 'textarea'], ['firstOneTitle', 'Tip 1 heading'], ['firstOneBody', 'Tip 1 text', 'textarea'],
+        ['firstTwoTitle', 'Tip 2 heading'], ['firstTwoBody', 'Tip 2 text', 'textarea'],
+        ['firstThreeTitle', 'Tip 3 heading'], ['firstThreeBody', 'Tip 3 text', 'textarea']
+    ] },
+    { title: 'Contact and footer', fields: [
+        ['contactEyebrow', 'Small heading'], ['contactTitle', 'Heading'], ['contactAccent', 'Highlighted words'],
+        ['contactIntro', 'Introduction', 'textarea'], ['contactPhone', 'Telephone button'], ['contactEmail', 'Email link'],
+        ['contactPlace', 'Location'], ['contactFormats', 'Ways to join'], ['footerText', 'Footer description', 'textarea']
+    ] }
+];
 
 function createId(prefix) {
     if (window.crypto && typeof window.crypto.randomUUID === 'function') return `${prefix}-${window.crypto.randomUUID()}`;
@@ -72,7 +120,7 @@ async function unlockEditor(event) {
         accessPassword.focus();
     } finally {
         accessButton.disabled = false;
-        accessButton.innerHTML = 'Continue <span aria-hidden="true">→</span>';
+        accessButton.innerHTML = 'Continue <svg class="ui-icon" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5"></path></svg>';
     }
 }
 
@@ -100,6 +148,172 @@ function buildRecordCard(title, detail, onEdit, onDelete) {
     actions.append(edit, remove);
     card.append(copy, actions);
     return card;
+}
+
+function renderPageFields() {
+    const container = document.querySelector('#page-content-fields');
+    container.replaceChildren();
+    pageFieldGroups.forEach((group) => {
+        const section = document.createElement('section');
+        section.className = 'page-field-group';
+        const heading = document.createElement('h3');
+        heading.textContent = group.title;
+        section.append(heading);
+        group.fields.forEach(([key, labelText, type = 'input']) => {
+            const label = document.createElement('label');
+            if (type === 'textarea') label.className = 'is-wide';
+            label.append(document.createTextNode(labelText));
+            const field = document.createElement(type === 'textarea' ? 'textarea' : 'input');
+            field.name = key;
+            field.maxLength = type === 'textarea' ? 5000 : 240;
+            if (type === 'textarea') field.rows = 4;
+            field.value = siteContent.page?.[key] || '';
+            label.append(field);
+            section.append(label);
+        });
+        container.append(section);
+    });
+}
+
+function updateImagePreview(source = '') {
+    const preview = document.querySelector('#service-image-preview');
+    preview.replaceChildren();
+    if (!source) {
+        const empty = document.createElement('span');
+        empty.textContent = 'No picture selected';
+        preview.append(empty);
+        return;
+    }
+    const image = document.createElement('img');
+    image.src = source;
+    image.alt = '';
+    image.style.objectPosition = `${serviceForm.elements.focalX.value}% ${serviceForm.elements.focalY.value}%`;
+    preview.append(image);
+}
+
+function renderServicesAdmin() {
+    const container = document.querySelector('#service-records');
+    container.replaceChildren();
+    document.querySelector('#service-count-admin').textContent = String(siteContent.services.length);
+    siteContent.services.forEach((service, serviceIndex) => {
+        const detail = `${service.label || 'Service'} · ${service.summary || ''}`;
+        const card = buildRecordCard(service.title || 'Untitled service', detail, () => editService(service.id), () => {
+            if (service.special) {
+                setStatus('This specialist service can be edited but not removed because it contains a bespoke layout.', 'error');
+                return;
+            }
+            siteContent.services = siteContent.services.filter((item) => item.id !== service.id);
+            const uploadPath = (service.image || '').replace(/^\.\//, '');
+            pendingUploads.delete(uploadPath);
+            renderServicesAdmin();
+            setStatus('Service removed from this draft. Publish to update the website.');
+        });
+        const actions = card.querySelector('.admin-record-actions');
+        const moveUp = document.createElement('button');
+        moveUp.type = 'button';
+        moveUp.className = 'admin-small-button';
+        moveUp.textContent = 'Up';
+        moveUp.disabled = serviceIndex === 0;
+        moveUp.addEventListener('click', () => {
+            [siteContent.services[serviceIndex - 1], siteContent.services[serviceIndex]] = [siteContent.services[serviceIndex], siteContent.services[serviceIndex - 1]];
+            renderServicesAdmin();
+            setStatus('Service order changed in this draft. Publish to update the website.');
+        });
+        const moveDown = document.createElement('button');
+        moveDown.type = 'button';
+        moveDown.className = 'admin-small-button';
+        moveDown.textContent = 'Down';
+        moveDown.disabled = serviceIndex === siteContent.services.length - 1;
+        moveDown.addEventListener('click', () => {
+            [siteContent.services[serviceIndex], siteContent.services[serviceIndex + 1]] = [siteContent.services[serviceIndex + 1], siteContent.services[serviceIndex]];
+            renderServicesAdmin();
+            setStatus('Service order changed in this draft. Publish to update the website.');
+        });
+        actions.prepend(moveUp, moveDown);
+        if (service.special) card.querySelector('.is-remove').textContent = 'Protected';
+        container.append(card);
+    });
+    if (!siteContent.services.length) container.append(emptyRecord('No services yet. Add one below.'));
+}
+
+function resetServiceForm() {
+    serviceForm.reset();
+    serviceForm.elements.id.value = '';
+    serviceForm.elements.image.value = '';
+    serviceForm.elements.special.value = '';
+    serviceForm.elements.focalX.value = '50';
+    serviceForm.elements.focalY.value = '50';
+    serviceForm.elements.ctaLabel.value = 'Ask Maureen for details';
+    serviceForm.elements.ctaHref.value = '#contact';
+    document.querySelector('#focal-x-output').value = '50%';
+    document.querySelector('#focal-y-output').value = '50%';
+    document.querySelector('#service-form-title').textContent = 'Add a service';
+    document.querySelector('[data-cancel="service"]').hidden = true;
+    updateImagePreview();
+}
+
+function editService(id) {
+    const service = siteContent.services.find((item) => item.id === id);
+    if (!service) return;
+    Object.entries(service).forEach(([key, value]) => {
+        if (!serviceForm.elements[key]) return;
+        serviceForm.elements[key].value = typeof value === 'boolean' ? String(value) : value || '';
+    });
+    serviceForm.elements.special.value = service.special || '';
+    document.querySelector('#focal-x-output').value = `${service.focalX ?? 50}%`;
+    document.querySelector('#focal-y-output').value = `${service.focalY ?? 50}%`;
+    document.querySelector('#service-form-title').textContent = 'Edit service';
+    document.querySelector('[data-cancel="service"]').hidden = false;
+    const imagePath = (service.image || '').replace(/^\.\//, '');
+    const pendingImage = pendingUploads.get(imagePath);
+    updateImagePreview(pendingImage ? `data:image/jpeg;base64,${pendingImage}` : service.image || '');
+    serviceForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function fileToDataUrl(blob) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error('Could not read that picture.'));
+        reader.readAsDataURL(blob);
+    });
+}
+
+async function resizeImage(file) {
+    const objectUrl = URL.createObjectURL(file);
+    try {
+        const image = new Image();
+        image.src = objectUrl;
+        await image.decode();
+        const scale = Math.min(1, 1800 / Math.max(image.naturalWidth, image.naturalHeight));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+        canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+        const context = canvas.getContext('2d');
+        context.fillStyle = '#ffffff';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', .84));
+        if (!blob) throw new Error('Could not prepare that picture.');
+        return blob;
+    } finally {
+        URL.revokeObjectURL(objectUrl);
+    }
+}
+
+async function prepareServiceImage(file) {
+    if (!file) return;
+    if (!file.type.startsWith('image/')) throw new Error('Please choose a JPG, PNG or WebP picture.');
+    if (file.size > 15 * 1024 * 1024) throw new Error('That picture is too large. Please choose one under 15MB.');
+    setStatus('Preparing picture…');
+    const blob = await resizeImage(file);
+    const dataUrl = await fileToDataUrl(blob);
+    const cleanName = file.name.replace(/\.[^.]+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 45) || 'service';
+    const path = `pics/uploads/${Date.now()}-${cleanName}.jpg`;
+    pendingUploads.set(path, dataUrl.split(',')[1]);
+    serviceForm.elements.image.value = `./${path}`;
+    updateImagePreview(dataUrl);
+    setStatus('Picture prepared. Save the service, then publish when you are ready.', 'success');
 }
 
 function renderAnnouncements() {
@@ -229,6 +443,77 @@ function editClass(id) {
     classForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
+pageContentForm.addEventListener('submit', (formEvent) => {
+    formEvent.preventDefault();
+    const values = new FormData(pageContentForm);
+    const page = {};
+    pageFieldGroups.forEach((group) => group.fields.forEach(([key]) => {
+        page[key] = String(values.get(key) || '').trim();
+    }));
+    siteContent.page = page;
+    setStatus('Page text saved in this draft. Publish to update the website.', 'success');
+});
+
+serviceForm.addEventListener('submit', (formEvent) => {
+    formEvent.preventDefault();
+    const values = new FormData(serviceForm);
+    const link = String(values.get('ctaHref') || '').trim();
+    if (link && !/^(https?:\/\/|mailto:|tel:|#)/i.test(link)) {
+        setStatus('The service button link must begin with https://, http://, mailto:, tel:, or #.', 'error');
+        serviceForm.elements.ctaHref.focus();
+        return;
+    }
+    const id = values.get('id') || createId('service');
+    const existing = siteContent.services.find((item) => item.id === id);
+    const service = {
+        ...(existing || {}),
+        id,
+        label: String(values.get('label') || '').trim(),
+        title: String(values.get('title') || '').trim(),
+        summary: String(values.get('summary') || '').trim(),
+        price: String(values.get('price') || '').trim(),
+        wide: values.get('wide') === 'true',
+        modalEyebrow: String(values.get('modalEyebrow') || '').trim(),
+        modalTitle: String(values.get('modalTitle') || '').trim(),
+        modalBody: String(values.get('modalBody') || '').trim(),
+        modalDetails: String(values.get('modalDetails') || '').trim(),
+        ctaLabel: String(values.get('ctaLabel') || '').trim(),
+        ctaHref: link || '#contact',
+        image: String(values.get('image') || '').trim(),
+        imageAlt: String(values.get('imageAlt') || '').trim(),
+        focalX: Number(values.get('focalX')) || 50,
+        focalY: Number(values.get('focalY')) || 50,
+        special: String(values.get('special') || existing?.special || '')
+    };
+    if (service.image && !service.imageAlt) {
+        setStatus('Please add a short description for the service picture.', 'error');
+        serviceForm.elements.imageAlt.focus();
+        return;
+    }
+    const index = siteContent.services.findIndex((item) => item.id === id);
+    if (index < 0) siteContent.services.push(service);
+    else siteContent.services[index] = service;
+    renderServicesAdmin();
+    resetServiceForm();
+    setStatus('Service saved in this draft. Publish to update the website.', 'success');
+});
+
+serviceForm.elements.imageFile.addEventListener('change', async () => {
+    try {
+        await prepareServiceImage(serviceForm.elements.imageFile.files[0]);
+    } catch (error) {
+        setStatus(error.message || 'Could not prepare that picture.', 'error');
+    }
+});
+
+['focalX', 'focalY'].forEach((name) => {
+    serviceForm.elements[name].addEventListener('input', () => {
+        document.querySelector(`#${name === 'focalX' ? 'focal-x' : 'focal-y'}-output`).value = `${serviceForm.elements[name].value}%`;
+        const image = document.querySelector('#service-image-preview img');
+        if (image) image.style.objectPosition = `${serviceForm.elements.focalX.value}% ${serviceForm.elements.focalY.value}%`;
+    });
+});
+
 announcementForm.addEventListener('submit', (formEvent) => {
     formEvent.preventDefault();
     const values = new FormData(announcementForm);
@@ -259,7 +544,9 @@ reviewForm.addEventListener('submit', (formEvent) => {
     formEvent.preventDefault();
     const values = new FormData(reviewForm);
     const id = values.get('id') || createId('review');
+    const existingReview = siteContent.reviews.find((item) => item.id === id);
     const review = {
+        ...(existingReview || {}),
         id,
         name: values.get('name').trim(),
         quote: values.get('quote').trim()
@@ -318,6 +605,20 @@ document.querySelectorAll('[data-cancel]').forEach((button) => {
         if (button.dataset.cancel === 'review') resetForm(reviewForm, '#review-form-title', 'review');
         if (button.dataset.cancel === 'event') resetForm(eventForm, '#event-form-title', 'event');
         if (button.dataset.cancel === 'class') resetForm(classForm, '#class-form-title', 'class');
+        if (button.dataset.cancel === 'service') resetServiceForm();
+    });
+});
+
+document.querySelectorAll('[data-admin-tab]').forEach((button) => {
+    button.addEventListener('click', () => {
+        document.querySelectorAll('[data-admin-tab]').forEach((tab) => {
+            const active = tab === button;
+            tab.classList.toggle('is-active', active);
+            tab.setAttribute('aria-selected', String(active));
+        });
+        document.querySelectorAll('[data-admin-panel]').forEach((panel) => {
+            panel.hidden = panel.dataset.adminPanel !== button.dataset.adminTab;
+        });
     });
 });
 
@@ -327,11 +628,15 @@ async function loadSiteContent() {
         if (!response.ok) throw new Error(`Content file request failed (${response.status})`);
         const content = await response.json();
         siteContent = {
+            page: content.page && typeof content.page === 'object' ? content.page : {},
+            services: Array.isArray(content.services) ? content.services : [],
             announcements: Array.isArray(content.announcements) ? content.announcements : [],
             reviews: Array.isArray(content.reviews) ? content.reviews : [],
             events: Array.isArray(content.events) ? content.events : [],
             classes: Array.isArray(content.classes) ? content.classes : []
         };
+        renderPageFields();
+        renderServicesAdmin();
         renderAnnouncements();
         renderReviews();
         renderEvents();
@@ -339,9 +644,31 @@ async function loadSiteContent() {
     } catch (error) {
         setStatus('Could not load the website content. Open this editor from the deployed website or run it on a local web server.', 'error');
         renderAnnouncements();
+        renderPageFields();
+        renderServicesAdmin();
         renderReviews();
         renderEvents();
         renderClasses();
+    }
+}
+
+async function publishPendingImages(headers) {
+    const usedImages = new Set(siteContent.services.map((service) => (service.image || '').replace(/^\.\//, '')));
+    const uploads = [...pendingUploads.entries()].filter(([path]) => usedImages.has(path));
+    for (let index = 0; index < uploads.length; index += 1) {
+        const [path, content] = uploads[index];
+        setStatus(`Uploading picture ${index + 1} of ${uploads.length}…`);
+        const encodedPath = path.split('/').map(encodeURIComponent).join('/');
+        const endpoint = `https://api.github.com/repos/${contentRepository}/contents/${encodedPath}`;
+        const currentResponse = await fetch(endpoint, { headers });
+        let sha;
+        if (currentResponse.ok) sha = (await currentResponse.json()).sha;
+        else if (currentResponse.status !== 404) throw new Error('Could not prepare an image upload. Please try again.');
+        const payload = { message: 'Upload service image from site editor', content };
+        if (sha) payload.sha = sha;
+        const response = await fetch(endpoint, { method: 'PUT', headers, body: JSON.stringify(payload) });
+        if (!response.ok) throw new Error('A picture could not be uploaded. Please try publishing again.');
+        pendingUploads.delete(path);
     }
 }
 
@@ -364,6 +691,7 @@ async function publishChanges() {
     };
 
     try {
+        await publishPendingImages(headers);
         const currentResponse = await fetch(endpoint, { headers });
         let sha;
         if (currentResponse.ok) sha = (await currentResponse.json()).sha;
@@ -403,4 +731,7 @@ renderAnnouncements();
 renderReviews();
 renderEvents();
 renderClasses();
+renderPageFields();
+renderServicesAdmin();
+resetServiceForm();
 loadSiteContent();
