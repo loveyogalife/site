@@ -319,11 +319,19 @@ function initSlideshows(root = document) {
         const currentLabel = slideshow.querySelector('[data-slide-current]');
         let currentIndex = 0;
         let pointerStartX = null;
+        const loadSlide = (slide) => {
+            if (!slide?.dataset.src || slide.src) return;
+            slide.src = slide.dataset.src;
+            slide.removeAttribute('data-src');
+        };
         const showSlide = (nextIndex) => {
             currentIndex = (nextIndex + slides.length) % slides.length;
+            loadSlide(slides[currentIndex]);
+            loadSlide(slides[(currentIndex + 1) % slides.length]);
             slides.forEach((slide, index) => { slide.hidden = index !== currentIndex; });
             currentLabel.textContent = String(currentIndex + 1);
         };
+        slideshow.addEventListener('slideshow:prepare', () => showSlide(currentIndex));
         slideshow.querySelector('[data-slide-previous]').addEventListener('click', () => showSlide(currentIndex - 1));
         slideshow.querySelector('[data-slide-next]').addEventListener('click', () => showSlide(currentIndex + 1));
         slideshow.addEventListener('keydown', (event) => {
@@ -366,6 +374,8 @@ function renderServices(services = []) {
         const image = makeElement('img');
         image.src = service.image || './pics/lotus.svg';
         image.alt = service.imageAlt || '';
+        image.loading = 'lazy';
+        image.decoding = 'async';
         image.style.objectPosition = `${service.focalX ?? 50}% ${service.focalY ?? 50}%`;
         imageWrap.append(image);
         const body = makeElement('div', 'service-card-body');
@@ -423,7 +433,7 @@ function renderServices(services = []) {
 }
 
 async function loadContent() {
-    const response = await fetch(`${contentUrl.href}?v=${Date.now()}`, { cache: 'no-store' });
+    const response = await fetch(contentUrl.href, { cache: 'no-cache' });
     if (!response.ok) throw new Error(`Content request failed (${response.status})`);
     const content = await response.json();
     applyPageContent(content.page && typeof content.page === 'object' ? content.page : {});
@@ -473,7 +483,12 @@ document.addEventListener('click', (event) => {
     const opener = event.target.closest('[data-open-dialog]');
     if (opener) {
         const dialog = document.getElementById(opener.dataset.openDialog);
-        if (dialog && typeof dialog.showModal === 'function') dialog.showModal();
+        if (dialog && typeof dialog.showModal === 'function') {
+            dialog.querySelectorAll('[data-slideshow]').forEach((slideshow) => {
+                slideshow.dispatchEvent(new Event('slideshow:prepare'));
+            });
+            dialog.showModal();
+        }
         return;
     }
     const closer = event.target.closest('[data-close-dialog], [data-dialog-contact]');
