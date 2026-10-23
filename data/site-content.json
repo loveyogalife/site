@@ -3,7 +3,7 @@
     "heroEyebrow": "Yoga, sound therapy & Reiki in Coventry",
     "heroTitle": "Find a little more room to",
     "heroAccent": "breathe.",
-    "heroIntro": "Welcome to Love Yoga Life🙏Whether you join me for yoga, sound therapy, Reiki or a yoga retreat, you're not just joining a class or experience — you're becoming part of a warm, supportive community where we can learn, grow and reconnect with ourselves and one another. I look forward to welcoming you and sharing the journey together.",
+    "heroIntro": "Welcome to Love Yoga Life🙏\nWhether you join me for yoga, sound therapy, Reiki or a yoga retreat, you're not just joining a class or experience — you're becoming part of a warm, supportive community where we can learn, grow and reconnect with ourselves and one another. I look forward to welcoming you and sharing the journey together.",
     "heroPrimary": "Explore classes",
     "heroSecondary": "Call Maureen",
     "heroCaption": "A practice that meets you where you are",
@@ -46,12 +46,7 @@
     "aboutEyebrow": "A little about your teacher",
     "aboutTitle": "Meet",
     "aboutAccent": "Maureen.",
-    "aboutBody1": "My journey with yoga began with a desire to feel healthier, happier and more balanced, and over the years it has become so much more than a physical practice. For the past 18 years, I’ve had the privilege of sharing yoga with others, and I continue to be inspired by the way it can support us through the different stages of life, helping us to find strength, stillness and a deeper connection with ourselves.",
-    "aboutBody2": "My love of yoga has taken me to India on several occasions, where I’ve explored the roots of yoga, deepened my understanding of its ancient philosophy and learned more about Ayurveda. These experiences have strengthened my belief that yoga is about far more than the poses on the mat — it’s a way of living that can bring greater awareness, balance and contentment into our everyday lives.",
-    "aboutBody3": "For me, yoga is also a journey of self-discovery — an opportunity to explore the connection between body, mind and spirit. I’m drawn to the wisdom of the ancient teachings and the way they invite us to live with greater awareness, compassion and connection, both with ourselves and with the world around us. This sense of inner connection continues to inspire my teaching and my own journey.",
-    "aboutBody4": "Alongside yoga, I now offer Reiki and singing bowl therapy, as well as monthly sound baths and yoga retreats. Each offers a different opportunity to slow down, release tension and nurture our wellbeing, creating space to reconnect with ourselves and find a little more peace in our often busy lives.",
-    "aboutBody5": "What I treasure most is the sense of connection that grows when people come together through yoga and shared experiences. Whether you join me for a class, a sound bath, an individual treatment or a retreat, my hope is that you feel welcomed, supported and part of a community where you can simply be yourself.",
-    "aboutBody6": "I look forward to welcoming you.",
+    "aboutBody": "My journey with yoga began with a desire to feel healthier, happier and more balanced, and over the years it has become so much more than a physical practice. For the past 18 years, I’ve had the privilege of sharing yoga with others, and I continue to be inspired by the way it can support us through the different stages of life, helping us to find strength, stillness and a deeper connection with ourselves.\n\nMy love of yoga has taken me to India on several occasions, where I’ve explored the roots of yoga, deepened my understanding of its ancient philosophy and learned more about Ayurveda. These experiences have strengthened my belief that yoga is about far more than the poses on the mat — it’s a way of living that can bring greater awareness, balance and contentment into our everyday lives.\n\nFor me, yoga is also a journey of self-discovery — an opportunity to explore the connection between body, mind and spirit. I’m drawn to the wisdom of the ancient teachings and the way they invite us to live with greater awareness, compassion and connection, both with ourselves and with the world around us. This sense of inner connection continues to inspire my teaching and my own journey.\n\nAlongside yoga, I now offer Reiki and singing bowl therapy, as well as monthly sound baths and yoga retreats. Each offers a different opportunity to slow down, release tension and nurture our wellbeing, creating space to reconnect with ourselves and find a little more peace in our often busy lives.\n\nWhat I treasure most is the sense of connection that grows when people come together through yoga and shared experiences. Whether you join me for a class, a sound bath, an individual treatment or a retreat, my hope is that you feel welcomed, supported and part of a community where you can simply be yourself.\n\nI look forward to welcoming you.",
     "aboutSignoff": "Love & light,",
     "aboutName": "Maureen",
     "aboutCta": "Come and say hello",
@@ -170,6 +165,16 @@
       "modalTitle": "A Journey Back to Yourself",
       "modalBody": "My yoga retreats are an invitation to slow down, breathe deeply and reconnect with what truly matters. Away from the demands of everyday life, we create space to nurture body, mind and spirit through yoga, relaxation, meditation, mantra, pranayama and moments of quiet reflection.\n\nRooted in the traditional teachings of yoga, these retreats offer more than simply a physical practice. Alongside asana, we explore the deeper dimensions of yoga through breathwork, mantra and yoga philosophy, creating opportunities to cultivate self-compassion, inner awareness and a greater sense of balance, peace and connection within yourself.\n\nWhether you are looking to deepen your practice, explore yoga’s ancient wisdom, find some stillness or simply give yourself time to recharge, you will be welcomed into a warm and supportive space where you can come just as you are.\n\nI offer two retreats each year, each with its own unique setting and atmosphere:\n\nPoland — End of May\nA springtime opportunity to step away from familiar routines, reconnect with nature and welcome a fresh sense of energy and possibility.\n\nSpain — End of September\nA late-summer retreat offering time to slow down, turn inward and enjoy a more grounded, reflective approach to yoga and wellbeing.\n\nEach retreat is an opportunity to pause, reconnect and return home feeling nourished — not only in body, but in mind and spirit.",
       "modalDetails": "",
+      "leaflets": {
+        "Poland": {
+          "label": "Download Poland retreat leaflet (PDF)",
+          "href": "./leaflets/Maureen%20Yoga%20Retreat%20Poland%202027.pdf"
+        },
+        "Spain": {
+          "label": "Download Spain retreat leaflet (Word document)",
+          "href": "./leaflets/Javea%20Retreat%202027%20leaflet.docx"
+        }
+      },
       "ctaLabel": "Ask about the next retreat",
       "ctaHref": "mailto:maureenthomson54@hotmail.com?subject=Yoga%20retreat%20enquiry"
     }

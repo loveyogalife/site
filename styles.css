@@ -1196,6 +1196,28 @@ h2 em {
     font-size: 13px;
 }
 
+.retreat-leaflet-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    margin-top: .65rem;
+    color: var(--forest);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+.retreat-leaflet-link:hover,
+.retreat-leaflet-link:focus-visible {
+    color: var(--terracotta);
+}
+
+.retreat-leaflet-link .ui-icon {
+    width: 13px;
+    height: 13px;
+}
+
 .retreat-galleries {
     display: grid;
     grid-column: 1 / -1;
@@ -1585,7 +1607,7 @@ h2 em {
     margin-bottom: 1.3rem;
 }
 
-.about-copy>p:not(.eyebrow) {
+.about-body p {
     color: var(--muted);
     font-size: 13px;
 }

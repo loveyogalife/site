@@ -304,10 +304,27 @@ function renderReviews(reviews = fallbackReviews) {
     requestAnimationFrame(syncHeight);
 }
 
+function appendTextWithLineBreaks(element, value) {
+    value.split(/\r?\n/).forEach((line, index) => {
+        if (index) element.append(document.createElement('br'));
+        element.append(document.createTextNode(line));
+    });
+}
+
 function applyPageContent(page = {}) {
     document.querySelectorAll('[data-page]').forEach((element) => {
         const value = page[element.dataset.page];
-        if (typeof value === 'string' && value.trim()) element.textContent = value;
+        if (typeof value !== 'string' || !value.trim()) return;
+        element.replaceChildren();
+        if (element.dataset.page === 'aboutBody') {
+            value.split(/\r?\n\s*\r?\n/).filter((paragraph) => paragraph.trim()).forEach((paragraph) => {
+                const paragraphElement = document.createElement('p');
+                appendTextWithLineBreaks(paragraphElement, paragraph.trim());
+                element.append(paragraphElement);
+            });
+            return;
+        }
+        appendTextWithLineBreaks(element, value);
     });
 }
 
@@ -410,9 +427,18 @@ function renderServices(services = []) {
         copy.append(title);
         String(service.modalBody || '').split(/\n\s*\n/).filter(Boolean).forEach((paragraph) => {
             const [firstLine, ...remainingLines] = paragraph.split('\n');
-            if (service.special === 'retreat' && /^(Poland|Spain)\s+—/.test(firstLine) && remainingLines.length) {
+            const retreatLocation = firstLine.match(/^(Poland|Spain)\s+—/)?.[1];
+            if (service.special === 'retreat' && retreatLocation && remainingLines.length) {
                 const option = makeElement('div', 'retreat-option');
                 option.append(makeElement('h3', '', firstLine), makeElement('p', '', remainingLines.join(' ')));
+                const leaflet = service.leaflets?.[retreatLocation];
+                if (leaflet?.label && /^\.\/leaflets\/[\w%+.,()' -]+\.(pdf|docx)$/i.test(leaflet.href || '')) {
+                    const download = makeElement('a', 'retreat-leaflet-link', leaflet.label);
+                    download.href = leaflet.href;
+                    download.download = '';
+                    download.append(' ', makeUiIcon('M6 1v7M3 5l3 3 3-3M2 11h8'));
+                    option.append(download);
+                }
                 copy.append(option);
             } else copy.append(makeElement('p', '', paragraph.replace(/\n+/g, ' ')));
         });

@@ -45,9 +45,7 @@ const pageFieldGroups = [
     ] },
     { title: 'About Maureen', fields: [
         ['aboutEyebrow', 'Small heading'], ['aboutTitle', 'Heading'], ['aboutAccent', 'Highlighted words'],
-        ['aboutBody1', 'Paragraph 1', 'textarea'], ['aboutBody2', 'Paragraph 2', 'textarea'],
-        ['aboutBody3', 'Paragraph 3', 'textarea'], ['aboutBody4', 'Paragraph 4', 'textarea'],
-        ['aboutBody5', 'Paragraph 5', 'textarea'], ['aboutBody6', 'Paragraph 6', 'textarea'],
+        ['aboutBody', 'About text', 'textarea'],
         ['aboutSignoff', 'Sign-off'], ['aboutName', 'Name'], ['aboutCta', 'Contact link']
     ] },
     { title: 'Your first class', fields: [
@@ -166,7 +164,8 @@ function renderPageFields() {
             const field = document.createElement(type === 'textarea' ? 'textarea' : 'input');
             field.name = key;
             field.maxLength = type === 'textarea' ? 5000 : 240;
-            if (type === 'textarea') field.rows = 4;
+            if (type === 'textarea') field.rows = key === 'aboutBody' ? 14 : 4;
+            if (key === 'aboutBody') field.placeholder = 'Use a blank line between paragraphs';
             field.value = siteContent.page?.[key] || '';
             label.append(field);
             section.append(label);
