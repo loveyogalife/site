@@ -76,7 +76,7 @@
       "label": "01 / YOGA",
       "title": "Private & small-group yoga",
       "summary": "Personal sessions shaped around your experience, goals and schedule — at Maureen's home studio.",
-      "price": "£40 per hour",
+      "price": "One-hour session · £40",
       "wide": false,
       "featured": true,
       "image": "./pics/4.jpeg",
@@ -86,35 +86,37 @@
       "openLabel": "More about private yoga",
       "modalEyebrow": "One-to-one or small group",
       "modalTitle": "Private yoga, shaped around you.",
-      "modalBody": "Personal lessons can suit beginners wanting to build confidence, people who prefer a quieter setting, or anyone hoping to focus on a particular posture or practice. Sessions are available at Maureen's home studio.",
-      "modalDetails": "£40 per hour at Maureen's home studio.",
+      "modalBody": "Personal lessons can suit beginners wanting to build confidence, people who prefer a quieter setting, couples wanting to practice together, or anyone hoping to focus on a particular posture.",
+      "modalDetails": "One-hour session · £40",
       "ctaLabel": "Ask Maureen about a session",
-      "ctaHref": "#contact"
+      "ctaHref": "#contact",
+      "special": ""
     },
     {
       "id": "reiki",
       "label": "02 / REIKI",
       "title": "Reiki",
-      "summary": "A gentle, hands-on or hands-above treatment intended to support deep rest and relaxation. You remain fully clothed.",
-      "price": "£40 single session",
+      "summary": "A gentle treatment intended to support deep rest and relaxation.",
+      "price": "Single treatment · £40",
       "wide": false,
       "image": "./pics/13.jpeg",
       "imageAlt": "Candles and meditation objects arranged for Reiki",
       "focalX": 50,
       "focalY": 48,
       "openLabel": "More about Reiki",
-      "modalEyebrow": "A quiet, fully clothed treatment",
+      "modalEyebrow": "A quiet treatment",
       "modalTitle": "Make space to rest.",
       "modalBody": "Reiki is a Japanese complementary practice often chosen as a way to relax. During a session, you lie fully clothed on a treatment couch while Maureen uses a light touch or holds her hands just above the body. You can talk through comfort and preferences beforehand.",
-      "modalDetails": "Single treatment £40. Reiki is complementary and is not a substitute for medical care.",
+      "modalDetails": "Single treatment · £40",
       "ctaLabel": "Ask Maureen about Reiki",
-      "ctaHref": "#contact"
+      "ctaHref": "#contact",
+      "special": ""
     },
     {
       "id": "singing-bowls",
       "label": "03 / SOUND",
       "title": "Singing bowl therapy",
-      "summary": "A one-to-one sound session with Tibetan singing bowls. Lie comfortably, fully clothed, and take time to unwind.",
+      "summary": "A one-to-one sound session with Tibetan singing bowls. Lie comfortably and take time to unwind.",
       "price": "One-hour treatment · £50",
       "wide": false,
       "image": "./pics/20.jpeg",
@@ -124,10 +126,11 @@
       "openLabel": "More about singing bowl therapy",
       "modalEyebrow": "A one-to-one sound session",
       "modalTitle": "Tibetan singing bowl therapy.",
-      "modalBody": "Settle fully clothed on a mattress on the floor while Maureen plays Tibetan singing bowls. The session is an hour, with time to get comfortable before the sounds begin.",
+      "modalBody": "Settle on a mattress on the floor while Maureen plays Tibetan singing bowls. The session is an hour, with time to get comfortable before the sounds begin.",
       "modalDetails": "One-hour treatment · £50. Let Maureen know about any comfort or access needs when arranging your visit.",
       "ctaLabel": "Ask Maureen about a treatment",
-      "ctaHref": "#contact"
+      "ctaHref": "#contact",
+      "special": ""
     },
     {
       "id": "sound-baths",
@@ -146,7 +149,8 @@
       "modalBody": "A sound bath is a journey of pure sound and vibration. It is called a sound bath because you are bathed in the healing vibrations of gongs, Tibetan singing bowls, gentle drums and many other instruments known for their vibratory healing frequencies.\n\nThe demands of our daily lives can lead to an increase in stress-related disease. Many influences, such as the foods we eat, people we encounter, thoughts we think, sounds we hear and environments we move within, can have a negative effect on our wellbeing. Sound and vibration help facilitate a deep sense of peace, release tension and blocked energy, and balance the energy centres in the body. They work at a cellular level to rebalance the physical, emotional and spiritual bodies.\n\nBring a mat, blanket and cushions so you can settle in warmly. The hall floor can feel cold; a limited number of mats may be available to borrow. Wear comfortable clothes.",
       "modalDetails": "Monthly at Baginton Village Hall, 6–7pm · £15 in advance or £18 on the day. Pre-booking is essential.",
       "ctaLabel": "See upcoming sound bath dates",
-      "ctaHref": "#events"
+      "ctaHref": "#events",
+      "special": ""
     },
     {
       "id": "retreats",
