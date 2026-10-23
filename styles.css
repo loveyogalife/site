@@ -1607,7 +1607,8 @@ h2 em {
     margin-bottom: 1.3rem;
 }
 
-.about-body p {
+.about-body {
+    margin-bottom: 1rem;
     color: var(--muted);
     font-size: 13px;
 }

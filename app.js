@@ -316,14 +316,6 @@ function applyPageContent(page = {}) {
         const value = page[element.dataset.page];
         if (typeof value !== 'string' || !value.trim()) return;
         element.replaceChildren();
-        if (element.dataset.page === 'aboutBody') {
-            value.split(/\r?\n\s*\r?\n/).filter((paragraph) => paragraph.trim()).forEach((paragraph) => {
-                const paragraphElement = document.createElement('p');
-                appendTextWithLineBreaks(paragraphElement, paragraph.trim());
-                element.append(paragraphElement);
-            });
-            return;
-        }
         appendTextWithLineBreaks(element, value);
     });
 }
