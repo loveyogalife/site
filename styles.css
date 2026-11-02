@@ -1306,13 +1306,16 @@ h2 em {
 }
 
 .slideshow-control svg {
+    display: block;
     width: 14px;
     height: 14px;
+    margin: 0;
     fill: none;
     stroke: currentColor;
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-width: 1.5;
+    vertical-align: 0;
 }
 
 .slideshow-previous {
