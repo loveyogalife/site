@@ -8,8 +8,8 @@
     <link rel="icon" href="./pics/lotus.svg" type="image/svg+xml">
     <meta name="robots" content="noindex, nofollow">
     <title>Site editor | Love Yoga Life</title>
-    <link rel="stylesheet" href="./styles.css?v=20261015-7">
-    <script src="./admin.js?v=20261015-3" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20261102-1">
+    <script src="./admin.js?v=20261102-1" defer></script>
 </head>
 
 <body class="admin-page">
@@ -102,6 +102,12 @@
                                 <label>Vertical focus <span><output id="focal-y-output">50%</output></span><input name="focalY" type="range" min="0" max="100" value="50"></label>
                             </div>
                         </fieldset>
+                        <fieldset class="admin-image-field retreat-gallery-editor" id="retreat-gallery-field" hidden>
+                            <legend>Retreat photo galleries</legend>
+                            <p class="admin-help">Add, rename, reorder or remove galleries and their pictures. Changes are saved with the retreat service.</p>
+                            <div id="retreat-gallery-list"></div>
+                            <button class="button button-quiet" type="button" id="add-retreat-gallery">Add a gallery</button>
+                        </fieldset>
                         <div class="admin-form-actions"><button class="button button-dark" type="submit">Save service</button><button class="button button-quiet" type="button" data-cancel="service" hidden>Cancel edit</button></div>
                     </form>
                 </section>
@@ -172,9 +178,13 @@
                     <label>Event name<input name="title" type="text" maxlength="100" required
                             placeholder="Sound bath & chakra meditation"></label>
                     <div class="admin-form-row">
-                        <label>Date<input name="date" type="date" required></label>
+                        <label>Start date<input name="date" type="date" required></label>
+                        <label>End date <span>Optional</span><input name="endDate" type="date"></label>
+                    </div>
+                    <div class="admin-form-row">
                         <label>Time<input name="time" type="text" maxlength="60" required
                                 placeholder="6:00–7:00pm"></label>
+                        <span></span>
                     </div>
                     <label>Venue<input name="location" type="text" maxlength="140" required
                             placeholder="Venue name and address"></label>

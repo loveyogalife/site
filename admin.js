@@ -17,6 +17,7 @@ const statusNode = document.querySelector('#admin-status');
 let siteContent = { page: {}, services: [], announcements: [], reviews: [], events: [], classes: [] };
 let publishToken = '';
 const pendingUploads = new Map();
+let editingRetreatGalleries = [];
 const pageFieldGroups = [
     { title: 'Hero banner', fields: [
         ['heroEyebrow', 'Small heading'], ['heroTitle', 'Main heading'], ['heroAccent', 'Highlighted words'],
@@ -248,6 +249,8 @@ function resetServiceForm() {
     document.querySelector('#focal-y-output').value = '50%';
     document.querySelector('#service-form-title').textContent = 'Add a service';
     document.querySelector('[data-cancel="service"]').hidden = true;
+    editingRetreatGalleries = [];
+    renderRetreatGalleryEditor();
     updateImagePreview();
 }
 
@@ -259,6 +262,8 @@ function editService(id) {
         serviceForm.elements[key].value = typeof value === 'boolean' ? String(value) : value || '';
     });
     serviceForm.elements.special.value = service.special || '';
+    editingRetreatGalleries = JSON.parse(JSON.stringify(Array.isArray(service.galleries) ? service.galleries : []));
+    renderRetreatGalleryEditor(service.special === 'retreat');
     document.querySelector('#focal-x-output').value = `${service.focalX ?? 50}%`;
     document.querySelector('#focal-y-output').value = `${service.focalY ?? 50}%`;
     document.querySelector('#service-form-title').textContent = 'Edit service';
@@ -315,6 +320,150 @@ async function prepareServiceImage(file) {
     setStatus('Picture prepared. Save the service, then publish when you are ready.', 'success');
 }
 
+function galleryImageSource(picture) {
+    const path = (picture.src || '').replace(/^\.\//, '');
+    const pending = pendingUploads.get(path);
+    return pending ? `data:image/jpeg;base64,${pending}` : picture.src;
+}
+
+function removePendingPicture(picture) {
+    const path = (picture?.src || '').replace(/^\.\//, '');
+    if (pendingUploads.has(path)) pendingUploads.delete(path);
+}
+
+async function prepareRetreatPicture(file) {
+    if (!file?.type.startsWith('image/')) throw new Error('Please choose JPG, PNG or WebP pictures.');
+    if (file.size > 15 * 1024 * 1024) throw new Error('A picture is too large. Please choose pictures under 15MB.');
+    const blob = await resizeImage(file);
+    const dataUrl = await fileToDataUrl(blob);
+    const cleanName = file.name.replace(/\.[^.]+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 45) || 'retreat';
+    const path = `pics/uploads/${Date.now()}-${Math.random().toString(36).slice(2, 7)}-${cleanName}.jpg`;
+    pendingUploads.set(path, dataUrl.split(',')[1]);
+    return { id: createId('picture'), src: `./${path}`, alt: 'A moment from a yoga retreat' };
+}
+
+function makeGalleryAction(label, handler, disabled = false, remove = false) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = `admin-small-button${remove ? ' is-remove' : ''}`;
+    button.textContent = label;
+    button.disabled = disabled;
+    button.addEventListener('click', handler);
+    return button;
+}
+
+function renderRetreatGalleryEditor(show = serviceForm.elements.special.value === 'retreat') {
+    const field = document.querySelector('#retreat-gallery-field');
+    const list = document.querySelector('#retreat-gallery-list');
+    field.hidden = !show;
+    list.replaceChildren();
+    if (!show) return;
+    editingRetreatGalleries.forEach((gallery, galleryIndex) => {
+        gallery.images = Array.isArray(gallery.images) ? gallery.images : [];
+        const card = document.createElement('section');
+        card.className = 'admin-gallery-card';
+        const header = document.createElement('div');
+        header.className = 'admin-gallery-heading';
+        const title = document.createElement('h4');
+        title.textContent = gallery.title || `Gallery ${galleryIndex + 1}`;
+        const actions = document.createElement('div');
+        actions.className = 'admin-record-actions';
+        actions.append(
+            makeGalleryAction('Up', () => {
+                [editingRetreatGalleries[galleryIndex - 1], editingRetreatGalleries[galleryIndex]] = [editingRetreatGalleries[galleryIndex], editingRetreatGalleries[galleryIndex - 1]];
+                renderRetreatGalleryEditor(true);
+            }, galleryIndex === 0),
+            makeGalleryAction('Down', () => {
+                [editingRetreatGalleries[galleryIndex], editingRetreatGalleries[galleryIndex + 1]] = [editingRetreatGalleries[galleryIndex + 1], editingRetreatGalleries[galleryIndex]];
+                renderRetreatGalleryEditor(true);
+            }, galleryIndex === editingRetreatGalleries.length - 1),
+            makeGalleryAction('Remove gallery', () => {
+                (gallery.images || []).forEach(removePendingPicture);
+                editingRetreatGalleries.splice(galleryIndex, 1);
+                renderRetreatGalleryEditor(true);
+            }, false, true)
+        );
+        header.append(title, actions);
+        const fields = document.createElement('div');
+        fields.className = 'admin-form-row';
+        const makeTextField = (labelText, value, update) => {
+            const label = document.createElement('label');
+            label.append(document.createTextNode(labelText));
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.maxLength = 100;
+            input.value = value || '';
+            input.addEventListener('input', () => {
+                update(input.value);
+                title.textContent = gallery.title || `Gallery ${galleryIndex + 1}`;
+            });
+            label.append(input);
+            return label;
+        };
+        fields.append(
+            makeTextField('Gallery title', gallery.title, (value) => { gallery.title = value; }),
+            makeTextField('Gallery subtitle', gallery.subtitle, (value) => { gallery.subtitle = value; })
+        );
+        const pictures = document.createElement('div');
+        pictures.className = 'admin-gallery-pictures';
+        (gallery.images || []).forEach((picture, pictureIndex) => {
+            const row = document.createElement('div');
+            row.className = 'admin-gallery-picture';
+            const image = document.createElement('img');
+            image.src = galleryImageSource(picture);
+            image.alt = '';
+            const label = document.createElement('label');
+            label.append(document.createTextNode('Image description'));
+            const alt = document.createElement('input');
+            alt.type = 'text';
+            alt.maxLength = 180;
+            alt.value = picture.alt || '';
+            alt.addEventListener('input', () => { picture.alt = alt.value; });
+            label.append(alt);
+            const pictureActions = document.createElement('div');
+            pictureActions.className = 'admin-record-actions';
+            pictureActions.append(
+                makeGalleryAction('Up', () => {
+                    [gallery.images[pictureIndex - 1], gallery.images[pictureIndex]] = [gallery.images[pictureIndex], gallery.images[pictureIndex - 1]];
+                    renderRetreatGalleryEditor(true);
+                }, pictureIndex === 0),
+                makeGalleryAction('Down', () => {
+                    [gallery.images[pictureIndex], gallery.images[pictureIndex + 1]] = [gallery.images[pictureIndex + 1], gallery.images[pictureIndex]];
+                    renderRetreatGalleryEditor(true);
+                }, pictureIndex === gallery.images.length - 1),
+                makeGalleryAction('Remove', () => {
+                    removePendingPicture(picture);
+                    gallery.images.splice(pictureIndex, 1);
+                    renderRetreatGalleryEditor(true);
+                }, false, true)
+            );
+            row.append(image, label, pictureActions);
+            pictures.append(row);
+        });
+        const uploadLabel = document.createElement('label');
+        uploadLabel.className = 'admin-gallery-upload';
+        uploadLabel.append(document.createTextNode('Add pictures'));
+        const upload = document.createElement('input');
+        upload.type = 'file';
+        upload.accept = 'image/jpeg,image/png,image/webp';
+        upload.multiple = true;
+        upload.addEventListener('change', async () => {
+            try {
+                setStatus('Preparing retreat pictures…');
+                for (const file of upload.files) gallery.images.push(await prepareRetreatPicture(file));
+                renderRetreatGalleryEditor(true);
+                setStatus('Pictures prepared. Save the service, then publish when you are ready.', 'success');
+            } catch (error) {
+                setStatus(error.message || 'Could not prepare those pictures.', 'error');
+            }
+        });
+        uploadLabel.append(upload);
+        card.append(header, fields, pictures, uploadLabel);
+        list.append(card);
+    });
+    if (!editingRetreatGalleries.length) list.append(emptyRecord('No galleries yet. Add one below.'));
+}
+
 function renderAnnouncements() {
     const container = document.querySelector('#announcement-records');
     container.replaceChildren();
@@ -350,7 +499,8 @@ function renderEvents() {
     document.querySelector('#event-count-admin').textContent = String(siteContent.events.length);
     const events = [...siteContent.events].sort((first, second) => first.date.localeCompare(second.date));
     events.forEach((event) => {
-        const detail = `${event.date} · ${event.time || 'Time to be confirmed'} · ${event.location || 'Venue to be confirmed'}`;
+        const dates = event.endDate && event.endDate !== event.date ? `${event.date} to ${event.endDate}` : event.date;
+        const detail = `${dates} · ${event.time || 'Time to be confirmed'} · ${event.location || 'Venue to be confirmed'}`;
         container.append(buildRecordCard(event.title || 'Untitled event', detail, () => editEvent(event.id), () => {
             siteContent.events = siteContent.events.filter((item) => item.id !== event.id);
             renderEvents();
@@ -484,6 +634,18 @@ serviceForm.addEventListener('submit', (formEvent) => {
         focalY: Number(values.get('focalY')) || 50,
         special: String(values.get('special') || existing?.special || '')
     };
+    if (service.special === 'retreat') service.galleries = editingRetreatGalleries
+        .map((gallery) => ({
+            id: gallery.id || createId('gallery'),
+            title: String(gallery.title || '').trim(),
+            subtitle: String(gallery.subtitle || '').trim(),
+            images: (gallery.images || []).map((picture) => ({
+                id: picture.id || createId('picture'),
+                src: picture.src,
+                alt: String(picture.alt || '').trim()
+            })).filter((picture) => picture.src)
+        }))
+        .filter((gallery) => gallery.title || gallery.images.length);
     if (service.image && !service.imageAlt) {
         setStatus('Please add a short description for the service picture.', 'error');
         serviceForm.elements.imageAlt.focus();
@@ -561,11 +723,17 @@ reviewForm.addEventListener('submit', (formEvent) => {
 eventForm.addEventListener('submit', (formEvent) => {
     formEvent.preventDefault();
     const values = new FormData(eventForm);
+    if (values.get('endDate') && values.get('endDate') < values.get('date')) {
+        setStatus('The event end date must be on or after its start date.', 'error');
+        eventForm.elements.endDate.focus();
+        return;
+    }
     const id = values.get('id') || createId('event');
     const event = {
         id,
         title: values.get('title').trim(),
         date: values.get('date'),
+        endDate: values.get('endDate') || '',
         time: values.get('time').trim(),
         location: values.get('location').trim(),
         description: values.get('description').trim(),
@@ -652,7 +820,10 @@ async function loadSiteContent() {
 }
 
 async function publishPendingImages(headers) {
-    const usedImages = new Set(siteContent.services.map((service) => (service.image || '').replace(/^\.\//, '')));
+    const usedImages = new Set(siteContent.services.flatMap((service) => [
+        service.image,
+        ...(service.galleries || []).flatMap((gallery) => (gallery.images || []).map((picture) => picture.src))
+    ]).filter(Boolean).map((path) => path.replace(/^\.\//, '')));
     const uploads = [...pendingUploads.entries()].filter(([path]) => usedImages.has(path));
     for (let index = 0; index < uploads.length; index += 1) {
         const [path, content] = uploads[index];
@@ -726,6 +897,10 @@ async function publishChanges() {
 
 accessForm.addEventListener('submit', unlockEditor);
 document.querySelector('#publish-button').addEventListener('click', publishChanges);
+document.querySelector('#add-retreat-gallery').addEventListener('click', () => {
+    editingRetreatGalleries.push({ id: createId('gallery'), title: 'New retreat gallery', subtitle: '', images: [] });
+    renderRetreatGalleryEditor(true);
+});
 renderAnnouncements();
 renderReviews();
 renderEvents();

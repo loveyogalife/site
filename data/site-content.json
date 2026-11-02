@@ -152,7 +152,7 @@
       "id": "retreats",
       "label": "05 / RETREATS",
       "title": "Yoga & wellbeing retreats",
-      "summary": "Step away from the everyday and give yourself the gift of time, space and stillness. Join me in Poland in May or Spain in September for a nourishing retreat combining yoga, relaxation and deeper connection with yourself.",
+      "summary": "Join me in Jávea, Spain for one of three nourishing retreat weeks in 2027: 14–20 May, 27 September–3 October, or 4–10 October.",
       "price": "",
       "wide": true,
       "special": "retreat",
@@ -161,20 +161,54 @@
       "focalX": 52,
       "focalY": 42,
       "openLabel": "More about retreats",
-      "modalEyebrow": "Twice-yearly time away",
+      "modalEyebrow": "Three Jávea retreats in 2027",
       "modalTitle": "A Journey Back to Yourself",
-      "modalBody": "My yoga retreats are an invitation to slow down, breathe deeply and reconnect with what truly matters. Away from the demands of everyday life, we create space to nurture body, mind and spirit through yoga, relaxation, meditation, mantra, pranayama and moments of quiet reflection.\n\nRooted in the traditional teachings of yoga, these retreats offer more than simply a physical practice. Alongside asana, we explore the deeper dimensions of yoga through breathwork, mantra and yoga philosophy, creating opportunities to cultivate self-compassion, inner awareness and a greater sense of balance, peace and connection within yourself.\n\nWhether you are looking to deepen your practice, explore yoga’s ancient wisdom, find some stillness or simply give yourself time to recharge, you will be welcomed into a warm and supportive space where you can come just as you are.\n\nI offer two retreats each year, each with its own unique setting and atmosphere:\n\nPoland — End of May\nA springtime opportunity to step away from familiar routines, reconnect with nature and welcome a fresh sense of energy and possibility.\n\nSpain — End of September\nA late-summer retreat offering time to slow down, turn inward and enjoy a more grounded, reflective approach to yoga and wellbeing.\n\nEach retreat is an opportunity to pause, reconnect and return home feeling nourished — not only in body, but in mind and spirit.",
+      "modalBody": "My yoga retreats are an invitation to slow down, breathe deeply and reconnect with what truly matters. Away from the demands of everyday life, we create space to nurture body, mind and spirit through yoga, relaxation, meditation, mantra, pranayama and moments of quiet reflection.\n\nRooted in the traditional teachings of yoga, these retreats offer more than simply a physical practice. Alongside asana, we explore the deeper dimensions of yoga through breathwork, mantra and yoga philosophy, creating opportunities to cultivate self-compassion, inner awareness and a greater sense of balance, peace and connection within yourself.\n\nWhether you are looking to deepen your practice, explore yoga’s ancient wisdom, find some stillness or simply give yourself time to recharge, you will be welcomed into a warm and supportive space where you can come just as you are.\n\nI’m delighted to offer three retreat weeks in Jávea, Spain in 2027.\n\nJávea retreat dates — 2027\n14–20 May\n27 September–3 October\n4–10 October\n\nEach retreat is an opportunity to pause, reconnect and return home feeling nourished — not only in body, but in mind and spirit.",
       "modalDetails": "",
       "leaflets": {
-        "Poland": {
-          "label": "Download Poland retreat leaflet (PDF)",
-          "href": "./leaflets/Maureen%20Yoga%20Retreat%20Poland%202027.pdf"
-        },
         "Spain": {
-          "label": "Download Spain retreat leaflet (Word document)",
+          "label": "Download Jávea retreat leaflet (Word document)",
           "href": "./leaflets/Javea%20Retreat%202027%20leaflet.docx"
         }
       },
+      "galleries": [
+        {
+          "id": "gallery-retreat-memories",
+          "title": "Retreat memories",
+          "subtitle": "Yoga, rest & connection",
+          "images": [
+            { "id": "retreat-memory-1", "src": "./pics/r1.jpeg", "alt": "A shared moment from a yoga retreat" },
+            { "id": "retreat-memory-2", "src": "./pics/r3.jpeg", "alt": "A shared moment from a yoga retreat" },
+            { "id": "retreat-memory-3", "src": "./pics/r4.jpeg", "alt": "A shared moment from a yoga retreat" },
+            { "id": "retreat-memory-4", "src": "./pics/r5.jpeg", "alt": "A shared moment from a yoga retreat" },
+            { "id": "retreat-memory-5", "src": "./pics/r6.jpeg", "alt": "A shared moment from a yoga retreat" },
+            { "id": "retreat-memory-6", "src": "./pics/r7.jpeg", "alt": "A shared moment from a yoga retreat" },
+            { "id": "retreat-memory-7", "src": "./pics/r8.jpeg", "alt": "A shared moment from a yoga retreat" },
+            { "id": "retreat-memory-8", "src": "./pics/r9.jpeg", "alt": "A shared moment from a yoga retreat" },
+            { "id": "retreat-memory-9", "src": "./pics/r10.jpeg", "alt": "A shared moment from a yoga retreat" },
+            { "id": "retreat-memory-10", "src": "./pics/r11.jpeg", "alt": "A shared moment from a yoga retreat" }
+          ]
+        },
+        {
+          "id": "gallery-javea",
+          "title": "Jávea retreats",
+          "subtitle": "Sunshine by the Mediterranean",
+          "images": [
+            { "id": "javea-1", "src": "./pics/rs1.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
+            { "id": "javea-2", "src": "./pics/rs2.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
+            { "id": "javea-3", "src": "./pics/rs3.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
+            { "id": "javea-4", "src": "./pics/rs4.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
+            { "id": "javea-5", "src": "./pics/rs5.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
+            { "id": "javea-6", "src": "./pics/rs6.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
+            { "id": "javea-7", "src": "./pics/rs7.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
+            { "id": "javea-8", "src": "./pics/rs8.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
+            { "id": "javea-9", "src": "./pics/rs9.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
+            { "id": "javea-10", "src": "./pics/rs10.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
+            { "id": "javea-11", "src": "./pics/rs11.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
+            { "id": "javea-12", "src": "./pics/rs12.jpeg", "alt": "A moment from a yoga retreat in Jávea" }
+          ]
+        }
+      ],
       "ctaLabel": "Ask about the next retreat",
       "ctaHref": "mailto:maureenthomson54@hotmail.com?subject=Yoga%20retreat%20enquiry"
     }
@@ -268,6 +302,36 @@
     }
   ],
   "events": [
+    {
+      "id": "javea-retreat-2027-05-14",
+      "title": "Jávea yoga & wellbeing retreat",
+      "date": "2027-05-14",
+      "endDate": "2027-05-20",
+      "time": "Six-night retreat",
+      "location": "Jávea, Spain",
+      "description": "A nourishing week of yoga, relaxation, meditation and time to reconnect.",
+      "price": "Ask Maureen for availability and details"
+    },
+    {
+      "id": "javea-retreat-2027-09-27",
+      "title": "Jávea yoga & wellbeing retreat",
+      "date": "2027-09-27",
+      "endDate": "2027-10-03",
+      "time": "Six-night retreat",
+      "location": "Jávea, Spain",
+      "description": "A nourishing week of yoga, relaxation, meditation and time to reconnect.",
+      "price": "Ask Maureen for availability and details"
+    },
+    {
+      "id": "javea-retreat-2027-10-04",
+      "title": "Jávea yoga & wellbeing retreat",
+      "date": "2027-10-04",
+      "endDate": "2027-10-10",
+      "time": "Six-night retreat",
+      "location": "Jávea, Spain",
+      "description": "A nourishing week of yoga, relaxation, meditation and time to reconnect.",
+      "price": "Ask Maureen for availability and details"
+    },
     {
       "id": "sound-bath-2026-10-17",
       "title": "Sound bath & chakra meditation",

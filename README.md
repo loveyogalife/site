@@ -21,7 +21,7 @@ The site is plain HTML, CSS, JavaScript, and JSON; no build step or paid service
 
 ## Using the site editor
 
-The editor stores content in `data/site-content.json` in this repository. It can add, edit, and remove homepage announcements, calendar events, and weekly classes. Changes stay in the current page as a draft until **Publish changes** is pressed.
+The editor stores content in `data/site-content.json` in this repository. It can manage page copy, service cards and modals, retreat photo galleries and uploads, homepage announcements, multi-day calendar events, reviews, and weekly classes. Changes stay in the current page as a draft until **Publish changes** is pressed.
 
 To publish, enter the repository as `owner/repository` and a GitHub fine-grained personal access token that is limited to this repository, with **Contents: Read and write** permission. GitHub uses the token to commit the JSON update. The token is held only in the open tab, is not written to local storage or the site files, and is cleared after a successful publish. Do not share or embed the token in the website.
 

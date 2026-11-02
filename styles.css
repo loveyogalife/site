@@ -2466,6 +2466,61 @@ h2 em {
     accent-color: var(--leaf);
 }
 
+.retreat-gallery-editor[hidden] {
+    display: none;
+}
+
+#retreat-gallery-list,
+.admin-gallery-pictures {
+    display: grid;
+    gap: .8rem;
+}
+
+.admin-gallery-card {
+    display: grid;
+    gap: .85rem;
+    padding: 1rem;
+    border: 1px solid var(--line);
+    background: #f9faf7;
+}
+
+.admin-gallery-heading,
+.admin-gallery-picture {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .8rem;
+}
+
+.admin-gallery-heading h4 {
+    margin: 0;
+    color: var(--forest);
+    font-family: var(--serif);
+    font-size: 18px;
+}
+
+.admin-gallery-picture {
+    justify-content: flex-start;
+    padding: .65rem;
+    background: white;
+    border: 1px solid var(--line);
+}
+
+.admin-gallery-picture img {
+    width: 76px;
+    height: 60px;
+    flex: 0 0 auto;
+    object-fit: cover;
+}
+
+.admin-gallery-picture label {
+    flex: 1 1 240px;
+}
+
+.admin-gallery-upload {
+    padding-top: .3rem;
+}
+
 .admin-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2699,6 +2754,17 @@ h2 em {
 
     .page-field-group .is-wide {
         grid-column: auto;
+    }
+
+    .admin-gallery-heading,
+    .admin-gallery-picture {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .admin-gallery-picture label {
+        flex-basis: auto;
+        width: 100%;
     }
 }
 

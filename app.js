@@ -10,7 +10,6 @@ let weeklyClasses = [];
 let calendarDate = new Date(today.getFullYear(), today.getMonth(), 1);
 let selectedDate = '';
 let testimonialResizeObserver;
-const retreatGalleriesTemplate = document.querySelector('.retreat-galleries')?.cloneNode(true);
 const fallbackReviews = [
     {
         id: 'review-sam',
@@ -45,6 +44,23 @@ function formatDateKey(date) {
 function parseDateKey(dateKey) {
     const [year, month, day] = dateKey.split('-').map(Number);
     return new Date(year, month - 1, day);
+}
+
+function eventIncludesDate(event, dateKey) {
+    const endDate = /^\d{4}-\d{2}-\d{2}$/.test(event.endDate || '') ? event.endDate : event.date;
+    return event.date <= dateKey && endDate >= dateKey;
+}
+
+function formatEventDateRange(event) {
+    if (!event.endDate || event.endDate === event.date) return '';
+    const start = parseDateKey(event.date);
+    const end = parseDateKey(event.endDate);
+    const sameYear = start.getFullYear() === end.getFullYear();
+    const sameMonth = sameYear && start.getMonth() === end.getMonth();
+    if (sameMonth) return `${start.getDate()}–${new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(end)}`;
+    const startFormat = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', ...(sameYear ? {} : { year: 'numeric' }) });
+    const endFormat = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    return `${startFormat.format(start)}–${endFormat.format(end)}`;
 }
 
 function makeElement(tag, className, text) {
@@ -108,7 +124,7 @@ function makeEventCard(event, isClass = false) {
     if (isClass) details.append(makeElement('span', 'event-type', 'Weekly class'));
     details.append(
         makeElement('h4', '', event.title),
-        makeElement('p', '', `${event.time || ''}${event.location ? ` · ${event.location}` : ''}`)
+        makeElement('p', '', `${formatEventDateRange(event) || event.time || ''}${formatEventDateRange(event) && event.time ? ` · ${event.time}` : ''}${event.location ? ` · ${event.location}` : ''}`)
     );
     if (event.description) details.append(makeElement('p', 'event-detail', event.description));
     if (event.price) details.append(makeElement('p', 'event-detail', event.price));
@@ -134,10 +150,10 @@ function renderEventList() {
     const count = document.querySelector('#event-count');
     const items = selectedDate
         ? [
-            ...visibleEvents.filter((event) => event.date === selectedDate),
+            ...visibleEvents.filter((event) => eventIncludesDate(event, selectedDate)),
             ...getClassesOnDate(selectedDate)
         ]
-        : visibleEvents.filter((event) => event.date >= todayKey).slice(0, 4);
+        : visibleEvents.slice(0, 4);
     list.replaceChildren();
     count.textContent = selectedDate ? 'Selected day' : `${items.length} ahead`;
     if (selectedDate && items.length === 0) {
@@ -156,7 +172,6 @@ function renderCalendar() {
     const firstDay = new Date(year, month, 1).getDay();
     const daysThisMonth = new Date(year, month + 1, 0).getDate();
     const daysPreviousMonth = new Date(year, month, 0).getDate();
-    const eventDates = new Set(visibleEvents.map((event) => event.date));
     document.querySelector('#calendar-month').textContent = monthFormatter.format(calendarDate);
     grid.replaceChildren();
 
@@ -187,7 +202,7 @@ function renderCalendar() {
         const hasClass = weeklyClasses.some((session) =>
             session.day.toLowerCase() === weekdayName.toLowerCase()
         );
-        const hasEvent = eventDates.has(dateKey);
+        const hasEvent = visibleEvents.some((event) => eventIncludesDate(event, dateKey));
         const dayButton = makeElement('button', 'calendar-day', String(dayNumber));
         dayButton.type = 'button';
         dayButton.setAttribute('role', 'gridcell');
@@ -361,6 +376,51 @@ function initSlideshows(root = document) {
     });
 }
 
+function makeRetreatGalleries(galleries = []) {
+    const usableGalleries = galleries.filter((gallery) => Array.isArray(gallery.images) && gallery.images.length);
+    if (!usableGalleries.length) return null;
+    const section = makeElement('section', 'retreat-galleries');
+    section.setAttribute('aria-label', 'Retreat photo galleries');
+    usableGalleries.forEach((gallery) => {
+        const galleryNode = makeElement('div', 'retreat-gallery');
+        const heading = makeElement('div', 'retreat-gallery-heading');
+        heading.append(makeElement('h3', '', gallery.title || 'Retreat gallery'));
+        if (gallery.subtitle) heading.append(makeElement('span', '', gallery.subtitle));
+        const slideshow = makeElement('div', 'retreat-slideshow');
+        slideshow.dataset.slideshow = '';
+        slideshow.tabIndex = 0;
+        slideshow.setAttribute('aria-label', `${gallery.title || 'Retreat'} photographs`);
+        const slides = makeElement('div', 'retreat-slides');
+        gallery.images.forEach((picture, index) => {
+            const image = makeElement('img', 'retreat-slide');
+            image.dataset.src = picture.src;
+            image.alt = picture.alt || `A moment from ${gallery.title || 'a yoga retreat'}`;
+            image.decoding = 'async';
+            image.hidden = index > 0;
+            slides.append(image);
+        });
+        const previous = makeElement('button', 'slideshow-control slideshow-previous');
+        previous.type = 'button';
+        previous.dataset.slidePrevious = '';
+        previous.setAttribute('aria-label', `Previous ${gallery.title || 'retreat'} photograph`);
+        previous.append(makeUiIcon('m7.5 2-4 4 4 4'));
+        const next = makeElement('button', 'slideshow-control slideshow-next');
+        next.type = 'button';
+        next.dataset.slideNext = '';
+        next.setAttribute('aria-label', `Next ${gallery.title || 'retreat'} photograph`);
+        next.append(makeUiIcon('m4.5 2 4 4-4 4'));
+        const count = makeElement('span', 'slideshow-count');
+        count.setAttribute('aria-live', 'polite');
+        const current = makeElement('span', '', '1');
+        current.dataset.slideCurrent = '';
+        count.append(current, ` / ${gallery.images.length}`);
+        slideshow.append(slides, previous, next, count);
+        galleryNode.append(heading, slideshow);
+        section.append(galleryNode);
+    });
+    return section;
+}
+
 function renderServices(services = []) {
     if (!services.length) return;
     const grid = document.querySelector('#service-grid');
@@ -419,11 +479,13 @@ function renderServices(services = []) {
         copy.append(title);
         String(service.modalBody || '').split(/\n\s*\n/).filter(Boolean).forEach((paragraph) => {
             const [firstLine, ...remainingLines] = paragraph.split('\n');
-            const retreatLocation = firstLine.match(/^(Poland|Spain)\s+—/)?.[1];
-            if (service.special === 'retreat' && retreatLocation && remainingLines.length) {
+            const isRetreatOption = service.special === 'retreat' && firstLine.includes('—') && remainingLines.length;
+            if (isRetreatOption) {
                 const option = makeElement('div', 'retreat-option');
-                option.append(makeElement('h3', '', firstLine), makeElement('p', '', remainingLines.join(' ')));
-                const leaflet = service.leaflets?.[retreatLocation];
+                option.append(makeElement('h3', '', firstLine), makeElement('p', '', remainingLines.join(' · ')));
+                const leafletEntries = Object.entries(service.leaflets || {});
+                const leaflet = leafletEntries.find(([name]) => firstLine.toLowerCase().includes(name.toLowerCase()))?.[1]
+                    || (leafletEntries.length === 1 ? leafletEntries[0][1] : null);
                 if (leaflet?.label && /^\.\/leaflets\/[\w%+.,()' -]+\.(pdf|docx)$/i.test(leaflet.href || '')) {
                     const download = makeElement('a', 'retreat-leaflet-link', leaflet.label);
                     download.href = leaflet.href;
@@ -443,7 +505,8 @@ function renderServices(services = []) {
             copy.append(link);
         }
         layout.append(dialogImage, copy);
-        if (service.special === 'retreat' && retreatGalleriesTemplate) layout.append(retreatGalleriesTemplate.cloneNode(true));
+        const galleries = service.special === 'retreat' ? makeRetreatGalleries(service.galleries) : null;
+        if (galleries) layout.append(galleries);
         dialog.append(layout);
         aboutSection.before(dialog);
         initSlideshows(dialog);
@@ -461,7 +524,8 @@ async function loadContent() {
     renderSchedule(weeklyClasses);
     renderReviews(Array.isArray(content.reviews) ? content.reviews : fallbackReviews);
     allEvents = Array.isArray(content.events) ? content.events : [];
-    visibleEvents = allEvents.filter((event) => /^\d{4}-\d{2}-\d{2}$/.test(event.date) && event.date >= todayKey)
+    visibleEvents = allEvents.filter((event) => /^\d{4}-\d{2}-\d{2}$/.test(event.date)
+        && (/^\d{4}-\d{2}-\d{2}$/.test(event.endDate || '') ? event.endDate : event.date) >= todayKey)
         .sort((first, second) => first.date.localeCompare(second.date));
     renderCalendar();
     renderEventList();
