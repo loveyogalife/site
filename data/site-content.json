@@ -181,16 +181,56 @@
           "title": "Retreat memories",
           "subtitle": "Yoga, rest & connection",
           "images": [
-            { "id": "retreat-memory-1", "src": "./pics/r1.jpeg", "alt": "A shared moment from a yoga retreat" },
-            { "id": "retreat-memory-2", "src": "./pics/r3.jpeg", "alt": "A shared moment from a yoga retreat" },
-            { "id": "retreat-memory-3", "src": "./pics/r4.jpeg", "alt": "A shared moment from a yoga retreat" },
-            { "id": "retreat-memory-4", "src": "./pics/r5.jpeg", "alt": "A shared moment from a yoga retreat" },
-            { "id": "retreat-memory-5", "src": "./pics/r6.jpeg", "alt": "A shared moment from a yoga retreat" },
-            { "id": "retreat-memory-6", "src": "./pics/r7.jpeg", "alt": "A shared moment from a yoga retreat" },
-            { "id": "retreat-memory-7", "src": "./pics/r8.jpeg", "alt": "A shared moment from a yoga retreat" },
-            { "id": "retreat-memory-8", "src": "./pics/r9.jpeg", "alt": "A shared moment from a yoga retreat" },
-            { "id": "retreat-memory-9", "src": "./pics/r10.jpeg", "alt": "A shared moment from a yoga retreat" },
-            { "id": "retreat-memory-10", "src": "./pics/r11.jpeg", "alt": "A shared moment from a yoga retreat" }
+            {
+              "id": "retreat-memory-1",
+              "src": "./pics/r1.jpeg",
+              "alt": "A shared moment from a yoga retreat"
+            },
+            {
+              "id": "retreat-memory-2",
+              "src": "./pics/r3.jpeg",
+              "alt": "A shared moment from a yoga retreat"
+            },
+            {
+              "id": "retreat-memory-3",
+              "src": "./pics/r4.jpeg",
+              "alt": "A shared moment from a yoga retreat"
+            },
+            {
+              "id": "retreat-memory-4",
+              "src": "./pics/r5.jpeg",
+              "alt": "A shared moment from a yoga retreat"
+            },
+            {
+              "id": "retreat-memory-5",
+              "src": "./pics/r6.jpeg",
+              "alt": "A shared moment from a yoga retreat"
+            },
+            {
+              "id": "retreat-memory-6",
+              "src": "./pics/r7.jpeg",
+              "alt": "A shared moment from a yoga retreat"
+            },
+            {
+              "id": "retreat-memory-7",
+              "src": "./pics/r8.jpeg",
+              "alt": "A shared moment from a yoga retreat"
+            },
+            {
+              "id": "retreat-memory-8",
+              "src": "./pics/r9.jpeg",
+              "alt": "A shared moment from a yoga retreat"
+            },
+            {
+              "id": "retreat-memory-9",
+              "src": "./pics/r10.jpeg",
+              "alt": "A shared moment from a yoga retreat"
+            },
+            {
+              "id": "retreat-memory-10",
+              "src": "./pics/r11.jpeg",
+              "alt": "A shared moment from a yoga retreat"
+            }
           ]
         },
         {
@@ -198,18 +238,66 @@
           "title": "Jávea retreats",
           "subtitle": "Sunshine by the Mediterranean",
           "images": [
-            { "id": "javea-1", "src": "./pics/rs1.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
-            { "id": "javea-2", "src": "./pics/rs2.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
-            { "id": "javea-3", "src": "./pics/rs3.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
-            { "id": "javea-4", "src": "./pics/rs4.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
-            { "id": "javea-5", "src": "./pics/rs5.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
-            { "id": "javea-6", "src": "./pics/rs6.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
-            { "id": "javea-7", "src": "./pics/rs7.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
-            { "id": "javea-8", "src": "./pics/rs8.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
-            { "id": "javea-9", "src": "./pics/rs9.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
-            { "id": "javea-10", "src": "./pics/rs10.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
-            { "id": "javea-11", "src": "./pics/rs11.jpeg", "alt": "A moment from a yoga retreat in Jávea" },
-            { "id": "javea-12", "src": "./pics/rs12.jpeg", "alt": "A moment from a yoga retreat in Jávea" }
+            {
+              "id": "javea-1",
+              "src": "./pics/rs1.jpeg",
+              "alt": "A moment from a yoga retreat in Jávea"
+            },
+            {
+              "id": "javea-2",
+              "src": "./pics/rs2.jpeg",
+              "alt": "A moment from a yoga retreat in Jávea"
+            },
+            {
+              "id": "javea-3",
+              "src": "./pics/rs3.jpeg",
+              "alt": "A moment from a yoga retreat in Jávea"
+            },
+            {
+              "id": "javea-4",
+              "src": "./pics/rs4.jpeg",
+              "alt": "A moment from a yoga retreat in Jávea"
+            },
+            {
+              "id": "javea-5",
+              "src": "./pics/rs5.jpeg",
+              "alt": "A moment from a yoga retreat in Jávea"
+            },
+            {
+              "id": "javea-6",
+              "src": "./pics/rs6.jpeg",
+              "alt": "A moment from a yoga retreat in Jávea"
+            },
+            {
+              "id": "javea-7",
+              "src": "./pics/rs7.jpeg",
+              "alt": "A moment from a yoga retreat in Jávea"
+            },
+            {
+              "id": "javea-8",
+              "src": "./pics/rs8.jpeg",
+              "alt": "A moment from a yoga retreat in Jávea"
+            },
+            {
+              "id": "javea-9",
+              "src": "./pics/rs9.jpeg",
+              "alt": "A moment from a yoga retreat in Jávea"
+            },
+            {
+              "id": "javea-10",
+              "src": "./pics/rs10.jpeg",
+              "alt": "A moment from a yoga retreat in Jávea"
+            },
+            {
+              "id": "javea-11",
+              "src": "./pics/rs11.jpeg",
+              "alt": "A moment from a yoga retreat in Jávea"
+            },
+            {
+              "id": "javea-12",
+              "src": "./pics/rs12.jpeg",
+              "alt": "A moment from a yoga retreat in Jávea"
+            }
           ]
         }
       ],
