@@ -391,6 +391,11 @@
       "id": "review-lyn-first-weeks",
       "name": "Lyn",
       "quote": "I’ve been going to Maureen’s class on a Friday for a few weeks now. It’s wonderful, as I go straight from work. Friday is so busy for me and this is such a lovely end to the day and a great start to the weekend. I look forward to it so much. It’s time just for yourself to relax and really feel you’re doing something good for your body. I’m noticing differences already! Maureen is so calm and friendly, and encourages everyone in how they are progressing as the weeks go on. When you’ve got such a busy life, it’s fantastic to just stop — while doing some stretches, of course!"
+    },
+    {
+      "id": "review-622f5d20-39b3-4526-b883-88927e831dca",
+      "name": "Nicola",
+      "quote": "I have practiced yoga with Maureen for a while now and love her sessions. Friendly & welcoming with a wonderful group of people. Thank you! 🙏xx"
     }
   ],
   "events": [
@@ -425,22 +430,84 @@
       "price": "Ask Maureen for availability and details"
     },
     {
-      "id": "sound-bath-2026-10-17",
-      "title": "Sound bath & chakra meditation",
-      "date": "2026-10-17",
-      "time": "6:00–7:00pm",
+      "id": "event-86cb1cc6-12e6-41ef-a0cb-1e7f144503e2",
+      "title": "Sound Bath and Chakra Meditation",
+      "date": "2027-01-16",
+      "endDate": "",
+      "time": "6.00-7.00pm",
       "location": "Baginton Village Hall, Frances Road, Baginton CV8 3AB",
-      "description": "Join us for a journey of pure sound and vibration.  Bathe in the healing vibrations of Gongs, Tibetan Singing bowls, gentle drums and many other instruments known for their vibratory healing frequencies -  Calming the mind, releasing tension & restoring inner balance🙏.  Pre booking essential x",
-      "price": "£15 in advance · £18 on the day"
+      "description": "",
+      "price": ""
     },
     {
-      "id": "sound-bath-2026-11-14",
-      "title": "Sound bath & chakra meditation",
-      "date": "2026-11-14",
-      "time": "6:00–7:00pm",
+      "id": "event-d1582bfb-9599-4561-970c-b614513f5dd6",
+      "title": "Sound Bath & Chakra meditation",
+      "date": "2027-02-20",
+      "endDate": "",
+      "time": "6.00-7.00pm",
       "location": "Baginton Village Hall, Frances Road, Baginton CV8 3AB",
-      "description": "Join us for a journey of pure sound and vibration.  Bathe in the healing vibrations of Gongs, Tibetan Singing bowls, gentle drums and many other instruments known for their vibratory healing frequencies -  Calming the mind, releasing tension & restoring inner balance🙏.  Pre booking essential x",
-      "price": "£15 in advance · £18 on the day"
+      "description": "",
+      "price": ""
+    },
+    {
+      "id": "event-ebdd20d9-2081-455e-8ff1-f9c3e4168ca0",
+      "title": "Sound Bath & Chakra meditation",
+      "date": "2027-03-20",
+      "endDate": "",
+      "time": "6.00-7.00pm",
+      "location": "Baginton Village Hall, Frances Road, Baginton Village CV8 3AB",
+      "description": "",
+      "price": ""
+    },
+    {
+      "id": "event-a75605d9-b06e-4e9c-912c-f1e78a3ede09",
+      "title": "Sound Bath & Chakra meditation`",
+      "date": "2027-04-17",
+      "endDate": "",
+      "time": "6.00-7.00pm",
+      "location": "Baginton Village Hall, Frances Road, Baginton Village CV8 3AB",
+      "description": "",
+      "price": ""
+    },
+    {
+      "id": "event-814bea65-8534-4bee-b39f-ea2886d9a18f",
+      "title": "Sound Bath & Chakra Meditation",
+      "date": "2027-05-23",
+      "endDate": "",
+      "time": "6.00-7.00pm",
+      "location": "Baginton Village Hall, Frances Road, Baginton Village CV8 3AB",
+      "description": "",
+      "price": ""
+    },
+    {
+      "id": "event-e61610a2-ce84-4469-bae9-3c5f0944baf2",
+      "title": "Sound Bath & Chakra meditation",
+      "date": "2027-09-18",
+      "endDate": "",
+      "time": "6.00-7.00pm",
+      "location": "Baginton Village Hall, Frances Road, Baginton Village CV8 3AB",
+      "description": "",
+      "price": ""
+    },
+    {
+      "id": "event-b1391050-b70b-4609-b42c-4fe3181dee72",
+      "title": "Sound Bath & Chakra meditation",
+      "date": "2027-10-16",
+      "endDate": "",
+      "time": "6.00-7.00pm",
+      "location": "Baginton Village Hall, Frances Road, Baginton Village CV8 3AB",
+      "description": "",
+      "price": ""
+    },
+    {
+      "id": "event-790f7a31-ecb0-4722-9b1d-0b77f3689e04",
+      "title": "Sound Bath & Chakra meditation",
+      "date": "2027-11-20",
+      "endDate": "",
+      "time": "6.00-7.00pm",
+      "location": "Baginton Village Hall, Frances Road, Baginton Village CV8 3AB",
+      "description": "",
+      "price": ""
     }
   ],
   "classes": [
